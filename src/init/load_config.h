@@ -16,12 +16,15 @@ namespace learning_to_fly{
                 nlohmann::json parameters_json;
                 parameters_file >> parameters_json;
                 if(parameters_json.contains("mdp")){
+                    if(parameters_json["mdp"].contains("gamma")){
+                        ts.actor_critic.gamma = parameters_json["mdp"]["gamma"];
+                    }
                     auto mdp_json = parameters_json["mdp"];
                     if(mdp_json.contains("reward")){
                         auto reward_json = mdp_json["reward"];
                         rlt::utils::assert_exit(ts.device, reward_json.contains("type"), "Parameters file does not contain reward type");
                         rlt::utils::assert_exit(ts.device, reward_json["type"] == "Squared", "Parameters file reward type is not Squared");
-                        
+
                         auto& reward_params = ts.env_parameters_base.mdp.reward;
                         auto& reward_params_eval = ts.env_parameters_base_eval.mdp.reward;
 
@@ -70,9 +73,23 @@ namespace learning_to_fly{
                             reward_params_eval.action = reward_json["action"];
                         }
                     }
-                }
+                    if(mdp_json.contains("curriculum")){
+                        auto curriculum_json = mdp_json["curriculum"];
 
-                std::cout << "Gamma: " << parameters_json["gamma"] << "\n";
+                        if(curriculum_json.contains("action")){
+                            ts.curriculum.action.factor = curriculum_json["action"]["factor"];
+                            ts.curriculum.action.limit = curriculum_json["action"]["limit"];
+                        }
+                        if(curriculum_json.contains("position")){
+                            ts.curriculum.position.factor = curriculum_json["position"]["factor"];
+                            ts.curriculum.position.limit = curriculum_json["position"]["limit"];
+                        }
+                        if(curriculum_json.contains("linear_velocity")){
+                            ts.curriculum.linear_velocity.factor = curriculum_json["linear_velocity"]["factor"];
+                            ts.curriculum.linear_velocity.limit = curriculum_json["linear_velocity"]["limit"];
+                        }
+                    }
+                }
 #endif
             }
         }

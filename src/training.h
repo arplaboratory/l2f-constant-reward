@@ -39,7 +39,7 @@ namespace learning_to_fly{
         ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
         ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
 
-//        _init::load_config(ts);
+        _init::load_config(ts);
 
         for (auto& env : ts.envs) {
             env.parameters = ts.env_parameters_base;

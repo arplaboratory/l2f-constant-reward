@@ -15,24 +15,24 @@ namespace learning_to_fly {
                     for(auto& env : ts.off_policy_runner.envs){
                         {
                             T action_weight = env.parameters.mdp.reward.action;
-                            action_weight *= 1.4;
-                            T action_weight_limit = 1.0;
+                            action_weight *= ts.curriculum.action.factor;
+                            T action_weight_limit = ts.curriculum.action.limit;
                             action_weight = action_weight > action_weight_limit ? action_weight_limit : action_weight;
                             env.parameters.mdp.reward.action = action_weight;
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/action_weight", action_weight);
                         }
                         {
                             T position_weight = env.parameters.mdp.reward.position;
-                            position_weight *= 1.2;
-                            T position_weight_limit = 40;
+                            position_weight *= ts.curriculum.position.factor;
+                            T position_weight_limit = ts.curriculum.position.limit;
                             position_weight = position_weight > position_weight_limit ? position_weight_limit : position_weight;
                             env.parameters.mdp.reward.position = position_weight;
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/position_weight", position_weight);
                         }
                         {
                             T linear_velocity_weight = env.parameters.mdp.reward.linear_velocity;
-                            linear_velocity_weight *= 1.4;
-                            T linear_velocity_weight_limit = 1;
+                            linear_velocity_weight *= ts.curriculum.linear_velocity.factor;
+                            T linear_velocity_weight_limit = ts.curriculum.linear_velocity.limit;
                             linear_velocity_weight = linear_velocity_weight > linear_velocity_weight_limit ? linear_velocity_weight_limit : linear_velocity_weight;
                             env.parameters.mdp.reward.linear_velocity = linear_velocity_weight;
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/linear_velocity_weight", linear_velocity_weight);

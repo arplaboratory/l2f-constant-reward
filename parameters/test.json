@@ -1,19 +1,33 @@
 {
   "mdp": {
-    "gamma": 1337,
+    "gamma": 0.99,
     "reward": {
       "type": "Squared",
-      "scale": 1,
+      "scale": 0.5,
       "constant": 2,
-      "termination_penalty": 3,
-      "position": 4,
+      "termination_penalty": 0,
+      "position": 5,
       "orientation": 5,
-      "linear_velocity": 6,
-      "angular_velocity": 7,
-      "linear_acceleration": 8,
-      "angular_acceleration": 9,
-      "action_baseline": 10,
-      "action": 11
+      "linear_velocity": 0.01,
+      "angular_velocity": 0,
+      "linear_acceleration": 0,
+      "angular_acceleration": 0,
+      "action_baseline": 0.334,
+      "action": 0.01
+    },
+    "curriculum": {
+      "action": {
+        "factor": 1.4,
+        "limit": 1
+      },
+      "position": {
+          "factor": 1.2,
+          "limit": 40
+      },
+      "linear_velocity": {
+          "factor": 1.4,
+          "limit": 1
+      }
     }
   }
 }
