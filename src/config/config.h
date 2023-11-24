@@ -26,6 +26,7 @@ namespace learning_to_fly{
             using ABLATION_SPEC_EVAL_INSTANCE = ABLATION_SPEC_EVAL<ABLATION_SPEC>;
             static_assert(ABLATION_SPEC_EVAL_INSTANCE::ROTOR_DELAY == true);
             using ENVIRONMENT_EVALUATION = typename parameters::environment<T, TI, ABLATION_SPEC_EVAL_INSTANCE>::ENVIRONMENT;
+            using ENVIRONMENT_PARAMETERS = typename parameters::environment<T, TI, ABLATION_SPEC>::PARAMETERS_TYPE;
             static_assert(ENVIRONMENT::OBSERVATION_DIM == ENVIRONMENT_EVALUATION::OBSERVATION_DIM);
             static_assert(ENVIRONMENT::ACTION_DIM == ENVIRONMENT_EVALUATION::ACTION_DIM);
             using UI = bool;

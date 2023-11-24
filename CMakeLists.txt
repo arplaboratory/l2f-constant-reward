@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 cmake_policy(SET CMP0003 NEW)
 
 
-project(learning_to_fly)
+project(learning_to_fly_hpo)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -10,7 +10,7 @@ find_package(HDF5)
 if(HDF5_FOUND)
     set(RL_TOOLS_ENABLE_HDF5 ON)
 endif()
-find_package(Protobuf)
+find_package(Protobuf CONFIG)
 if(Protobuf_FOUND)
     set(RL_TOOLS_ENABLE_TENSORBOARD ON)
 endif()

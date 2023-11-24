@@ -1,0 +1,19 @@
+{
+  "mdp": {
+    "gamma": 1337,
+    "reward": {
+      "type": "Squared",
+      "scale": 1,
+      "constant": 2,
+      "termination_penalty": 3,
+      "position": 4,
+      "orientation": 5,
+      "linear_velocity": 6,
+      "angular_velocity": 7,
+      "linear_acceleration": 8,
+      "angular_acceleration": 9,
+      "action_baseline": 10,
+      "action": 11
+    }
+  }
+}

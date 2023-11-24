@@ -12,6 +12,8 @@ namespace rlt = RL_TOOLS_NAMESPACE_WRAPPER ::rl_tools;
 
 #include "training_state.h"
 
+#include "init/load_config.h"
+
 #include "steps/checkpoint.h"
 #include "steps/critic_reset.h"
 #include "steps/curriculum.h"
@@ -34,12 +36,15 @@ namespace learning_to_fly{
         using T = typename CONFIG::T;
         using TI = typename CONFIG::TI;
         using ABLATION_SPEC = typename CONFIG::ABLATION_SPEC;
-        auto env_parameters = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
-        auto env_parameters_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
+        ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
+        ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
+
+//        _init::load_config(ts);
+
         for (auto& env : ts.envs) {
-            env.parameters = env_parameters;
+            env.parameters = ts.env_parameters_base;
         }
-        ts.env_eval.parameters = env_parameters_eval;
+        ts.env_eval.parameters = ts.env_parameters_base_eval;
         TI effective_seed = CONFIG::BASE_SEED + seed;
         ts.run_name = helpers::run_name<ABLATION_SPEC, CONFIG>(effective_seed);
         rlt::construct(ts.device, ts.device.logger, std::string("logs"), ts.run_name);
@@ -50,7 +55,7 @@ namespace learning_to_fly{
         ts.off_policy_runner.parameters = CONFIG::off_policy_runner_parameters;
 
         for(typename CONFIG::ENVIRONMENT& env: ts.validation_envs){
-            env.parameters = parameters::environment<typename CONFIG::T, TI, ABLATION_SPEC>::parameters;
+            env.parameters = ts.env_parameters_base;
         }
         rlt::malloc(ts.device, ts.validation_actor_buffers);
         rlt::init(ts.device, ts.task, ts.validation_envs, ts.rng_eval);
