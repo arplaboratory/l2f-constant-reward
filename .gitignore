@@ -6,3 +6,4 @@
 /.idea
 /**/*.h5
 *.bin
+/results

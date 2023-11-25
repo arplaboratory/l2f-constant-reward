@@ -40,7 +40,7 @@ namespace learning_to_fly {
                     }
                     if constexpr(CONFIG::ABLATION_SPEC::RECALCULATE_REWARDS == true){
                         auto start = std::chrono::high_resolution_clock::now();
-                        rlt::recalculate_rewards(ts.device, ts.off_policy_runner.replay_buffers[0], ts.off_policy_runner.envs[0], ts.rng_eval);
+                        rlt::recalculate_rewards(ts.device, ts.off_policy_runner.replay_buffers[0], ts.off_policy_runner.envs[0], ts.rng);
                         auto end = std::chrono::high_resolution_clock::now();
 //                        std::cout << "recalculate_rewards: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << "ms\n";
                     }

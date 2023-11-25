@@ -38,8 +38,9 @@ namespace learning_to_fly{
         using ABLATION_SPEC = typename CONFIG::ABLATION_SPEC;
         ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
         ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
-
+#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         _init::load_config(ts);
+#endif
 
         for (auto& env : ts.envs) {
             env.parameters = ts.env_parameters_base;
@@ -58,7 +59,7 @@ namespace learning_to_fly{
             env.parameters = ts.env_parameters_base;
         }
         rlt::malloc(ts.device, ts.validation_actor_buffers);
-        rlt::init(ts.device, ts.task, ts.validation_envs, ts.rng_eval);
+        rlt::init(ts.device, ts.task, ts.validation_envs, ts.rng_validation);
 
         // info
 
@@ -77,13 +78,42 @@ namespace learning_to_fly{
         }
         steps::logger(ts);
         steps::checkpoint(ts);
-        steps::validation(ts);
+        if constexpr(!CONFIG::BENCHMARK){
+//            steps::validation(ts);
+        }
         steps::curriculum(ts);
         rlt::rl::algorithms::td3::loop::step(ts);
         steps::trajectory_collection(ts);
     }
     template <typename CONFIG>
     void destroy(TrainingState<CONFIG>& ts){
+        {
+            rlt::reset(ts.device, ts.task, ts.rng_validation);
+            bool completed = false;
+            while(!completed){
+                completed = rlt::step(ts.device, ts.task, ts.actor_critic.actor, ts.validation_actor_buffers, ts.rng_validation);
+            }
+            auto results = rlt::analyse_json(ts.device, ts.task, typename TrainingState<CONFIG>::SPEC::METRICS{});
+            std::filesystem::path results_directory = std::string("results/") + ts.run_name;
+            try {
+                std::filesystem::create_directories(results_directory);
+            }
+            catch (const std::filesystem::filesystem_error& e) {
+                std::cerr << "Error creating directories: " << e.what() << '\n';
+            }
+            {
+                std::ofstream file;
+                file.open(results_directory / "validation.json");
+                file << results.dump(4);
+                file.close();
+            }
+            {
+                std::ofstream file;
+                file.open("result.json");
+                file << results.dump(4);
+                file.close();
+            }
+        }
         rlt::rl::algorithms::td3::loop::destroy(ts);
         rlt::destroy(ts.device, ts.task);
         rlt::free(ts.device, ts.validation_actor_buffers);

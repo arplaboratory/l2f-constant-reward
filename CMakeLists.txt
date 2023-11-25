@@ -14,6 +14,7 @@ find_package(Protobuf CONFIG)
 if(Protobuf_FOUND)
     set(RL_TOOLS_ENABLE_TENSORBOARD ON)
 endif()
+set(RL_TOOLS_ENABLE_CLI11 ON)
 set(RL_TOOLS_ENABLE_JSON ON)
 set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
 

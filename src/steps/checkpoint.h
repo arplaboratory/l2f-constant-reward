@@ -56,13 +56,12 @@ namespace learning_to_fly {
                     actor_output_file << actor_weights;
                     {
                         typename CONFIG::ENVIRONMENT_EVALUATION::State state;
-                        rlt::sample_initial_state(ts.device, ts.envs[0], state, ts.rng_eval);
+                        rlt::sample_initial_state(ts.device, ts.envs[0], state, ts.rng_checkpoint);
                         rlt::MatrixDynamic<rlt::matrix::Specification<T, TI, 1, CONFIG::ENVIRONMENT_EVALUATION::OBSERVATION_DIM>> observation;
                         rlt::MatrixDynamic<rlt::matrix::Specification<T, TI, 1, CONFIG::ENVIRONMENT::ACTION_DIM>> action;
                         rlt::malloc(ts.device, observation);
                         rlt::malloc(ts.device, action);
-                        auto rng_copy = ts.rng_eval;
-                        rlt::observe(ts.device, ts.env_eval, state, observation, rng_copy);
+                        rlt::observe(ts.device, ts.env_eval, state, observation, ts.rng_checkpoint);
                         rlt::evaluate(ts.device, ts.actor_critic.actor, observation, action, actor_buffer);
                         rlt::evaluate(ts.device, actor_checkpoint, observation, action, actor_checkpoint_buffer);
                         actor_output_file << "\n" << rlt::save_code(ts.device, observation, std::string("rl_tools::checkpoint::observation"), true);

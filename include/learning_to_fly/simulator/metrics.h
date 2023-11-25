@@ -151,7 +151,12 @@ namespace rl_tools{
                 max_pos_error_count += 1;
             }
         }
-        return max_pos_error_sum / max_pos_error_count;
+        if(max_pos_error_count == 0){
+            return math::infinity<T>(device.math);
+        }
+        else{
+            return max_pos_error_sum / max_pos_error_count;
+        }
     }
     template <typename DEVICE, typename SPEC, enum rl::utils::validation::metrics::multirotor::MultirotorStateQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP>
     typename SPEC::T evaluate(DEVICE& device, rl::utils::validation::metrics::MaxErrorStd<T_QUANTITY, T_TI, T_START_STEP>, rl::utils::validation::Task<SPEC>& task){
@@ -178,6 +183,11 @@ namespace rl_tools{
                 max_pos_error_count += 1;
             }
         }
-        return math::sqrt(device.math, max_pos_error_variance_sum / max_pos_error_count);
+        if(max_pos_error_count == 0){
+            return math::infinity<T>(device.math);
+        }
+        else{
+            return math::sqrt(device.math, max_pos_error_variance_sum / max_pos_error_count);
+        }
     }
 }

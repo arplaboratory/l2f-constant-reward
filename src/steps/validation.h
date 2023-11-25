@@ -8,7 +8,7 @@ namespace learning_to_fly {
                 rlt::reset(ts.device, ts.task, ts.rng_eval);
                 bool completed = false;
                 while(!completed){
-                    completed = rlt::step(ts.device, ts.task, ts.actor_critic.actor, ts.validation_actor_buffers, ts.rng_eval);
+                    completed = rlt::step(ts.device, ts.task, ts.actor_critic.actor, ts.validation_actor_buffers, ts.rng_validation);
                 }
                 rlt::analyse_log(ts.device, ts.task, typename TrainingState<CONFIG>::SPEC::METRICS{});
             }
