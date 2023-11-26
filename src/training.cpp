@@ -14,6 +14,7 @@ int run(int argc, char** argv){
     using CONFIG = learning_to_fly::config::Config<T_ABLATION_SPEC>;
     using TI = typename CONFIG::TI;
 
+    TI base_seed = 0;
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
     CLI::App app{"Hyperparameter optimization for Learning to Fly in Seconds"};
 
@@ -22,6 +23,8 @@ int run(int argc, char** argv){
     std::string parameters_path, results_path;
     app.add_option("-f,--parameter-file", parameters_path, "Parameter file to load hyperparameters from")->required();
     app.add_option("-r,--result-file", results_path, "Path store the results (JSON)")->required();
+    app.add_option("-s,--seed", base_seed, "Base seed (incremented for additional runs)");
+
 
     CLI11_PARSE(app, argc, argv);
 #else
@@ -40,7 +43,7 @@ int run(int argc, char** argv){
         ts.parameters_path = parameters_path;
         ts.results_path = results_path;
 #endif
-        learning_to_fly::init(ts, run_i);
+        learning_to_fly::init(ts, base_seed + run_i);
 
         for(TI step_i=0; step_i < CONFIG::STEP_LIMIT; step_i++){
             learning_to_fly::step(ts);
@@ -54,7 +57,12 @@ int run(int argc, char** argv){
     return 0;
 }
 
+struct ABLATION_SPEC: learning_to_fly::config::DEFAULT_ABLATION_SPEC{
+    static constexpr bool ENABLE_CURRICULUM = false;
+    static constexpr bool USE_INITIAL_REWARD_FUNCTION = true;
+    static constexpr bool EXPLORATION_NOISE_DECAY = false;
+};
 
 int main(int argc, char** argv){
-    return run<learning_to_fly::config::DEFAULT_ABLATION_SPEC>(argc, argv);
+    return run<ABLATION_SPEC>(argc, argv);
 }

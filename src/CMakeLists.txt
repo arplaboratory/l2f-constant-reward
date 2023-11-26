@@ -28,6 +28,14 @@ target_link_libraries(
 )
 target_compile_definitions(training_benchmark PRIVATE LEARNING_TO_FLY_IN_SECONDS_BENCHMARK)
 
+add_executable(evaluate_actor evaluate_actor.cpp)
+target_link_libraries(
+        evaluate_actor
+        PRIVATE
+        rl_tools
+        learning_to_fly
+)
+
 add_executable(hpo training.cpp)
 target_link_libraries(
         hpo

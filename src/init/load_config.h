@@ -13,7 +13,7 @@ namespace learning_to_fly{
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
             parameters_path = ts.parameters_path;
 #else
-            parameters_path = std::filesystem::path("parameters") / "test.json";
+            parameters_path = std::filesystem::path("parameters") / "default.json";
 #endif
             std::ifstream parameters_file(parameters_path);
             if(!parameters_file.is_open()) {
@@ -99,6 +99,20 @@ namespace learning_to_fly{
                     }
                 }
             }
+            if(parameters_json.contains("off_policy_runner")){
+                if(parameters_json["off_policy_runner"].contains("exploration_noise")){
+                    ts.off_policy_runner.parameters.exploration_noise = parameters_json["off_policy_runner"]["exploration_noise"];
+                }
+            }
+            if(parameters_json.contains("td3")){
+                if(parameters_json["td3"].contains("target_action_noise_std")){
+                    ts.actor_critic.target_next_action_noise_std = parameters_json["td3"]["target_action_noise_std"];
+                }
+                if(parameters_json["td3"].contains("target_action_noise_clip")){
+                    ts.actor_critic.target_next_action_noise_clip = parameters_json["td3"]["target_action_noise_clip"];
+                }
+            }
+
 #endif
         }
     }

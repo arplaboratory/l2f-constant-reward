@@ -7,3 +7,7 @@
 /**/*.h5
 *.bin
 /results
+.DS_Store
+
+results.json
+validation.json

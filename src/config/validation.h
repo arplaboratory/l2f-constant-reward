@@ -1,3 +1,5 @@
+#include <rl_tools/rl/utils/validation.h>
+#include <learning_to_fly/simulator/metrics.h>
 namespace learning_to_fly{
     namespace config{
         template <typename T_SUPER_CONFIG>

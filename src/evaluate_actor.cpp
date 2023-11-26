@@ -1,14 +1,15 @@
-#include <rl_tools/operations/cpu.h>
+#include <rl_tools/operations/cpu_mux.h>
 
 #include <learning_to_fly/simulator/operations_cpu.h>
 #include <learning_to_fly/simulator/ui.h>
 #include <rl_tools/nn_models/operations_cpu.h>
 #include <rl_tools/nn_models/persist.h>
+#include <rl_tools/nn_models/sequential/persist.h>
 
 namespace rlt = RL_TOOLS_NAMESPACE_WRAPPER ::rl_tools;
 
-#include "parameters_training.h"
-#include "training.h"
+#include "config/config.h"
+//#include "training.h"
 
 #include <chrono>
 #include <iostream>
@@ -22,7 +23,7 @@ namespace TEST_DEFINITIONS{
     using DEVICE = rlt::devices::DefaultCPU;
     using T = float;
     using TI = typename DEVICE::index_t;
-    namespace parameter_set = parameters_0;
+    namespace parameter_set = parameters;
     template <typename BASE_SPEC>
     struct SpecEval: BASE_SPEC{
         static constexpr bool DISTURBANCE = true;
@@ -51,7 +52,7 @@ namespace TEST_DEFINITIONS{
     constexpr TI N_ENVIRONMENTS = 100;
     constexpr T max_pos_diff = 0.6;
     constexpr T max_vel_diff = 5;
-    constexpr T time_lapse = 0.05;
+    constexpr T time_lapse = 1.0;
 }
 
 template <typename T>
@@ -213,7 +214,7 @@ int main(int argc, char** argv) {
 //            states[env_i].position[2] *= 3;
             rlt::set_state(dev, uis[env_i], states[env_i]);
         }
-        std::this_thread::sleep_for(std::chrono::seconds(10));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
         std::cout << "Random force: " << states[0].force[0] << ", " << states[0].force[1] << ", " << states[0].force[2] << std::endl;
         T max_speed = 0;
         constexpr TI TRACKING_START_STEP = 100;
@@ -282,7 +283,7 @@ int main(int argc, char** argv) {
                 }
                 std::this_thread::sleep_for(std::chrono::milliseconds((int)((dt/time_lapse - diff.count())*1000)));
                 if(terminated_flag || step_i == (MAX_EPISODE_LENGTH - 1)){
-                    std::cout << "Episode terminated after " << step_i << " steps with reward " << reward_acc << "(max speed: " << max_speed << ")" << std::endl;
+//                    std::cout << "Episode terminated after " << step_i << " steps with reward " << reward_acc << "(max speed: " << max_speed << ")" << std::endl;
                 }
             }
         }

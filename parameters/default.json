@@ -3,31 +3,38 @@
     "gamma": 0.99,
     "reward": {
       "type": "Squared",
-      "scale": 0.5,
-      "constant": 2,
+      "scale": 1.00,
+      "constant": 1,
       "termination_penalty": 0,
-      "position": 5,
-      "orientation": 5,
-      "linear_velocity": 0.01,
+      "position": 1,
+      "orientation": 1,
+      "linear_velocity": 0.1,
       "angular_velocity": 0,
       "linear_acceleration": 0,
       "angular_acceleration": 0,
       "action_baseline": 0.334,
-      "action": 0.01
+      "action": 0.00
     },
     "curriculum": {
       "action": {
-        "factor": 1.4,
-        "limit": 1
+        "factor": 1.2,
+        "limit": 0
       },
       "position": {
           "factor": 1.2,
-          "limit": 40
+          "limit": 0
       },
       "linear_velocity": {
           "factor": 1.4,
-          "limit": 1
+          "limit": 1.0
       }
     }
+  },
+  "off_policy_runner": {
+    "exploration_noise_std": 0.1
+  },
+  "td3": {
+    "target_action_noise_std": 0.1,
+    "target_action_noise_clip": 0.3
   }
 }

@@ -152,7 +152,7 @@ namespace rl_tools{
             }
         }
         if(max_pos_error_count == 0){
-            return math::infinity<T>(device.math);
+            return -1;
         }
         else{
             return max_pos_error_sum / max_pos_error_count;
@@ -184,7 +184,7 @@ namespace rl_tools{
             }
         }
         if(max_pos_error_count == 0){
-            return math::infinity<T>(device.math);
+            return -1;
         }
         else{
             return math::sqrt(device.math, max_pos_error_variance_sum / max_pos_error_count);

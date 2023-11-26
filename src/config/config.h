@@ -72,10 +72,10 @@ namespace learning_to_fly{
             static constexpr bool COLLECT_EPISODE_STATS = false;
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;
-            static constexpr TI STEP_LIMIT = 300001;
+            static constexpr TI STEP_LIMIT = 3000001;
 //            static constexpr TI REPLAY_BUFFER_LIMIT = 3000000;
             static constexpr TI REPLAY_BUFFER_CAP = STEP_LIMIT;
-            static constexpr TI ENVIRONMENT_STEP_LIMIT = 500;
+            static constexpr TI ENVIRONMENT_STEP_LIMIT = 100;
             static constexpr TI ENVIRONMENT_STEP_LIMIT_EVALUATION = 500;
             static constexpr TI BASE_SEED = 0;
             static constexpr bool CONSTRUCT_LOGGER = false;

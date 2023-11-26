@@ -3,7 +3,6 @@
 namespace rlt = RL_TOOLS_NAMESPACE_WRAPPER ::rl_tools;
 
 #include <learning_to_fly/simulator/operations_cpu.h>
-#include <learning_to_fly/simulator/metrics.h>
 
 #include "config/config.h"
 
@@ -38,9 +37,10 @@ namespace learning_to_fly{
         using ABLATION_SPEC = typename CONFIG::ABLATION_SPEC;
         ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
         ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
+//#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
+//        _init::load_config(ts);
+//#endif
         _init::load_config(ts);
-#endif
 
         for (auto& env : ts.envs) {
             env.parameters = ts.env_parameters_base;
@@ -77,11 +77,15 @@ namespace learning_to_fly{
             std::cout << "Step: " << ts.step << std::endl;
         }
         steps::logger(ts);
+        if constexpr(!CONFIG::BENCHMARK) {
+            steps::log_reward(ts);
+        }
         steps::checkpoint(ts);
         if constexpr(!CONFIG::BENCHMARK){
-//            steps::validation(ts);
+            steps::validation(ts);
         }
         steps::curriculum(ts);
+        steps::critic_reset(ts);
         rlt::rl::algorithms::td3::loop::step(ts);
         steps::trajectory_collection(ts);
     }
@@ -107,12 +111,14 @@ namespace learning_to_fly{
                 file << results.dump(4);
                 file.close();
             }
+#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
             {
                 std::ofstream file;
-                file.open("result.json");
+                file.open(ts.results_path);
                 file << results.dump(4);
                 file.close();
             }
+#endif
         }
         rlt::rl::algorithms::td3::loop::destroy(ts);
         rlt::destroy(ts.device, ts.task);
