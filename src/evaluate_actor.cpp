@@ -26,7 +26,7 @@ namespace TEST_DEFINITIONS{
     namespace parameter_set = parameters;
     template <typename BASE_SPEC>
     struct SpecEval: BASE_SPEC{
-        static constexpr bool DISTURBANCE = true;
+        static constexpr bool DISTURBANCE = false;
         static constexpr bool OBSERVATION_NOISE = true;
         static constexpr bool ROTOR_DELAY = true;
         static constexpr bool ACTION_HISTORY = BASE_SPEC::ROTOR_DELAY && BASE_SPEC::ACTION_HISTORY;
@@ -215,7 +215,7 @@ int main(int argc, char** argv) {
             rlt::set_state(dev, uis[env_i], states[env_i]);
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        std::cout << "Random force: " << states[0].force[0] << ", " << states[0].force[1] << ", " << states[0].force[2] << std::endl;
+//        std::cout << "Random force: " << states[0].force[0] << ", " << states[0].force[1] << ", " << states[0].force[2] << std::endl;
         T max_speed = 0;
         constexpr TI TRACKING_START_STEP = 100;
 

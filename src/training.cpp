@@ -58,9 +58,10 @@ int run(int argc, char** argv){
 }
 
 struct ABLATION_SPEC: learning_to_fly::config::DEFAULT_ABLATION_SPEC{
-    static constexpr bool ENABLE_CURRICULUM = false;
+    static constexpr bool ENABLE_CURRICULUM = true;
     static constexpr bool USE_INITIAL_REWARD_FUNCTION = true;
     static constexpr bool EXPLORATION_NOISE_DECAY = false;
+    static constexpr bool DISTURBANCE = false;
 };
 
 int main(int argc, char** argv){
