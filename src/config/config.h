@@ -35,8 +35,8 @@ namespace learning_to_fly{
                 using LOGGING = rlt::devices::logging::CPU;
             };
             struct TD3PendulumParameters: rlt::rl::algorithms::td3::DefaultParameters<T, TI>{
-                static constexpr TI ACTOR_BATCH_SIZE = 256;
-                static constexpr TI CRITIC_BATCH_SIZE = 256;
+                static constexpr TI ACTOR_BATCH_SIZE = 512;
+                static constexpr TI CRITIC_BATCH_SIZE = 512;
                 static constexpr TI TRAINING_INTERVAL = 10;
                 static constexpr TI CRITIC_TRAINING_INTERVAL = 1 * TRAINING_INTERVAL;
                 static constexpr TI ACTOR_TRAINING_INTERVAL = 2 * TRAINING_INTERVAL;
@@ -67,8 +67,8 @@ namespace learning_to_fly{
             static constexpr bool ACTOR_ENABLE_CHECKPOINTS = !BENCHMARK;
             static constexpr TI ACTOR_CHECKPOINT_INTERVAL = 100000;
             static constexpr bool DETERMINISTIC_EVALUATION = !BENCHMARK;
-            static constexpr TI EVALUATION_INTERVAL = 10000;
-            static constexpr TI NUM_EVALUATION_EPISODES = 1000;
+            static constexpr TI EVALUATION_INTERVAL = 50000;
+            static constexpr TI NUM_EVALUATION_EPISODES = 10;
             static constexpr bool COLLECT_EPISODE_STATS = false;
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;

@@ -467,33 +467,18 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0.0, // action
     };
     template<typename T>
-    constexpr Absolute<T> reward_absolute_fast_learning = {
+    constexpr Absolute<T> reward_absolute = {
             false, // non-negative
-            1, // scale
-            1, // constant
+            0.5, // scale
+            2, // constant
             0, // termination penalty
-            1, // position
-            0, // orientation
-            0, // linear_velocity
+            5, // position
+            5, // orientation
+            0.01, // linear_velocity
             0, // angular_velocity
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
-            0.0, // action
-    };
-    template<typename T>
-    constexpr Absolute<T> reward_absolute_fast_learning_2 = {
-            false, // non-negative
-            1, // scale
-            2, // constant
-            0, // termination penalty
-            1, // position
-            0.1, // orientation
-            0.1, // linear_velocity
-            0.01, // angular_velocity
-            0, // linear_acceleration
-            0, // angular_acceleration
-            RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
-            0.0, // action
+            0.01, // action
     };
 }

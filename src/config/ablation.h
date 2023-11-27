@@ -14,7 +14,7 @@ namespace learning_to_fly::config{
     template <typename T_ABLATION_SPEC>
     struct ABLATION_SPEC_EVAL: T_ABLATION_SPEC{
         // override everything but ACTION_HISTORY because that changes the observation space
-        static constexpr bool DISTURBANCE = true;
+//        static constexpr bool DISTURBANCE = true;
         static constexpr bool OBSERVATION_NOISE = true;
         static constexpr bool ASYMMETRIC_ACTOR_CRITIC = true;
         static constexpr bool ROTOR_DELAY = true;

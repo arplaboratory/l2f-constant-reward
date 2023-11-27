@@ -309,12 +309,23 @@ namespace rl_tools{
             state.orientation[2] = 0;
             state.orientation[3] = 0;
         }
-        for(TI i = 0; i < 3; i++){
-            state.linear_velocity[i] = random::uniform_real_distribution(random_dev, -env.parameters.mdp.init.max_linear_velocity, env.parameters.mdp.init.max_linear_velocity, rng);
+        if(!guidance) {
+            for(TI i = 0; i < 3; i++){
+                state.linear_velocity[i] = random::uniform_real_distribution(random_dev, -env.parameters.mdp.init.max_linear_velocity, env.parameters.mdp.init.max_linear_velocity, rng);
+            }
+            for(TI i = 0; i < 3; i++){
+                state.angular_velocity[i] = random::uniform_real_distribution(random_dev, -env.parameters.mdp.init.max_angular_velocity, env.parameters.mdp.init.max_angular_velocity, rng);
+            }
         }
-        for(TI i = 0; i < 3; i++){
-            state.angular_velocity[i] = random::uniform_real_distribution(random_dev, -env.parameters.mdp.init.max_angular_velocity, env.parameters.mdp.init.max_angular_velocity, rng);
+        else{
+            for(TI i = 0; i < 3; i++){
+                state.linear_velocity[i] = 0;
+            }
+            for(TI i = 0; i < 3; i++){
+                state.angular_velocity[i] = 0;
+            }
         }
+
         initial_parameters(device, env, state);
     }
     template<typename DEVICE, typename T_S, typename TI_S, typename SPEC, typename NEXT_COMPONENT, typename RNG>
