@@ -85,7 +85,7 @@ namespace learning_to_fly{
             steps::validation(ts);
         }
         steps::curriculum(ts);
-        steps::critic_reset(ts);
+//        steps::critic_reset(ts);
         rlt::rl::algorithms::td3::loop::step(ts);
         steps::trajectory_collection(ts);
     }
