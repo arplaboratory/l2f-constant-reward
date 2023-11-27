@@ -20,9 +20,13 @@
         "factor": 1.0,
         "limit": 0
       },
+      "orientation": {
+        "factor": 1.2,
+        "limit": 10
+      },
       "position": {
           "factor": 1.2,
-          "limit": 5
+          "limit": 10
       },
       "linear_velocity": {
           "factor": 1.0,

@@ -27,9 +27,10 @@ namespace learning_to_fly{
                 T factor;
                 T limit;
             };
-            Schedule action = {1.4, 1};
             Schedule position = {1.2, 40};
+            Schedule orientation = {1.0, 100};
             Schedule linear_velocity = {1.4, 1};
+            Schedule action = {1.4, 1};
         };
         Curriculum curriculum;
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION

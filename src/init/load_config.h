@@ -85,17 +85,21 @@ namespace learning_to_fly{
                 if(mdp_json.contains("curriculum")){
                     auto curriculum_json = mdp_json["curriculum"];
 
-                    if(curriculum_json.contains("action")){
-                        ts.curriculum.action.factor = curriculum_json["action"]["factor"];
-                        ts.curriculum.action.limit = curriculum_json["action"]["limit"];
-                    }
                     if(curriculum_json.contains("position")){
                         ts.curriculum.position.factor = curriculum_json["position"]["factor"];
                         ts.curriculum.position.limit = curriculum_json["position"]["limit"];
                     }
+                    if(curriculum_json.contains("orientation")){
+                        ts.curriculum.orientation.factor = curriculum_json["orientation"]["factor"];
+                        ts.curriculum.orientation.limit = curriculum_json["orientation"]["limit"];
+                    }
                     if(curriculum_json.contains("linear_velocity")){
                         ts.curriculum.linear_velocity.factor = curriculum_json["linear_velocity"]["factor"];
                         ts.curriculum.linear_velocity.limit = curriculum_json["linear_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("action")){
+                        ts.curriculum.action.factor = curriculum_json["action"]["factor"];
+                        ts.curriculum.action.limit = curriculum_json["action"]["limit"];
                     }
                 }
             }
