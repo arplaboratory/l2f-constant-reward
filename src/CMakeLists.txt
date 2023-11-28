@@ -46,6 +46,15 @@ target_link_libraries(
 target_compile_definitions(hpo PRIVATE LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION)
 target_compile_definitions(hpo PRIVATE LEARNING_TO_FLY_IN_SECONDS_BENCHMARK)
 
+add_executable(validation validation.cpp)
+target_link_libraries(
+        validation
+        PRIVATE
+        rl_tools
+        learning_to_fly
+)
+
+
 if(RL_TOOLS_ENABLE_HDF5)
 add_executable(ablation_study ablation_study.cpp)
 target_link_libraries(
