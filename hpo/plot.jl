@@ -8,7 +8,6 @@ color_palette = ColorSchemes.tab10
 data = OrderedDict()
 
 for hpo_framework_results_file in reverse(sort(readdir("hpo/hpo_results")))
-
     hpo_framework_results = JSON.parsefile("hpo/hpo_results/" * hpo_framework_results_file)
     hpo_framework = splitext(hpo_framework_results_file)[1]
     data[hpo_framework] = hpo_framework_results
