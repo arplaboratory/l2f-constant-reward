@@ -1,6 +1,8 @@
 using DataFrames
 using JSON
 using CSV
+using Statistics
+using GLM
 
 json_data = JSON.parsefile("transferability_assessment/data/data_table.json")
 df = DataFrame(json_data)
@@ -38,6 +40,9 @@ relevant_df = df[df.test.=="figure_eight_tracking_normal", :]
 
 joined_df = deepcopy(innerjoin(df, validation_df, on=["config", "step", "seed"]))
 regression_df = select(joined_df, Not([:step, :config, :filename, :seed, :test]))
+transform!(regression_df, :rmse_without_z => ByRow(x-> isnothing(x) ? NaN : Float64(x)) => :rmse_without_z)
+transform!(regression_df, :success => ByRow(Float64) => :success)
+
 
 for n in names(regression_df)
     println(n)
@@ -45,14 +50,52 @@ end
 
 nan_df = deepcopy(regression_df)
 replace_nothing_with_nan(x) = isnothing(x) ? NaN : x
+replace_nothing_with_nan_string(x) = isnothing(x) ? "nan" : x
 for col in names(nan_df)
-    if eltype(nan_df[!, col]) <: Union{Number, Missing}
+    if eltype(nan_df[!, col]) <: Union{Number, Nothing}
         transform!(nan_df, col => ByRow(replace_nothing_with_nan) => col)
+    else
+        transform!(nan_df, col => ByRow(replace_nothing_with_nan_string) => col)
     end
 end
 
-nan_df
-
+missing_df = deepcopy(nan_df)
+replace_nan_with_missing(x) = isnan(x) ? missing : x
+for col in names(missing_df)
+    transform!(missing_df, col => ByRow(replace_nan_with_missing) => col)
+end
+dropmissing!(missing_df)
 
 CSV.write("transferability_assessment/data/regression_data.csv", nan_df)
+CSV.write("transferability_assessment/data/regression_data_clean.csv", missing_df)
 
+@assert all(missing_df.success .== 1.0)
+
+
+missing_df
+
+normalized_df = deepcopy(missing_df)
+zscore_normalize!(col) = (col .-= mean(col)) ./= std(col)
+foreach(zscore_normalize!, eachcol(normalized_df))
+
+predictors = sum(Term.(Symbol.(names(normalized_df)[3:end])))
+formula_rmse_without_z = Term(:rmse_without_z) ~ predictors
+model_rmse = lm(formula_rmse_without_z, normalized_df)
+
+coef_df_rmse = DataFrame(
+    :name => coefnames(model_rmse),
+    :coef => coef(model_rmse)
+)
+
+sort(coef_df_rmse, :coef, by=abs)
+
+predictors = sum(Term.(Symbol.(names(normalized_df)[3:end])))
+formula_success = Term(:success) ~ predictors
+model_success = lm(formula_success, normalized_df)
+
+coef_df_success = DataFrame(
+    :name => coefnames(model_success),
+    :coef => coef(model_success)
+)
+
+sort(coef_df_success, :coef, by=abs)

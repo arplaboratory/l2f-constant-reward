@@ -27,7 +27,7 @@ optimizer = BayesianOptimization(
 
 optimizer.maximize(
     init_points=0,
-    n_iter=100,
+    n_iter=200,
 )
 
 
