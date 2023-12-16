@@ -3,3 +3,5 @@
 /results.json
 /parameters_temp.json
 /__pycache__
+/**/*.json
+/**/*.pdf

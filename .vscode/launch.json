@@ -47,6 +47,15 @@
             "justMyCode": true
         },
         {
+            "name": "bayesian optimization 3 test",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/hpo", 
+            "program": "bayesian_optimization_test3.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "ax test",
             "type": "python",
             "request": "launch",

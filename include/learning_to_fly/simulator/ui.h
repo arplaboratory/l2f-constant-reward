@@ -99,10 +99,11 @@ namespace rl_tools::rl::environments::multirotor {
                 {"position", {0, 0, 0}}
             }}
         };
-        message["data"]["model"]["gravity"] = { 0.0, 0.0, -9.81};
+        message["data"]["model"]["gravity"] = {0.0, 0.0, -9.81};
         message["data"]["display_options"]["displayGlobalCoordinateSystem"] = false;
         message["data"]["display_options"]["displayIMUCoordinateSystem"] = false;
         message["data"]["display_options"]["displayActions"] = false;
+        std:: cout << message << std::endl;
         return message;
     }
 }
