@@ -3,7 +3,7 @@ import subprocess
 import random
 
 
-with open('/home/jonas/phd/projects/rl_for_control/learning_to_fly_hpo/parameters/default.json') as f:
+with open('parameters/default.json') as f:
   default_params = json.loads(f.read())
 
 def nested_dict(input_dict):
@@ -44,7 +44,7 @@ def evaluate(params):
   with open('parameters_temp.json', 'w') as f:
     json.dump(merged, f, indent=4)
 
-  subprocess.call(['/home/jonas/phd/projects/rl_for_control/learning_to_fly_hpo/cmake-build-release/src/hpo', "-f", "parameters_temp.json", "-r", "results.json", "-s", str(seed)])
+  subprocess.call(['cmake-build-release/src/hpo', "-f", "parameters_temp.json", "-r", "results.json", "-s", str(seed)])
 
   with open('results.json') as f:
     results = json.loads(f.read())
