@@ -1,25 +1,35 @@
 # Learning to Fly in Seconds
 
 <div align="center">
-<img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/training_simulation.gif" alt="animated" height='300'/>
+<img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/training_simulation.gif" alt="animated" width='600'/>
 </div>
 <div align="center">
     Trained for 18s on a 2020 MacBook Pro (M1) using <span style="color:#7DB9B6">RLtools</span>.
 </div>
 <br>
 <div align="center" >
-<img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/trajectory_tracking_long_exposure.gif" alt="animated" height='200'/>
+<img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/trajectory_tracking_long_exposure.gif" alt="animated" width='350'/>
 </div>
 <div align="center">
 Trajectory tracking using a trained policy on a real Crazyflie (nano quadrotor).
+</div>
+<br>
+<div align="center" >
+
+<a href="https://youtu.be/NRD43ZA1D-4" rel="Link to video"><img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/video_thumbnail.png" width='450'/></a>
 </div>
 <br>
 
 
 
 ## Introduction
-This repository contains the code for the paper [Learning to Fly in Seconds](https://arxiv.org/abs/2311.13081). The main dependency is the [RLtools](https://github.com/rl-tools/rl-tools) deep reinforcement learning library.
+This repository contains the code for the paper [Learning to Fly in Seconds](https://arxiv.org/abs/2311.13081). It allows to train end-to-end control policies using deep reinforcement learning. The training is done in simulation and is finished within seconds on a consumer-grade laptop. The trained policies generalize and can be deployed on real quadrotors:
+<div align="center" >
+<img src="https://github.com/arplaboratory/learning_to_fly_media/blob/master/overview.jpg"/>
+</div>
+<br>
 
+The main dependency is the [RLtools](https://github.com/rl-tools/rl-tools) deep reinforcement learning library. 
 
 
 ## Instructions to run the code
