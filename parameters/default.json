@@ -17,8 +17,8 @@
     },
     "curriculum": {
       "action": {
-        "factor": 1.5,
-        "limit": 2.0
+        "factor": 2.0,
+        "limit": 4.0
       },
       "orientation": {
         "factor": 1.1,

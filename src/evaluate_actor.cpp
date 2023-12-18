@@ -200,6 +200,8 @@ int main(int argc, char** argv) {
         if(!SAME_CONFIG_AS_IN_TRAINING && DISABLE_DISTURBANCES){
             env.parameters.disturbances.random_force.mean = 0;
             env.parameters.disturbances.random_force.std = 0;
+            env.parameters.disturbances.random_torque.mean = 0;
+            env.parameters.disturbances.random_torque.std = 0;
         }
         else{
             if(AMPLIFY_DISTURBANCES){

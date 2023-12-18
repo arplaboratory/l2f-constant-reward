@@ -54,9 +54,9 @@ namespace parameters{
                             init_params,
                             reward_function,
                             {   // Observation noise
-                                    0.001 * ABLATION_SPEC::OBSERVATION_NOISE, // position
+                                    0.05 * ABLATION_SPEC::OBSERVATION_NOISE, // position
                                     0.001 * ABLATION_SPEC::OBSERVATION_NOISE, // orientation
-                                    0.002 * ABLATION_SPEC::OBSERVATION_NOISE, // linear_velocity
+                                    0.1 * ABLATION_SPEC::OBSERVATION_NOISE, // linear_velocity
                                     0.2 * ABLATION_SPEC::OBSERVATION_NOISE, // angular_velocity
                             },
                             {   // Action noise
@@ -66,7 +66,7 @@ namespace parameters{
                     },
                     typename PARAMETERS_TYPE::Disturbances{
                             typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;
-                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 100 * ABLATION_SPEC::DISTURBANCE} // random_torque;
+                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 1000 * ABLATION_SPEC::DISTURBANCE} // random_torque;
                     }
 
             };
