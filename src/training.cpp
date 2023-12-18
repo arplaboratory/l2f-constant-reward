@@ -62,7 +62,7 @@ struct ABLATION_SPEC: learning_to_fly::config::DEFAULT_ABLATION_SPEC{
     static constexpr bool USE_INITIAL_REWARD_FUNCTION = true;
     static constexpr bool EXPLORATION_NOISE_DECAY = false;
     static constexpr bool DISTURBANCE = false;
-    static constexpr bool OBSERVATION_NOISE = false;
+    static constexpr bool OBSERVATION_NOISE = true;
 };
 
 int main(int argc, char** argv){

@@ -30,10 +30,10 @@ namespace parameters{
         template<typename T, typename TI, typename T_ABLATION_SPEC>
         struct environment {
             using ABLATION_SPEC = T_ABLATION_SPEC;
-//            static constexpr auto initial_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque<T>;
-//            static constexpr auto target_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque_curriculum_target<T>;
-//            static constexpr auto reward_function = ABLATION_SPEC::USE_INITIAL_REWARD_FUNCTION ? initial_reward_function : target_reward_function;
-            static constexpr auto reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_absolute<T>;
+            static constexpr auto initial_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque<T>;
+            static constexpr auto target_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque_curriculum_target<T>;
+            static constexpr auto reward_function = ABLATION_SPEC::USE_INITIAL_REWARD_FUNCTION ? initial_reward_function : target_reward_function;
+//            static constexpr auto reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_absolute<T>;
 
 
             using REWARD_FUNCTION_CONST = typename rl_tools::utils::typing::remove_cv_t<decltype(reward_function)>;
@@ -57,7 +57,7 @@ namespace parameters{
                                     0.001 * ABLATION_SPEC::OBSERVATION_NOISE, // position
                                     0.001 * ABLATION_SPEC::OBSERVATION_NOISE, // orientation
                                     0.002 * ABLATION_SPEC::OBSERVATION_NOISE, // linear_velocity
-                                    0.002 * ABLATION_SPEC::OBSERVATION_NOISE, // angular_velocity
+                                    0.2 * ABLATION_SPEC::OBSERVATION_NOISE, // angular_velocity
                             },
                             {   // Action noise
                                     0, // std of additive gaussian noise onto the normalized action (-1, 1)

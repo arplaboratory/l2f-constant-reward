@@ -12,6 +12,11 @@ namespace learning_to_fly{
                 auto next_state = rlt::get(rb.next_states, last_position, 0);
                 rlt::log_reward(ts.device, ts.off_policy_runner.envs[0], state, action, next_state, ts.rng_log);
             }
+//            if(ts.step % 100000 == 0){
+//                for (const auto &[key, value] : ts.device.logger.topic_frequency_dict) {
+//                    std::cout << "Key: " << key << ", Value: " << value << std::endl;
+//                }
+//            }
         }
     }
 }

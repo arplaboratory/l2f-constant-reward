@@ -12,21 +12,21 @@
       "angular_velocity": 0,
       "linear_acceleration": 0,
       "angular_acceleration": 0,
-      "action_baseline": 0.334,
-      "action": 0.00
+      "action_baseline": 0.11525309261164662,
+      "action": 0.10
     },
     "curriculum": {
       "action": {
-        "factor": 1.0,
-        "limit": 0
+        "factor": 2.0,
+        "limit": 2
       },
       "orientation": {
         "factor": 1.1,
-        "limit": 20
+        "limit": 2
       },
       "position": {
           "factor": 1.1,
-          "limit": 20
+          "limit": 2
       },
       "linear_velocity": {
           "factor": 1.0,

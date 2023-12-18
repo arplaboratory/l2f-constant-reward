@@ -54,9 +54,9 @@ namespace learning_to_fly{
             };
 
             struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DefaultParameters<T, TI>{
-//                static constexpr T WEIGHT_DECAY = 0.0001;
-//                static constexpr T WEIGHT_DECAY_INPUT = 0.0001;
-//                static constexpr T WEIGHT_DECAY_OUTPUT = 0.0001;
+                static constexpr T WEIGHT_DECAY = 0.0001;
+                static constexpr T WEIGHT_DECAY_INPUT = 0.0001;
+                static constexpr T WEIGHT_DECAY_OUTPUT = 0.0001;
                 static constexpr T BIAS_LR_FACTOR = 1;
             };
             using OPTIMIZER = rlt::nn::optimizers::Adam<OPTIMIZER_PARAMETERS>;
