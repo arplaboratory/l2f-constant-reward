@@ -26,7 +26,7 @@ namespace TEST_DEFINITIONS{
     namespace parameter_set = parameters;
     template <typename BASE_SPEC>
     struct SpecEval: BASE_SPEC{
-        static constexpr bool DISTURBANCE = false;
+        static constexpr bool DISTURBANCE = true;
         static constexpr bool OBSERVATION_NOISE = true;
         static constexpr bool ROTOR_DELAY = true;
         static constexpr bool ACTION_HISTORY = BASE_SPEC::ROTOR_DELAY && BASE_SPEC::ACTION_HISTORY;
@@ -48,8 +48,8 @@ namespace TEST_DEFINITIONS{
     constexpr bool DEACTIVATE_OBSERVATION_NOISE = true;
     constexpr bool INJECT_EXPLORATION_NOISE = false;
     constexpr bool DISABLE_DISTURBANCES = true;
-    constexpr bool AMPLIFY_DISTURBANCES = true;
-    constexpr TI N_ENVIRONMENTS = 100;
+    constexpr bool AMPLIFY_DISTURBANCES = false;
+    constexpr TI N_ENVIRONMENTS = 10;
     constexpr T max_pos_diff = 0.6;
     constexpr T max_vel_diff = 5;
     constexpr T time_lapse = 1.0;
@@ -203,7 +203,8 @@ int main(int argc, char** argv) {
         }
         else{
             if(AMPLIFY_DISTURBANCES){
-                env.parameters.disturbances.random_force.std *= 2;
+                env.parameters.disturbances.random_force.std = 1;
+                env.parameters.disturbances.random_torque.std = 0.01;
             }
         }
         env.parameters.mdp.init.guidance = 0;

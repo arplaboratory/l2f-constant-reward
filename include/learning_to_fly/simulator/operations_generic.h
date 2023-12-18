@@ -345,7 +345,7 @@ namespace rl_tools{
             auto distribution = env.parameters.disturbances.random_torque;
             state.torque[0] = random::normal_distribution::sample(random_dev, (T)distribution.mean, (T)distribution.std, rng);
             state.torque[1] = random::normal_distribution::sample(random_dev, (T)distribution.mean, (T)distribution.std, rng);
-            state.torque[2] = random::normal_distribution::sample(random_dev, (T)distribution.mean, (T)distribution.std, rng);
+            state.torque[2] = random::normal_distribution::sample(random_dev, (T)distribution.mean, (T)distribution.std/100, rng);
         }
 //        }
 //        else{
