@@ -7,6 +7,8 @@
 #include <learning_to_fly/simulator/parameters/reward_functions/default.h>
 #include <learning_to_fly/simulator/parameters/dynamics/crazy_flie.h>
 #include <learning_to_fly/simulator/parameters/dynamics/race.h>
+#include <learning_to_fly/simulator/parameters/dynamics/x500_sim.h>
+#include <learning_to_fly/simulator/parameters/dynamics/x500_real.h>
 #include <learning_to_fly/simulator/parameters/init/default.h>
 #include <learning_to_fly/simulator/parameters/termination/default.h>
 
@@ -48,7 +50,7 @@ namespace parameters{
                                                 rl_tools::rl::environments::multirotor::parameters::init::all_positions<T, TI, 4, REWARD_FUNCTION>;
 
             static constexpr PARAMETERS_TYPE parameters = {
-                    rl_tools::rl::environments::multirotor::parameters::dynamics::race<T, TI, REWARD_FUNCTION>,
+                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::sim<T, TI, REWARD_FUNCTION>,
                     {0.01}, // integration dt
                     {
                             init_params,

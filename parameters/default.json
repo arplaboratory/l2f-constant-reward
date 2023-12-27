@@ -12,7 +12,8 @@
       "angular_velocity": 0,
       "linear_acceleration": 0,
       "angular_acceleration": 0,
-      "action_baseline": 0.11525309261164662,
+      "action_baseline": 0.4582053118721884,
+      "calculate_action_baseline": true,
       "action": 0.10
     },
     "curriculum": {

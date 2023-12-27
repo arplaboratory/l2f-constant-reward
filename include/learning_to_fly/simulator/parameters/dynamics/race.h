@@ -49,7 +49,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
             {
                     0,
                     0,
-                    23.5
+                    143
             },
             // torque constant
 //            0.025126582278481014,
@@ -97,6 +97,6 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
             // T, RPM time constant
             0.04,
             // action limit
-            {0.1, 0.5},
+            {0.1, 0.2},
     };
 }

@@ -19,6 +19,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         T linear_acceleration;
         T angular_acceleration;
         T action_baseline;
+        bool calculate_action_baseline;
         T action;
         struct Components{
             T orientation_cost;
@@ -50,8 +51,10 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         components.angular_acc_cost = (angular_acc[0] * angular_acc[0] + angular_acc[1] * angular_acc[1] + angular_acc[2] * angular_acc[2]) / (env.parameters.integration.dt * env.parameters.integration.dt);
 
         T action_diff[ACTION_DIM];
-        for(TI i = 0; i < ACTION_DIM; i++){
-            action_diff[i] = get(action, 0, i) - params.action_baseline;
+        for(TI action_i = 0; action_i < ACTION_DIM; action_i++){
+            T half_range = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2;
+            T action_value = get(action, 0, action_i) * half_range + env.parameters.dynamics.action_limit.min + half_range;
+            action_diff[action_i] = action_value - params.action_baseline;
         }
         components.action_cost = utils::vector_operations::norm<DEVICE, T, ACTION_DIM>(action_diff);
         components.action_cost *= components.action_cost;

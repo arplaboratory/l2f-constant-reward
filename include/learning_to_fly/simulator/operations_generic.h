@@ -226,6 +226,14 @@ namespace rl_tools{
 //        env.current_dynamics.mass *= mass_factor;
 //        printf("initial state: %f %f %f %f %f %f %f %f %f %f %f %f %f\n", state.state[0], state.state[1], state.state[2], state.state[3], state.state[4], state.state[5], state.state[6], state.state[7], state.state[8], state.state[9], state.state[10], state.state[11], state.state[12]);
         env.current_dynamics = env.parameters.dynamics;
+        // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
+        // todo:
+        if(env.parameters.mdp.reward.calculate_action_baseline){
+            utils::assert_exit(device, env.current_dynamics.thrust_constants[1] == 0, "linear thrust coefficient not handled yet");
+            T hover_thrust = env.current_dynamics.mass * (-1) * env.current_dynamics.gravity[2];
+            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.thrust_constants[0]) / env.current_dynamics.thrust_constants[2]);
+        }
+
     }
     template<typename DEVICE, typename T, typename TI, typename SPEC>
     static void initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateBase<T, TI>& state){

@@ -77,6 +77,10 @@ namespace learning_to_fly{
                         reward_params.action_baseline = reward_json["action_baseline"];
                         reward_params_eval.action_baseline = reward_json["action_baseline"];
                     }
+                    if(reward_json.contains("calculate_action_baseline")){
+                        reward_params.calculate_action_baseline = reward_json["calculate_action_baseline"];
+                        reward_params_eval.calculate_action_baseline = reward_json["calculate_action_baseline"];
+                    }
                     if(reward_json.contains("action")){
                         reward_params.action = reward_json["action"];
                         reward_params_eval.action = reward_json["action"];
