@@ -49,8 +49,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
                 15.85
             },
             // torque constant
-//            0.025126582278481014,
-            0.11697849233439939,
+//            0.11697849233439939,
+            0.2,
             // mass vehicle
             2.000,
             // gravity
