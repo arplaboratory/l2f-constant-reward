@@ -30,6 +30,8 @@ namespace learning_to_fly{
             Schedule position = {1.2, 40};
             Schedule orientation = {1.0, 100};
             Schedule linear_velocity = {1.4, 1};
+            Schedule linear_acceleration = {1.0, 0};
+            Schedule angular_acceleration = {1.0, 0};
             Schedule action = {1.4, 1};
         };
         Curriculum curriculum;

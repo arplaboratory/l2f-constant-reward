@@ -101,6 +101,14 @@ namespace learning_to_fly{
                         ts.curriculum.linear_velocity.factor = curriculum_json["linear_velocity"]["factor"];
                         ts.curriculum.linear_velocity.limit = curriculum_json["linear_velocity"]["limit"];
                     }
+                    if(curriculum_json.contains("linear_acceleration")){
+                        ts.curriculum.linear_acceleration.factor = curriculum_json["linear_acceleration"]["factor"];
+                        ts.curriculum.linear_acceleration.limit = curriculum_json["linear_acceleration"]["limit"];
+                    }
+                    if(curriculum_json.contains("angular_acceleration")){
+                        ts.curriculum.angular_acceleration.factor = curriculum_json["angular_acceleration"]["factor"];
+                        ts.curriculum.angular_acceleration.limit = curriculum_json["angular_acceleration"]["limit"];
+                    }
                     if(curriculum_json.contains("action")){
                         ts.curriculum.action.factor = curriculum_json["action"]["factor"];
                         ts.curriculum.action.limit = curriculum_json["action"]["limit"];
