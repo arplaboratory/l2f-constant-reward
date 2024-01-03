@@ -50,7 +50,7 @@ namespace parameters{
                                                 rl_tools::rl::environments::multirotor::parameters::init::all_positions<T, TI, 4, REWARD_FUNCTION>;
 
             static constexpr PARAMETERS_TYPE parameters = {
-                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::sim<T, TI, REWARD_FUNCTION>,
+                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<T, TI, REWARD_FUNCTION>,
                     {0.01}, // integration dt
                     {
                             init_params,
