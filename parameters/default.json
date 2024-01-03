@@ -1,6 +1,6 @@
 {
   "mdp": {
-    "gamma": 0.995,
+    "gamma": 0.99,
     "reward": {
       "type": "Squared",
       "scale": 1.00,
@@ -10,11 +10,11 @@
       "orientation": 0.5,
       "linear_velocity": 0.0,
       "angular_velocity": 0,
-      "linear_acceleration": 0.0001,
-      "angular_acceleration": 0.0001,
+      "linear_acceleration": 0.0,
+      "angular_acceleration": 0.0,
       "action_baseline": 0.4582053118721884,
       "calculate_action_baseline": true,
-      "action": 0.0
+      "action": 0.1
     },
     "curriculum": {
       "position": {
@@ -31,11 +31,11 @@
       },
       "linear_acceleration": {
         "factor": 2.0,
-        "limit": 0.01
+        "limit": 0.0
       },
       "angular_acceleration": {
         "factor": 1.2,
-        "limit": 0.01
+        "limit": 0.0
       },
       "action": {
         "factor": 2.0,

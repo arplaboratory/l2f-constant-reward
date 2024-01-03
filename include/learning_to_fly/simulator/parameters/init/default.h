@@ -73,7 +73,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
     };
     template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
     constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_biggest_angle = {
-            0.1, // guidance
+            0.7, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             90.0/180.0 * 3.14,   // orientation
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY,   // linear velocity
