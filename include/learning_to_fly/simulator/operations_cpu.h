@@ -89,6 +89,18 @@ namespace rl_tools{
                         }
                     }
                 }
+                if(config["dynamics"].contains("motor_time_constant")){
+                    parameters.motor_time_constant = config["dynamics"]["motor_time_constant"];
+                }
+                if(config["dynamics"].contains("action_limit")){
+                    auto action_limit = config["dynamics"]["action_limit"];
+                    if(action_limit.contains("upper_bound")){
+                        parameters.action_limit.max = action_limit["upper_bound"];
+                    }
+                    if(action_limit.contains("lower_bound")){
+                        parameters.action_limit.min = action_limit["lower_bound"];
+                    }
+                }
 
 
             }

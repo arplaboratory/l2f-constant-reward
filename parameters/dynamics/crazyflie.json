@@ -29,7 +29,7 @@
   ],
   "motor_time_constant": 0.15,
   "action_limit": {
-    "lower": 0,
-    "upper": 21702
+    "lower_bound": 0,
+    "upper_bound": 21702
   }
 }
