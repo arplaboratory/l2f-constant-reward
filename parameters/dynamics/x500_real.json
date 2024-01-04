@@ -20,7 +20,7 @@
       [0, 0,  1]
     ],
     "rotor_thrust_coefficients": [1.425, 0, 15.85],
-    "torque_constant": 0.2,
+    "rotor_torque_constant": 0.2,
     "mass": 2.000,
     "gravity": [0, 0, -9.81],
     "J": [

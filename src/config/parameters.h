@@ -41,7 +41,8 @@ namespace parameters{
             using REWARD_FUNCTION_CONST = typename rl_tools::utils::typing::remove_cv_t<decltype(reward_function)>;
             using REWARD_FUNCTION = typename rl_tools::utils::typing::remove_cv<REWARD_FUNCTION_CONST>::type;
 
-            using PARAMETERS_SPEC = rl_tools::rl::environments::multirotor::ParametersBaseSpecification<T, TI, 4, REWARD_FUNCTION>;
+            constexpr static auto MODEL = rl_tools::rl::environments::multirotor::parameters::REGISTRY::x500_real;
+            using PARAMETERS_SPEC = rl_tools::rl::environments::multirotor::ParametersBaseSpecification<T, TI, 4, REWARD_FUNCTION, rl_tools::rl::environments::multirotor::parameters::REGISTRY, MODEL>;
             using PARAMETERS_TYPE = rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, rl_tools::rl::environments::multirotor::ParametersBase<PARAMETERS_SPEC>>;
 
             static_assert(ABLATION_SPEC::INIT_NORMAL);
@@ -50,7 +51,8 @@ namespace parameters{
                                                                            :
                                                 rl_tools::rl::environments::multirotor::parameters::init::all_positions<PARAMETERS_SPEC>;
 
-            constexpr static auto dynamics_parameters = rl_tools::rl::environments::multirotor::parameters::registry<PARAMETERS_SPEC, rl_tools::rl::environments::multirotor::parameters::REGISTRY::x500_real>; //rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<PARAMETERS_SPEC>;
+            constexpr static auto MODEL_NAME = rl_tools::rl::environments::multirotor::parameters::registry_name<PARAMETERS_SPEC>;
+            constexpr static auto dynamics_parameters = rl_tools::rl::environments::multirotor::parameters::registry<PARAMETERS_SPEC>; //rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<PARAMETERS_SPEC>;
             static constexpr PARAMETERS_TYPE parameters = {
                     dynamics_parameters,
                     {0.01}, // integration dt

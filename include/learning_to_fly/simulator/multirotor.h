@@ -4,12 +4,13 @@
 #include <rl_tools/utils/generic/typing.h>
 
 namespace rl_tools::rl::environments::multirotor{
-    template <typename T_T, typename T_TI, T_TI T_N, typename T_REWARD_FUNCTION>
+    template <typename T_T, typename T_TI, T_TI T_N, typename T_REWARD_FUNCTION, typename REGISTRY, REGISTRY T_MODEL>
     struct ParametersBaseSpecification{
         using T = T_T;
         using TI = T_TI;
         static constexpr TI N = T_N;
         using REWARD_FUNCTION = T_REWARD_FUNCTION;
+        static constexpr REGISTRY MODEL = T_MODEL;
     };
     template <typename T_SPEC>
     struct ParametersBase{
@@ -25,8 +26,8 @@ namespace rl_tools::rl::environments::multirotor{
             T rotor_positions[N][3];
             T rotor_thrust_directions[N][3];
             T rotor_torque_directions[N][3];
-            T thrust_coefficients[3];
-            T torque_constant;
+            T rotor_thrust_coefficients[3];
+            T rotor_torque_constant;
             T mass;
             T gravity[3];
             T J[3][3];

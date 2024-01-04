@@ -7,6 +7,7 @@ with open(f'dynamics/{name}.json', 'r') as file:
     dynamics = json.load(file)
 config = {**base, **dynamics}
 config['requires_processing'] = 'false'
+config['dynamics']['model'] = name
 J = np.array(config["dynamics"]["J"])
 config['dynamics']['J_inv'] = np.linalg.inv(J).tolist()
 with open(f'output/{name}.json', 'w') as file:

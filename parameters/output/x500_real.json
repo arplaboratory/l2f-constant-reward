@@ -137,7 +137,7 @@
             0,
             15.85
         ],
-        "torque_constant": 0.2,
+        "rotor_torque_constant": 0.2,
         "mass": 2.0,
         "gravity": [
             0,
@@ -166,6 +166,7 @@
             "lower_bound": 0.3,
             "upper_bound": 0.7
         },
+        "model": "x500_real",
         "J_inv": [
             [
                 16.155088852988694,

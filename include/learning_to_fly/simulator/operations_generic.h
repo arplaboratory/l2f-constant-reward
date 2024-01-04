@@ -134,12 +134,12 @@ namespace rl_tools::rl::environments::multirotor {
         for(typename DEVICE::index_t i_rotor = 0; i_rotor < 4; i_rotor++){
             // flops: 3 + 1 + 3 + 3 + 3 + 4 + 6 = 23
             T rpm = action[i_rotor];
-            T thrust_magnitude = params.dynamics.thrust_coefficients[0] + params.dynamics.thrust_coefficients[1] * rpm + params.dynamics.thrust_coefficients[2] * rpm * rpm;
+            T thrust_magnitude = params.dynamics.rotor_thrust_coefficients[0] + params.dynamics.rotor_thrust_coefficients[1] * rpm + params.dynamics.rotor_thrust_coefficients[2] * rpm * rpm;
             T rotor_thrust[3];
             utils::vector_operations::scalar_multiply<DEVICE, T, 3>(params.dynamics.rotor_thrust_directions[i_rotor], thrust_magnitude, rotor_thrust);
             utils::vector_operations::add_accumulate<DEVICE, T, 3>(rotor_thrust, thrust);
 
-            utils::vector_operations::scalar_multiply_accumulate<DEVICE, T, 3>(params.dynamics.rotor_torque_directions[i_rotor], thrust_magnitude * params.dynamics.torque_constant, torque);
+            utils::vector_operations::scalar_multiply_accumulate<DEVICE, T, 3>(params.dynamics.rotor_torque_directions[i_rotor], thrust_magnitude * params.dynamics.rotor_torque_constant, torque);
             utils::vector_operations::cross_product_accumulate<DEVICE, T>(params.dynamics.rotor_positions[i_rotor], rotor_thrust, torque);
         }
 
@@ -229,9 +229,9 @@ namespace rl_tools{
         // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
         // todo:
         if(env.parameters.mdp.reward.calculate_action_baseline){
-            utils::assert_exit(device, env.current_dynamics.thrust_coefficients[1] == 0, "linear thrust coefficient not handled yet");
+            utils::assert_exit(device, env.current_dynamics.rotor_thrust_coefficients[1] == 0, "linear thrust coefficient not handled yet");
             T hover_thrust = env.current_dynamics.mass * (-1) * env.current_dynamics.gravity[2];
-            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.thrust_coefficients[0]) / env.current_dynamics.thrust_coefficients[2]);
+            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.rotor_thrust_coefficients[0]) / env.current_dynamics.rotor_thrust_coefficients[2]);
 //            env.parameters.mdp.reward.action_baseline *= 0.8;
         }
 
