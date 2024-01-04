@@ -19,6 +19,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         T linear_acceleration;
         T angular_acceleration;
         T action_baseline;
+        bool calculate_action_baseline;
         T action;
         struct Components{
             T orientation_cost;

@@ -15,7 +15,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::termination{
     constexpr typename rl_tools::rl::environments::multirotor::ParametersBase<T, TI, 4, REWARD_FUNCTION>::MDP::Termination fast_learning = {
         true,           // enable
         0.6,            // position
-        1000,         // linear velocity
-        1000 // angular velocity
+        10,         // linear velocity
+        40 // angular velocity
     };
 }

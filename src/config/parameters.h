@@ -34,8 +34,8 @@ namespace parameters{
             using ABLATION_SPEC = T_ABLATION_SPEC;
             static constexpr auto initial_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque<T>;
             static constexpr auto target_reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_squared_position_only_torque_curriculum_target<T>;
-            static constexpr auto reward_function = ABLATION_SPEC::USE_INITIAL_REWARD_FUNCTION ? initial_reward_function : target_reward_function;
-//            static constexpr auto reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_absolute<T>;
+//            static constexpr auto reward_function = ABLATION_SPEC::USE_INITIAL_REWARD_FUNCTION ? initial_reward_function : target_reward_function;
+            static constexpr auto reward_function = rl_tools::rl::environments::multirotor::parameters::reward_functions::reward_absolute<T>;
 
 
             using REWARD_FUNCTION_CONST = typename rl_tools::utils::typing::remove_cv_t<decltype(reward_function)>;
@@ -67,8 +67,8 @@ namespace parameters{
                             rl_tools::rl::environments::multirotor::parameters::termination::fast_learning<T, TI, 4, REWARD_FUNCTION>
                     },
                     typename PARAMETERS_TYPE::Disturbances{
-                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;
-                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 1000 * ABLATION_SPEC::DISTURBANCE} // random_torque;
+                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 0.0 * 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;
+                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 0.0 * 1.0 * 9.81 / 1000 * ABLATION_SPEC::DISTURBANCE} // random_torque;
                     }
 
             };

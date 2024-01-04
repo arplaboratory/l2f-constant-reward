@@ -86,6 +86,38 @@ namespace learning_to_fly{
                         reward_params_eval.action = reward_json["action"];
                     }
                 }
+                if(mdp_json.contains("init")) {
+                    auto init_json = mdp_json["init"];
+                    auto& init_params = ts.env_parameters_base.mdp.init;
+                    if(init_json.contains("max_position")){
+                        init_params.max_position = init_json["max_position"];
+                    }
+                    if(init_json.contains("max_orientation")){
+                        init_params.max_angle = init_json["max_angle"];
+                    }
+                    if(init_json.contains("max_linear_velocity")){
+                        init_params.max_linear_velocity = init_json["max_linear_velocity"];
+                    }
+                    if(init_json.contains("max_angular_velocity")){
+                        init_params.max_angular_velocity = init_json["max_angular_velocity"];
+                    }
+                }
+                if(mdp_json.contains("termination")) {
+                    auto termination_json = mdp_json["termination"];
+                    auto& termination_params = ts.env_parameters_base.mdp.termination;
+                    if(termination_json.contains("enabled")){
+                        termination_params.enabled = termination_json["enabled"];
+                    }
+                    if(termination_json.contains("position_threshold")){
+                        termination_params.position_threshold = termination_json["position_threshold"];
+                    }
+                    if(termination_json.contains("linear_velocity_threshold")){
+                        termination_params.linear_velocity_threshold = termination_json["linear_velocity_threshold"];
+                    }
+                    if(termination_json.contains("angular_velocity_threshold")){
+                        termination_params.angular_velocity_threshold = termination_json["angular_velocity_threshold"];
+                    }
+                }
                 if(mdp_json.contains("curriculum")){
                     auto curriculum_json = mdp_json["curriculum"];
 
@@ -112,6 +144,34 @@ namespace learning_to_fly{
                     if(curriculum_json.contains("action")){
                         ts.curriculum.action.factor = curriculum_json["action"]["factor"];
                         ts.curriculum.action.limit = curriculum_json["action"]["limit"];
+                    }
+                    if(curriculum_json.contains("init_position")){
+                        ts.curriculum.init_position.factor = curriculum_json["init_position"]["factor"];
+                        ts.curriculum.init_position.limit = curriculum_json["init_position"]["limit"];
+                    }
+                    if(curriculum_json.contains("init_orientation")){
+                        ts.curriculum.init_orientation.factor = curriculum_json["init_orientation"]["factor"];
+                        ts.curriculum.init_orientation.limit = curriculum_json["init_orientation"]["limit"];
+                    }
+                    if(curriculum_json.contains("init_linear_velocity")){
+                        ts.curriculum.init_linear_velocity.factor = curriculum_json["init_linear_velocity"]["factor"];
+                        ts.curriculum.init_linear_velocity.limit = curriculum_json["init_linear_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("init_angular_velocity")){
+                        ts.curriculum.init_angular_velocity.factor = curriculum_json["init_angular_velocity"]["factor"];
+                        ts.curriculum.init_angular_velocity.limit = curriculum_json["init_angular_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_position")){
+                        ts.curriculum.termination_position.factor = curriculum_json["termination_position"]["factor"];
+                        ts.curriculum.termination_position.limit = curriculum_json["termination_position"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_linear_velocity")){
+                        ts.curriculum.termination_linear_velocity.factor = curriculum_json["termination_linear_velocity"]["factor"];
+                        ts.curriculum.termination_linear_velocity.limit = curriculum_json["termination_linear_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_angular_velocity")){
+                        ts.curriculum.termination_angular_velocity.factor = curriculum_json["termination_angular_velocity"]["factor"];
+                        ts.curriculum.termination_angular_velocity.limit = curriculum_json["termination_angular_velocity"]["limit"];
                     }
                 }
             }

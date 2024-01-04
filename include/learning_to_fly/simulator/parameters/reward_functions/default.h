@@ -498,6 +498,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             0.1, // action
     };
 }
