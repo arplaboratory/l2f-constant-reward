@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <fstream>
 
+#include <learning_to_fly/simulator/operations_cpu.h>
+
 namespace learning_to_fly{
     namespace _init{
         template <typename T_CONFIG>
@@ -13,7 +15,7 @@ namespace learning_to_fly{
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
             parameters_path = ts.parameters_path;
 #else
-            parameters_path = std::filesystem::path("parameters") / "default.json";
+            parameters_path = std::filesystem::path("parameters") / "output" / "default.json";
 #endif
             std::ifstream parameters_file(parameters_path);
             if(!parameters_file.is_open()) {
@@ -24,6 +26,8 @@ namespace learning_to_fly{
 #ifdef RL_TOOLS_ENABLE_JSON
             nlohmann::json parameters_json;
             parameters_file >> parameters_json;
+            rlt::load_config(ts.device, ts.env_parameters_base, parameters_json);
+            rlt::load_config(ts.device, ts.env_parameters_base_eval, parameters_json);
             if(parameters_json.contains("mdp")){
                 if(parameters_json["mdp"].contains("gamma")){
                     ts.actor_critic.gamma = parameters_json["mdp"]["gamma"];

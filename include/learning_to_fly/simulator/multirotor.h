@@ -4,8 +4,19 @@
 #include <rl_tools/utils/generic/typing.h>
 
 namespace rl_tools::rl::environments::multirotor{
-    template <typename T, typename TI, TI N, typename T_REWARD_FUNCTION>
+    template <typename T_T, typename T_TI, T_TI T_N, typename T_REWARD_FUNCTION>
+    struct ParametersBaseSpecification{
+        using T = T_T;
+        using TI = T_TI;
+        static constexpr TI N = T_N;
+        using REWARD_FUNCTION = T_REWARD_FUNCTION;
+    };
+    template <typename T_SPEC>
     struct ParametersBase{
+        using SPEC = T_SPEC;
+        using T = typename SPEC::T;
+        static constexpr typename SPEC::TI N = SPEC::N;
+
         struct Dynamics{
             struct ActionLimit{
                 T min;
@@ -14,20 +25,20 @@ namespace rl_tools::rl::environments::multirotor{
             T rotor_positions[N][3];
             T rotor_thrust_directions[N][3];
             T rotor_torque_directions[N][3];
-            T thrust_constants[3];
+            T thrust_coefficients[3];
             T torque_constant;
             T mass;
             T gravity[3];
             T J[3][3];
             T J_inv[3][3];
-            T rpm_time_constant;
+            T motor_time_constant;
             ActionLimit action_limit;
         };
         struct Integration{
             T dt;
         };
         struct MDP{
-            using REWARD_FUNCTION = T_REWARD_FUNCTION;
+            using REWARD_FUNCTION = typename SPEC::REWARD_FUNCTION;
             struct Initialization{
                 T guidance;
                 T max_position;

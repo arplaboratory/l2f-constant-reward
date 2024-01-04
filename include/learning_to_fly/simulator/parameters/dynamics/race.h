@@ -2,8 +2,8 @@
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
-    template<typename T, typename TI, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase <T, TI, TI(4), REWARD_FUNCTION>::Dynamics race = {
+    template<typename SPEC, typename = utils::typing::enable_if_t<SPEC::N == 4>> // This is a quadrotor
+    constexpr typename ParametersBase<SPEC>::Dynamics race = {
             // Rotor positions
             {
                     {

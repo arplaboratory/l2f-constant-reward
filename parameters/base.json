@@ -1,4 +1,5 @@
 {
+  "requires_processing": true,
   "mdp": {
     "gamma": 0.95,
     "reward": {

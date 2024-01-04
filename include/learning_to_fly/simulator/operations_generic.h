@@ -134,7 +134,7 @@ namespace rl_tools::rl::environments::multirotor {
         for(typename DEVICE::index_t i_rotor = 0; i_rotor < 4; i_rotor++){
             // flops: 3 + 1 + 3 + 3 + 3 + 4 + 6 = 23
             T rpm = action[i_rotor];
-            T thrust_magnitude = params.dynamics.thrust_constants[0] + params.dynamics.thrust_constants[1] * rpm + params.dynamics.thrust_constants[2] * rpm * rpm;
+            T thrust_magnitude = params.dynamics.thrust_coefficients[0] + params.dynamics.thrust_coefficients[1] * rpm + params.dynamics.thrust_coefficients[2] * rpm * rpm;
             T rotor_thrust[3];
             utils::vector_operations::scalar_multiply<DEVICE, T, 3>(params.dynamics.rotor_thrust_directions[i_rotor], thrust_magnitude, rotor_thrust);
             utils::vector_operations::add_accumulate<DEVICE, T, 3>(rotor_thrust, thrust);
@@ -191,7 +191,7 @@ namespace rl_tools::rl::environments::multirotor {
     RL_TOOLS_FUNCTION_PLACEMENT void multirotor_dynamics(DEVICE& device, const PARAMETERS& params, const StateRotors<T, TI, NEXT_COMPONENT>& state, const T* action, StateRotors<T, TI, NEXT_COMPONENT>& state_change) {
         multirotor_dynamics(device, params, static_cast<const NEXT_COMPONENT&>(state), state.rpm, static_cast<NEXT_COMPONENT&>(state_change));
         for(typename DEVICE::index_t i_rotor = 0; i_rotor < 4; i_rotor++){
-            state_change.rpm[i_rotor] = (action[i_rotor] - state.rpm[i_rotor]) * 1/params.dynamics.rpm_time_constant;
+            state_change.rpm[i_rotor] = (action[i_rotor] - state.rpm[i_rotor]) * 1/params.dynamics.motor_time_constant;
         }
 
     }
@@ -229,9 +229,9 @@ namespace rl_tools{
         // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
         // todo:
         if(env.parameters.mdp.reward.calculate_action_baseline){
-            utils::assert_exit(device, env.current_dynamics.thrust_constants[1] == 0, "linear thrust coefficient not handled yet");
+            utils::assert_exit(device, env.current_dynamics.thrust_coefficients[1] == 0, "linear thrust coefficient not handled yet");
             T hover_thrust = env.current_dynamics.mass * (-1) * env.current_dynamics.gravity[2];
-            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.thrust_constants[0]) / env.current_dynamics.thrust_constants[2]);
+            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.thrust_coefficients[0]) / env.current_dynamics.thrust_coefficients[2]);
 //            env.parameters.mdp.reward.action_baseline *= 0.8;
         }
 

@@ -41,16 +41,17 @@ namespace parameters{
             using REWARD_FUNCTION_CONST = typename rl_tools::utils::typing::remove_cv_t<decltype(reward_function)>;
             using REWARD_FUNCTION = typename rl_tools::utils::typing::remove_cv<REWARD_FUNCTION_CONST>::type;
 
-            using PARAMETERS_TYPE = rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, rl_tools::rl::environments::multirotor::ParametersBase<T, TI, 4, REWARD_FUNCTION>>;
+            using PARAMETERS_SPEC = rl_tools::rl::environments::multirotor::ParametersBaseSpecification<T, TI, 4, REWARD_FUNCTION>;
+            using PARAMETERS_TYPE = rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, rl_tools::rl::environments::multirotor::ParametersBase<PARAMETERS_SPEC>>;
 
             static_assert(ABLATION_SPEC::INIT_NORMAL);
             static constexpr auto init_params = ABLATION_SPEC::INIT_NORMAL ?
-                                                rl_tools::rl::environments::multirotor::parameters::init::orientation_biggest_angle<T, TI, 4, REWARD_FUNCTION>
+                                                rl_tools::rl::environments::multirotor::parameters::init::orientation_biggest_angle<PARAMETERS_SPEC>
                                                                            :
-                                                rl_tools::rl::environments::multirotor::parameters::init::all_positions<T, TI, 4, REWARD_FUNCTION>;
+                                                rl_tools::rl::environments::multirotor::parameters::init::all_positions<PARAMETERS_SPEC>;
 
             static constexpr PARAMETERS_TYPE parameters = {
-                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<T, TI, REWARD_FUNCTION>,
+                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<PARAMETERS_SPEC>,
                     {0.01}, // integration dt
                     {
                             init_params,
@@ -64,7 +65,7 @@ namespace parameters{
                             {   // Action noise
                                     0, // std of additive gaussian noise onto the normalized action (-1, 1)
                             },
-                            rl_tools::rl::environments::multirotor::parameters::termination::fast_learning<T, TI, 4, REWARD_FUNCTION>
+                            rl_tools::rl::environments::multirotor::parameters::termination::fast_learning<PARAMETERS_SPEC>
                     },
                     typename PARAMETERS_TYPE::Disturbances{
                             typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 0.0 * 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;

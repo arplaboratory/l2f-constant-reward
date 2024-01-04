@@ -2,33 +2,29 @@
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
-    template<typename T, typename TI, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase <T, TI, TI(4), REWARD_FUNCTION>::Dynamics crazy_flie = {
+    template<typename SPEC, typename = utils::typing::enable_if_t<SPEC::N == 4>> // Crazyflie is a quadrotor
+    constexpr typename ParametersBase<SPEC>::Dynamics crazy_flie = {
             // Rotor positions
             {
                     {
                             0.028,
                             -0.028,
                             0
-
                     },
                     {
                             -0.028,
                             -0.028,
                             0
-
                     },
                     {
                             -0.028,
                             0.028,
                             0
-
                     },
                     {
                             0.028,
                             0.028,
                             0
-
                     },
             },
             // Rotor thrust directions
