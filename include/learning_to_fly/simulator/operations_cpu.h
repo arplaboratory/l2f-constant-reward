@@ -101,8 +101,6 @@ namespace rl_tools{
                         parameters.action_limit.min = action_limit["lower_bound"];
                     }
                 }
-
-
             }
             else{
                 std::cout << "Config file does not contain rotor number, skipping..." << std::endl;
@@ -110,8 +108,153 @@ namespace rl_tools{
         }
     }
     template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::parameters::reward_functions::Absolute<typename SPEC::T>& parameters, nlohmann::json config){
+        if(config.contains("mdp")){
+            auto mdp_json = config["mdp"];
+            if(mdp_json.contains("reward")){
+                auto reward_json = mdp_json["reward"];
+                rlt::utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
+                rlt::utils::assert_exit(device, reward_json["type"] == "Squared", "Parameters file reward type is not Squared");
+
+                if(reward_json.contains("scale")){
+                    parameters.scale = reward_json["scale"];
+                }
+                if(reward_json.contains("constant")){
+                    parameters.constant = reward_json["constant"];
+                }
+                if(reward_json.contains("termination_penalty")){
+                    parameters.termination_penalty = reward_json["termination_penalty"];
+                }
+                if(reward_json.contains("position")){
+                    parameters.position = reward_json["position"];
+                }
+                if(reward_json.contains("orientation")){
+                    parameters.orientation = reward_json["orientation"];
+                }
+                if(reward_json.contains("linear_velocity")){
+                    parameters.linear_velocity = reward_json["linear_velocity"];
+                }
+                if(reward_json.contains("angular_velocity")){
+                    parameters.angular_velocity = reward_json["angular_velocity"];
+                }
+                if(reward_json.contains("linear_acceleration")){
+                    parameters.linear_acceleration = reward_json["linear_acceleration"];
+                }
+                if(reward_json.contains("angular_acceleration")){
+                    parameters.angular_acceleration = reward_json["angular_acceleration"];
+                }
+                if(reward_json.contains("action_baseline")){
+                    parameters.action_baseline = reward_json["action_baseline"];
+                }
+                if(reward_json.contains("calculate_action_baseline")){
+                    parameters.calculate_action_baseline = reward_json["calculate_action_baseline"];
+                }
+                if(reward_json.contains("action")){
+                    parameters.action = reward_json["action"];
+                }
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::parameters::reward_functions::Squared<typename SPEC::T>& parameters, nlohmann::json config){
+        if(config.contains("mdp")){
+            auto mdp_json = config["mdp"];
+            if(mdp_json.contains("reward")){
+                auto reward_json = mdp_json["reward"];
+                rlt::utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
+                rlt::utils::assert_exit(device, reward_json["type"] == "Squared", "Parameters file reward type is not Squared");
+
+                if(reward_json.contains("scale")){
+                    parameters.scale = reward_json["scale"];
+                }
+                if(reward_json.contains("constant")){
+                    parameters.constant = reward_json["constant"];
+                }
+                if(reward_json.contains("termination_penalty")){
+                    parameters.termination_penalty = reward_json["termination_penalty"];
+                }
+                if(reward_json.contains("position")){
+                    parameters.position = reward_json["position"];
+                }
+                if(reward_json.contains("orientation")){
+                    parameters.orientation = reward_json["orientation"];
+                }
+                if(reward_json.contains("linear_velocity")){
+                    parameters.linear_velocity = reward_json["linear_velocity"];
+                }
+                if(reward_json.contains("angular_velocity")){
+                    parameters.angular_velocity = reward_json["angular_velocity"];
+                }
+                if(reward_json.contains("linear_acceleration")){
+                    parameters.linear_acceleration = reward_json["linear_acceleration"];
+                }
+                if(reward_json.contains("angular_acceleration")){
+                    parameters.angular_acceleration = reward_json["angular_acceleration"];
+                }
+                if(reward_json.contains("action_baseline")){
+                    parameters.action_baseline = reward_json["action_baseline"];
+                }
+                if(reward_json.contains("calculate_action_baseline")){
+                    parameters.calculate_action_baseline = reward_json["calculate_action_baseline"];
+                }
+                if(reward_json.contains("action")){
+                    parameters.action = reward_json["action"];
+                }
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::MDP::Initialization& parameters, nlohmann::json config){
+        if(config.contains("mdp")) {
+            auto mdp_json = config["mdp"];
+            if(mdp_json.contains("init")) {
+                auto init_json = mdp_json["init"];
+                if(init_json.contains("max_position")){
+                    parameters.max_position = init_json["max_position"];
+                }
+                if(init_json.contains("max_orientation")){
+                    parameters.max_angle = init_json["max_angle"];
+                }
+                if(init_json.contains("max_linear_velocity")){
+                    parameters.max_linear_velocity = init_json["max_linear_velocity"];
+                }
+                if(init_json.contains("max_angular_velocity")){
+                    parameters.max_angular_velocity = init_json["max_angular_velocity"];
+                }
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::MDP::Termination& parameters, nlohmann::json config){
+        if(config.contains("mdp")) {
+            auto mdp_json = config["mdp"];
+            if(mdp_json.contains("termination")) {
+                auto termination_json = mdp_json["termination"];
+                if(termination_json.contains("enabled")){
+                    parameters.enabled = termination_json["enabled"];
+                }
+                if(termination_json.contains("position_threshold")){
+                    parameters.position_threshold = termination_json["position_threshold"];
+                }
+                if(termination_json.contains("linear_velocity_threshold")){
+                    parameters.linear_velocity_threshold = termination_json["linear_velocity_threshold"];
+                }
+                if(termination_json.contains("angular_velocity_threshold")){
+                    parameters.angular_velocity_threshold = termination_json["angular_velocity_threshold"];
+                }
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::MDP& parameters, nlohmann::json config){
+        load_config<DEV_SPEC, SPEC>(device, parameters.reward, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.init, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.termination, config);
+    }
+    template <typename DEV_SPEC, typename SPEC>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>& parameters, nlohmann::json config){
         load_config<DEV_SPEC, SPEC>(device, parameters.dynamics, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.mdp, config);
     }
 #endif
 }
