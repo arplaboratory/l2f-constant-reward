@@ -42,8 +42,8 @@ namespace learning_to_fly{
             Schedule termination_angular_velocity = {1.0, INFINITY};
         };
         Curriculum curriculum;
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         std::filesystem::path parameters_path;
+#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         std::filesystem::path results_path;
 #endif
     };

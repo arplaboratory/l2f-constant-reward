@@ -12,11 +12,7 @@ namespace learning_to_fly{
         template <typename T_CONFIG>
         void load_config(TrainingState<T_CONFIG>& ts){
             std::filesystem::path parameters_path;
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
             parameters_path = ts.parameters_path;
-#else
-            parameters_path = std::filesystem::path("parameters") / "output" / "default.json";
-#endif
             std::ifstream parameters_file(parameters_path);
             if(!parameters_file.is_open()) {
                 std::cout << "Could not open parameters file: " << parameters_path << "\n";

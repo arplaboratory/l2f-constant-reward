@@ -17,6 +17,11 @@ namespace rl_tools{
                 if(config["dynamics"].contains("rotor_positions")){
                     auto rotor_positions = config["dynamics"]["rotor_positions"];
                     utils::assert_exit(device, rotor_positions.size() == SPEC::N, "Rotor number in config file does not match number of rotors in parameters file");
+                    for(typename SPEC::TI rotor_i = 0; rotor_i < SPEC::N; rotor_i++){
+                        for(typename SPEC::TI dim_i = 0; dim_i < 3; dim_i++){
+                            parameters.rotor_positions[rotor_i][dim_i] = rotor_positions[rotor_i][dim_i];
+                        }
+                    }
                 }
             }
             else{

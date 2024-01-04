@@ -28,6 +28,7 @@ int run(int argc, char** argv){
 
     CLI11_PARSE(app, argc, argv);
 #else
+
 #ifdef LEARNING_TO_FLY_IN_SECONDS_BENCHMARK
     TI num_runs = 1;
 #else
@@ -42,6 +43,9 @@ int run(int argc, char** argv){
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         ts.parameters_path = parameters_path;
         ts.results_path = results_path;
+#else
+        std::string model_name = "x500_real";
+        ts.parameters_path = std::filesystem::path("parameters") / "output" / (model_name + ".json");
 #endif
         learning_to_fly::init(ts, base_seed + run_i);
 

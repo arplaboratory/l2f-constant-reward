@@ -50,8 +50,9 @@ namespace parameters{
                                                                            :
                                                 rl_tools::rl::environments::multirotor::parameters::init::all_positions<PARAMETERS_SPEC>;
 
+            constexpr static auto dynamics_parameters = rl_tools::rl::environments::multirotor::parameters::registry<PARAMETERS_SPEC, rl_tools::rl::environments::multirotor::parameters::REGISTRY::x500_real>; //rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<PARAMETERS_SPEC>;
             static constexpr PARAMETERS_TYPE parameters = {
-                    rl_tools::rl::environments::multirotor::parameters::dynamics::x500::real<PARAMETERS_SPEC>,
+                    dynamics_parameters,
                     {0.01}, // integration dt
                     {
                             init_params,
@@ -74,7 +75,7 @@ namespace parameters{
 
             };
 
-            using PARAMETERS = typename rl_tools::utils::typing::remove_cv_t<decltype(parameters)>;
+//            using PARAMETERS = typename rl_tools::utils::typing::remove_cv_t<decltype(parameters)>;
 
             struct ENVIRONMENT_STATIC_PARAMETERS{
                 static constexpr TI ACTION_HISTORY_LENGTH = 32;
@@ -114,7 +115,7 @@ namespace parameters{
                 static constexpr bool PRIVILEGED_OBSERVATION_NOISE = false;
             };
 
-            using ENVIRONMENT_SPEC = rlt::rl::environments::multirotor::Specification<T, TI, PARAMETERS, ENVIRONMENT_STATIC_PARAMETERS>;
+            using ENVIRONMENT_SPEC = rlt::rl::environments::multirotor::Specification<T, TI, PARAMETERS_TYPE, ENVIRONMENT_STATIC_PARAMETERS>;
             using ENVIRONMENT = rlt::rl::environments::Multirotor<ENVIRONMENT_SPEC>;
         };
     }
