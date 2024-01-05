@@ -37,9 +37,6 @@ namespace learning_to_fly{
         using ABLATION_SPEC = typename CONFIG::ABLATION_SPEC;
         ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
         ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
-//#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
-//        _init::load_config(ts);
-//#endif
         _init::load_config(ts);
 
         for (auto& env : ts.envs) {

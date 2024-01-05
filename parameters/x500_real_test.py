@@ -1,7 +1,8 @@
 import numpy as np
 import json, os
-name = os.path.splitext(os.path.basename(__file__))[0]
-with open(f'base/{name}.json', 'r') as file:
+name = "x500_real"
+experiment = "test"
+with open(f'base/{name}_{experiment}.json', 'r') as file:
     base = json.load(file)
 with open(f'dynamics/{name}.json', 'r') as file:
     dynamics = json.load(file)
@@ -10,5 +11,5 @@ config['requires_processing'] = 'false'
 config['dynamics']['model'] = name
 J = np.array(config["dynamics"]["J"])
 config['dynamics']['J_inv'] = np.linalg.inv(J).tolist()
-with open(f'output/{name}.json', 'w') as file:
+with open(f'output/{name}_{experiment}.json', 'w') as file:
     json.dump(config, file, indent=4)

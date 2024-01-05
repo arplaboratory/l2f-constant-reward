@@ -1,9 +1,7 @@
 #include <queue>
 #include <vector>
 #include <mutex>
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
 #include <filesystem>
-#endif
 
 namespace learning_to_fly{
     template <typename T_CONFIG>
@@ -43,8 +41,6 @@ namespace learning_to_fly{
         };
         Curriculum curriculum;
         std::filesystem::path parameters_path;
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         std::filesystem::path results_path;
-#endif
     };
 }

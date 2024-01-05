@@ -16,9 +16,7 @@ namespace rlt = RL_TOOLS_NAMESPACE_WRAPPER ::rl_tools;
 #include <rl_tools/rl/utils/validation_analysis.h>
 
 #include <chrono>
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
 #include <CLI/CLI.hpp>
-#endif
 
 
 
