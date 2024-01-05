@@ -1,10 +1,29 @@
 {
     "requires_processing": "false",
+    "rl": {
+        "td3": {
+            "ignore_termination": false,
+            "target_action_noise_std": 0.1,
+            "target_action_noise_clip": 0.3
+        },
+        "off_policy_runner": {
+            "exploration_noise_std": 0.1
+        },
+        "optimizer": {
+            "weight_decay": {
+                "base": 0.0001,
+                "input": 0.0001,
+                "output": 0.0001
+            },
+            "learning_rate": {
+                "bias_factor": 1
+            }
+        }
+    },
     "mdp": {
         "gamma": 0.95,
-        "ignore_termination": true,
         "reward": {
-            "type": "Squared",
+            "type": "absolute",
             "scale": 1.0,
             "constant": 1,
             "termination_penalty": 0,
@@ -67,13 +86,6 @@
             "mean": 0,
             "std": 0.009810000000000001
         }
-    },
-    "off_policy_runner": {
-        "exploration_noise_std": 0.1
-    },
-    "td3": {
-        "target_action_noise_std": 0.1,
-        "target_action_noise_clip": 0.3
     },
     "dynamics": {
         "n_rotors": 4,

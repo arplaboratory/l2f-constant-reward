@@ -29,9 +29,6 @@ namespace learning_to_fly{
                 if(parameters_json["mdp"].contains("gamma")){
                     ts.actor_critic.gamma = mdp_json["gamma"];
                 }
-                if(parameters_json["mdp"].contains("ignore_termination")){
-                    rlt::utils::assert_exit(ts.device, parameters_json["mdp"]["ignore_termination"] == decltype(ts.actor_critic)::SPEC::PARAMETERS::IGNORE_TERMINATION, "ignore termination should match the constexpr value");
-                }
                 if(mdp_json.contains("curriculum")){
                     auto curriculum_json = mdp_json["curriculum"];
 
@@ -89,20 +86,27 @@ namespace learning_to_fly{
                     }
                 }
             }
-            if(parameters_json.contains("off_policy_runner")){
-                if(parameters_json["off_policy_runner"].contains("exploration_noise")){
-                    ts.off_policy_runner.parameters.exploration_noise = parameters_json["off_policy_runner"]["exploration_noise"];
+            if(parameters_json.contains("rl")){
+                auto rl = parameters_json["rl"];
+                if(rl.contains("td3")){
+                    if(rl["td3"].contains("ignore_termination")){
+                        rlt::utils::assert_exit(ts.device, rl["td3"]["ignore_termination"] == decltype(ts.actor_critic)::SPEC::PARAMETERS::IGNORE_TERMINATION, "ignore termination should match the constexpr value");
+                    }
+                    if(rl["td3"].contains("target_action_noise_std")){
+                        ts.actor_critic.target_next_action_noise_std = rl["td3"]["target_action_noise_std"];
+                    }
+                    if(rl["td3"].contains("target_action_noise_clip")){
+                        ts.actor_critic.target_next_action_noise_clip = rl["td3"]["target_action_noise_clip"];
+                    }
+                }
+                if(rl.contains("optimizer")){
+                }
+                if(rl.contains("off_policy_runner")){
+                    if(rl["off_policy_runner"].contains("exploration_noise_std")){
+                        ts.off_policy_runner.parameters.exploration_noise = rl["off_policy_runner"]["exploration_noise_std"];
+                    }
                 }
             }
-            if(parameters_json.contains("td3")){
-                if(parameters_json["td3"].contains("target_action_noise_std")){
-                    ts.actor_critic.target_next_action_noise_std = parameters_json["td3"]["target_action_noise_std"];
-                }
-                if(parameters_json["td3"].contains("target_action_noise_clip")){
-                    ts.actor_critic.target_next_action_noise_clip = parameters_json["td3"]["target_action_noise_clip"];
-                }
-            }
-
 #endif
         }
     }
