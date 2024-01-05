@@ -209,6 +209,9 @@ namespace rl_tools{
             auto mdp_json = config["mdp"];
             if(mdp_json.contains("init")) {
                 auto init_json = mdp_json["init"];
+                if(init_json.contains("guidance")){
+                    parameters.guidance = init_json["guidance"];
+                }
                 if(init_json.contains("max_position")){
                     parameters.max_position = init_json["max_position"];
                 }
