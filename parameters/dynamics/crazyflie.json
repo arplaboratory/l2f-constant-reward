@@ -1,35 +1,37 @@
 {
-  "n_rotors": 4,
-  "rotor_positions": [
-    [0.028, -0.028, 0],
-    [-0.028, -0.028, 0],
-    [-0.028, 0.028, 0],
-    [0.028, 0.028, 0]
-  ],
-  "rotor_thrust_directions": [
-    [0, 0, 1],
-    [0, 0, 1],
-    [0, 0, 1],
-    [0, 0, 1]
-  ],
-  "rotor_torque_directions": [
-    [0, 0, -1],
-    [0, 0,  1],
-    [0, 0, -1],
-    [0, 0,  1]
-  ],
-  "thrust_coefficients": [0, 0, 3.16e-10],
-  "torque_constant": 0.005964552,
-  "mass": 0.027,
-  "gravity": [0, 0, -9.81],
-  "J": [
-    [3.85e-6, 0      ,         0],
-    [0      , 3.85e-6,         0],
-    [0      ,       0, 5.9675e-6]
-  ],
-  "motor_time_constant": 0.15,
-  "action_limit": {
-    "lower_bound": 0,
-    "upper_bound": 21702
+  "dynamics": {
+    "n_rotors": 4,
+    "rotor_positions": [
+      [0.028, -0.028, 0],
+      [-0.028, -0.028, 0],
+      [-0.028, 0.028, 0],
+      [0.028, 0.028, 0]
+    ],
+    "rotor_thrust_directions": [
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1]
+    ],
+    "rotor_torque_directions": [
+      [0, 0, -1],
+      [0, 0,  1],
+      [0, 0, -1],
+      [0, 0,  1]
+    ],
+    "rotor_thrust_coefficients": [0, 0, 3.16e-10],
+    "rotor_torque_constant": 0.005964552,
+    "mass": 0.027,
+    "gravity": [0, 0, -9.81],
+    "J": [
+      [3.85e-6, 0      ,         0],
+      [0      , 3.85e-6,         0],
+      [0      ,       0, 5.9675e-6]
+    ],
+    "motor_time_constant": 0.15,
+    "action_limit": {
+      "lower_bound": 0,
+      "upper_bound": 21702
+    }
   }
 }

@@ -29,6 +29,9 @@ namespace learning_to_fly{
                 if(parameters_json["mdp"].contains("gamma")){
                     ts.actor_critic.gamma = mdp_json["gamma"];
                 }
+                if(parameters_json["mdp"].contains("ignore_termination")){
+                    rlt::utils::assert_exit(ts.device, parameters_json["mdp"]["ignore_termination"] == decltype(ts.actor_critic)::SPEC::PARAMETERS::IGNORE_TERMINATION, "ignore termination should match the constexpr value");
+                }
                 if(mdp_json.contains("curriculum")){
                     auto curriculum_json = mdp_json["curriculum"];
 

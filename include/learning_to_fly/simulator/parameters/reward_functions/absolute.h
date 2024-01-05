@@ -127,6 +127,10 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         auto components = reward_components(device, env, params, state, action, next_state, rng);
         return components.reward;
     }
+    template<typename DEVICE, typename T>
+    RL_TOOLS_FUNCTION_PLACEMENT constexpr auto name(DEVICE& device, const rl::environments::multirotor::parameters::reward_functions::Absolute<T>& params){
+        return "absolute";
+    }
 }
 
 #endif

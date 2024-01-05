@@ -1,7 +1,7 @@
 import numpy as np
 import json, os
 name = os.path.splitext(os.path.basename(__file__))[0]
-with open('base.json', 'r') as file:
+with open(f'base_{name}.json', 'r') as file:
     base = json.load(file)
 with open(f'dynamics/{name}.json', 'r') as file:
     dynamics = json.load(file)

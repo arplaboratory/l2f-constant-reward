@@ -1,10 +1,10 @@
 {
   "requires_processing": true,
   "mdp": {
-    "gamma": 0.95,
-    "ignore_termination": true,
+    "gamma": 0.99,
+    "ignore_termination": false,
     "reward": {
-      "type": "Squared",
+      "type": "squared",
       "scale": 1.00,
       "constant": 1,
       "termination_penalty": 0,
@@ -16,20 +16,20 @@
       "angular_acceleration": 0.0,
       "action_baseline": 0.4582053118721884,
       "calculate_action_baseline": true,
-      "action": 0.00
+      "action": 0.10
     },
     "init": {
-      "guidance": 0,
-      "max_position": 0.5,
+      "guidance": 0.7,
+      "max_position": 0.2,
       "max_angle": 1.57,
-      "max_linear_velocity": 0.5,
+      "max_linear_velocity": 1.0,
       "max_angular_velocity": 1.0
     },
     "termination": {
       "enabled": true,
       "position_threshold": 0.6,
-      "linear_velocity_threshold": 10,
-      "angular_velocity_threshold": 40
+      "linear_velocity_threshold": 1000,
+      "angular_velocity_threshold": 1000
     },
     "curriculum": {
       "position": {
@@ -53,8 +53,8 @@
         "limit": 0.0
       },
       "action": {
-        "factor": 1.0,
-        "limit": 0.0
+        "factor": 2.0,
+        "limit": 4.0
       }
     }
   },

@@ -14,7 +14,7 @@ namespace rl_tools{
         if(config.contains("dynamics")){
             if(config["dynamics"].contains("model")){
                 std::string config_model = config["dynamics"]["model"];
-                utils::assert_exit(device, config_model == rl_tools::rl::environments::multirotor::parameters::registry_name<SPEC>, "Model in config file does not match model in parameters file");
+                utils::assert_exit(device, config_model == rl::environments::multirotor::parameters::dynamics::registry_name<SPEC>, "Model in config file does not match model in parameters file");
             }
             if(config["dynamics"].contains("n_rotors")){
                 typename SPEC::TI num_rotors = config["dynamics"]["n_rotors"];
@@ -113,8 +113,8 @@ namespace rl_tools{
             auto mdp_json = config["mdp"];
             if(mdp_json.contains("reward")){
                 auto reward_json = mdp_json["reward"];
-                rlt::utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
-                rlt::utils::assert_exit(device, reward_json["type"] == "Squared", "Parameters file reward type is not Squared");
+                utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
+                utils::assert_exit(device, reward_json["type"] == name(device, parameters), "Parameters file reward type " + std::string(reward_json["type"]) + "  is not matching " + std::string(name(device, parameters)));
 
                 if(reward_json.contains("scale")){
                     parameters.scale = reward_json["scale"];
@@ -161,8 +161,8 @@ namespace rl_tools{
             auto mdp_json = config["mdp"];
             if(mdp_json.contains("reward")){
                 auto reward_json = mdp_json["reward"];
-                rlt::utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
-                rlt::utils::assert_exit(device, reward_json["type"] == "Squared", "Parameters file reward type is not Squared");
+                utils::assert_exit(device, reward_json.contains("type"), "Parameters file does not contain reward type");
+                utils::assert_exit(device, reward_json["type"] == name(device, parameters), "Parameters file reward type " + std::string(reward_json["type"]) + "  is not matching " + std::string(name(device, parameters)));
 
                 if(reward_json.contains("scale")){
                     parameters.scale = reward_json["scale"];
@@ -255,6 +255,23 @@ namespace rl_tools{
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>& parameters, nlohmann::json config){
         load_config<DEV_SPEC, SPEC>(device, parameters.dynamics, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.mdp, config);
+    }
+    template <typename DEV_SPEC, typename T, typename TI, typename NEXT_COMPONENT>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, NEXT_COMPONENT>& parameters, nlohmann::json config){
+        load_config(device, (NEXT_COMPONENT&)parameters, config);
+        if(config.contains("disturbances")) {
+            auto disturbances = config["disturbances"];
+            if(disturbances.contains("random_force")) {
+                auto random_force = disturbances["random_force"];
+                parameters.disturbances.random_force.mean = random_force["mean"];
+                parameters.disturbances.random_force.std = random_force["std"];
+            }
+            if(disturbances.contains("random_torque")) {
+                auto random_torque = disturbances["random_torque"];
+                parameters.disturbances.random_torque.mean = random_torque["mean"];
+                parameters.disturbances.random_torque.std = random_torque["std"];
+            }
+        }
     }
 #endif
 }
