@@ -1,3 +1,6 @@
+#ifndef LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_MRS_H
+#define LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_MRS_H
+
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
@@ -95,3 +98,4 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
     };
 
 }
+#endif

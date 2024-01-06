@@ -1,4 +1,5 @@
-
+#ifndef LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_RACE_H
+#define LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_RACE_H
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
@@ -100,3 +101,5 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
             {0.1, 0.2},
     };
 }
+
+#endif

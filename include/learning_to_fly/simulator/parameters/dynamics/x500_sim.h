@@ -1,4 +1,5 @@
-
+#ifndef LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_X500_SIM_H
+#define LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_X500_SIM_H
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
@@ -101,3 +102,5 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
 
     }
 }
+
+#endif

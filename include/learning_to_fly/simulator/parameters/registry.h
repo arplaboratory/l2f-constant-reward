@@ -37,7 +37,7 @@ namespace rl_tools::rl::environments::multirotor::parameters{
             }else if constexpr (SPEC::MODEL == REGISTRY::x500_sim){
                 return "x500_sim";
             }else{
-                static_assert(utils::typing::dependent_false<REGISTRY>, "Unknown model");
+                static_assert(utils::typing::dependent_false<SPEC>, "Unknown model");
             }
         }();
     }
