@@ -10,6 +10,14 @@ target_link_libraries(
         learning_to_fly
         Boost::boost
 )
+add_executable(ui_server ui/server.cpp)
+target_link_libraries(
+        ui_server
+        PRIVATE
+        rl_tools
+        learning_to_fly
+        Boost::boost
+)
 endif()
 
 add_executable(training_headless_x500 training.cpp)

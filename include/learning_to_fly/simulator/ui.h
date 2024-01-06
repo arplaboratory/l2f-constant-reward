@@ -26,6 +26,7 @@ namespace rl_tools::rl::environments::multirotor {
         std::string port;
         net::io_context ioc;
         websocket::stream<tcp::socket> ws{ioc};
+        std::string ns = "";
     };
     template <typename DEVICE, typename ENVIRONMENT>
     nlohmann::json state_message(DEVICE& dev, rl::environments::multirotor::UI<ENVIRONMENT>& ui, const typename ENVIRONMENT::State& state){
@@ -69,6 +70,7 @@ namespace rl_tools::rl::environments::multirotor {
     template <typename DEVICE, typename ENVIRONMENT>
     nlohmann::json model_message(DEVICE& dev, ENVIRONMENT& env, rl::environments::multirotor::UI<ENVIRONMENT>& ui){
         nlohmann::json message;
+        message["namespace"] = ui.ns;
         message["channel"] = "addDrone";
         message["data"]["id"] = ui.id;
         message["data"]["origin"] = {ui.origin[0], ui.origin[1], ui.origin[2]};
@@ -123,20 +125,22 @@ namespace rl_tools{
         ui.origin[0] = 0;
         ui.origin[1] = 0;
         ui.origin[2] = 0;
-        try
-        {
-            tcp::resolver resolver{ui.ioc};
-            auto const results = resolver.resolve(ui.host, ui.port);
+        tcp::resolver resolver{ui.ioc};
+        auto const results = resolver.resolve(ui.host, ui.port);
 
-            net::connect(ui.ws.next_layer(), results.begin(), results.end());
-            ui.ws.handshake(ui.host, "/");
+        net::connect(ui.ws.next_layer(), results.begin(), results.end());
+        ui.ws.handshake(ui.host, "/backend");
+        std::cout << "Waiting for handshake" << std::endl;
+        boost::beast::flat_buffer buffer;
+        ui.ws.read(buffer);
+        std::cout << beast::make_printable(buffer.data()) << std::endl;
+        auto message_string = beast::buffers_to_string(buffer.data());
+        std::cout << message_string << std::endl;
+        buffer.consume(buffer.size());
+        auto message = nlohmann::json::parse(message_string);
+        ui.ns = message["data"]["namespace"];
 
-            ui.ws.write(net::buffer(model_message(dev, env, ui).dump()));
-        }
-        catch(std::exception const& e)
-        {
-            std::cerr << "Error: " << e.what() << std::endl;
-        }
+        ui.ws.write(net::buffer(model_message(dev, env, ui).dump()));
     }
     template <typename DEVICE, typename ENVIRONMENT>
     void set_state(DEVICE& dev, rl::environments::multirotor::UI<ENVIRONMENT>& ui, const typename ENVIRONMENT::State& state){

@@ -13,6 +13,7 @@ namespace learning_to_fly{
         void load_config(TrainingState<T_CONFIG>& ts){
             std::filesystem::path parameters_path;
             parameters_path = ts.parameters_path;
+            std::cout << "Loading parameters from: " << parameters_path << std::endl;
             std::ifstream parameters_file(parameters_path);
             if(!parameters_file.is_open()) {
                 std::cout << "Could not open parameters file: " << parameters_path << "\n";
