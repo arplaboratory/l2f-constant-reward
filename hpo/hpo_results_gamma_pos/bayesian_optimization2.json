@@ -8,1402 +8,1402 @@
     ],
     [
         {
-            "mdp.gamma": 0.10877631476275917,
-            "mdp.reward.position": 18.443958498671755
+            "mdp.gamma": 0.9841265438849168,
+            "mdp.reward.position": 0.4936487679459256
         },
-        -1
+        -0.1778779923915863
     ],
     [
         {
-            "mdp.gamma": 0.9609027129386143,
-            "mdp.reward.position": 0.01576939593667115
+            "mdp.gamma": 0.13932247809224407,
+            "mdp.reward.position": 3.2486278910338005
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8316104027493979,
-            "mdp.reward.position": 49.98418630640732
+            "mdp.gamma": 0.8075928406377822,
+            "mdp.reward.position": 47.94742137480614
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.14045064463601042,
-            "mdp.reward.position": 0.0011485519056053661
+            "mdp.gamma": 1.0,
+            "mdp.reward.position": 11.936960117803517
         },
-        -1
+        -0.23456917703151703
     ],
     [
         {
-            "mdp.gamma": 0.8972033339933785,
-            "mdp.reward.position": 49.99207057882781
+            "mdp.gamma": 0.9248828812804314,
+            "mdp.reward.position": 38.89607988333913
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.11615573054531547,
-            "mdp.reward.position": 0.0018535809725439556
+            "mdp.gamma": 0.7413605754261939,
+            "mdp.reward.position": 0.0
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.288508477519659,
-            "mdp.reward.position": 49.99870216409124
+            "mdp.gamma": 0.9187452333031839,
+            "mdp.reward.position": 0.0
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.05110415334763241,
-            "mdp.reward.position": 0.0010769108892638712
+            "mdp.gamma": 0.3557790678240176,
+            "mdp.reward.position": 0.48937477911333294
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6498754954148958,
-            "mdp.reward.position": 49.985610792219745
+            "mdp.gamma": 0.247557288731293,
+            "mdp.reward.position": 13.665409551616797
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.23554941388145623,
-            "mdp.reward.position": 0.018844708574444757
+            "mdp.gamma": 0.5663626835502306,
+            "mdp.reward.position": 0.49348387009631733
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.790438106106888,
-            "mdp.reward.position": 49.999735351077724
+            "mdp.gamma": 0.5711070333814006,
+            "mdp.reward.position": 3.1728589656365713
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9345101427090556,
-            "mdp.reward.position": 0.003196001914751445
+            "mdp.gamma": 0.3588753704461065,
+            "mdp.reward.position": 26.411610871883756
         },
-        -0.6356485486030579
+        -1
     ],
     [
         {
-            "mdp.gamma": 0.9041431567600179,
-            "mdp.reward.position": 0.054768909202729255
+            "mdp.gamma": 0.973915621789247,
+            "mdp.reward.position": 37.94956614433458
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9351049334561784,
-            "mdp.reward.position": 0.008554112935793556
+            "mdp.gamma": 0.47369228589998913,
+            "mdp.reward.position": 28.007001008208682
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.1680764199663769,
-            "mdp.reward.position": 34.2052130704451
+            "mdp.gamma": 0.13297316963443484,
+            "mdp.reward.position": 20.225124812629286
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.717006178814817,
-            "mdp.reward.position": 19.99488371956003
+            "mdp.gamma": 0.5585392953398436,
+            "mdp.reward.position": 23.86384788840243
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.07973643611511128,
-            "mdp.reward.position": 31.357946384207285
+            "mdp.gamma": 0.5692379817480465,
+            "mdp.reward.position": 19.18098180945761
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.010990594275571142,
-            "mdp.reward.position": 18.7439578200228
+            "mdp.gamma": 1.0,
+            "mdp.reward.position": 0.0
         },
-        -1
+        -0.5687280893325806
     ],
     [
         {
-            "mdp.gamma": 0.2194836093211443,
-            "mdp.reward.position": 41.64131198523765
+            "mdp.gamma": 0.9840910194884943,
+            "mdp.reward.position": 14.102179723807911
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.5103449302707468,
-            "mdp.reward.position": 38.927513978085926
+            "mdp.gamma": 0.984333361653291,
+            "mdp.reward.position": 1.9332602480347738
         },
-        -1
+        -0.1392834186553955
     ],
     [
         {
-            "mdp.gamma": 0.8441016945678355,
-            "mdp.reward.position": 30.486020842304818
+            "mdp.gamma": 0.9880863718507858,
+            "mdp.reward.position": 0.7525790995123122
         },
-        -1
+        -0.2439948469400406
     ],
     [
         {
-            "mdp.gamma": 0.7915018517140654,
-            "mdp.reward.position": 38.427725806140515
+            "mdp.gamma": 0.9730490682817032,
+            "mdp.reward.position": 1.538497614521478
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.010342983540423178,
-            "mdp.reward.position": 18.249346327412532
+            "mdp.gamma": 0.9946242835076109,
+            "mdp.reward.position": 7.592385997597006
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.4614424982570675,
-            "mdp.reward.position": 24.3989947505321
+            "mdp.gamma": 1.0,
+            "mdp.reward.position": 17.674265975153137
         },
-        -1
+        -0.13910727202892303
     ],
     [
         {
-            "mdp.gamma": 0.4944288158081669,
-            "mdp.reward.position": 4.563151280632849
+            "mdp.gamma": 0.9858798528930038,
+            "mdp.reward.position": 0.26820987620602144
         },
-        -1
+        -0.42561641335487366
     ],
     [
         {
-            "mdp.gamma": 0.31433823067339595,
-            "mdp.reward.position": 10.722551580547012
+            "mdp.gamma": 0.984313082850785,
+            "mdp.reward.position": 18.73891244206617
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8803384686945215,
-            "mdp.reward.position": 6.605720686044436
+            "mdp.gamma": 0.9986414964405373,
+            "mdp.reward.position": 18.137954096750452
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.023193820666232212,
-            "mdp.reward.position": 1.3807727346844545
+            "mdp.gamma": 0.9870116652395451,
+            "mdp.reward.position": 2.0819249288321906
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.062291382488800506,
-            "mdp.reward.position": 19.484084472976043
+            "mdp.gamma": 0.005525125241614637,
+            "mdp.reward.position": 45.84487000076114
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7386627689015391,
-            "mdp.reward.position": 14.906941668631713
+            "mdp.gamma": 0.9999787083241204,
+            "mdp.reward.position": 39.8821806684165
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6658701394527595,
-            "mdp.reward.position": 47.28939389285783
+            "mdp.gamma": 0.9983309872307334,
+            "mdp.reward.position": 11.884686042084386
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.22240315858016124,
-            "mdp.reward.position": 44.067445532607934
+            "mdp.gamma": 0.9997879451417406,
+            "mdp.reward.position": 17.611599714711286
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.08495387419446021,
-            "mdp.reward.position": 32.3874649555478
+            "mdp.gamma": 0.9575630935865331,
+            "mdp.reward.position": 26.063612705663523
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8952269912969115,
-            "mdp.reward.position": 23.519408854105116
+            "mdp.gamma": 0.984222517794727,
+            "mdp.reward.position": 3.577588840965118
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.43217061458746386,
-            "mdp.reward.position": 43.274073172877934
+            "mdp.gamma": 0.5925660016546425,
+            "mdp.reward.position": 15.579676305874408
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.027902030544437073,
-            "mdp.reward.position": 6.910253860049343
+            "mdp.gamma": 0.9841343271601192,
+            "mdp.reward.position": 10.29945666357226
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.925965305528055,
-            "mdp.reward.position": 22.83035100898819
+            "mdp.gamma": 0.9880453108895625,
+            "mdp.reward.position": 25.65558933851403
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.882327830332195,
-            "mdp.reward.position": 42.01351135329399
+            "mdp.gamma": 0.22672761008483377,
+            "mdp.reward.position": 18.624160002363073
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6111983939685051,
-            "mdp.reward.position": 40.450819304766696
+            "mdp.gamma": 0.9999926762202774,
+            "mdp.reward.position": 30.598542894801838
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.06263275319605988,
-            "mdp.reward.position": 26.370320553489435
+            "mdp.gamma": 0.5316366639108699,
+            "mdp.reward.position": 2.929538300848339
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.34327804284543506,
-            "mdp.reward.position": 31.96421465772941
+            "mdp.gamma": 0.3587471361900818,
+            "mdp.reward.position": 28.63130632917144
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7272175993791093,
-            "mdp.reward.position": 12.073421179330007
+            "mdp.gamma": 0.9999951709168838,
+            "mdp.reward.position": 9.132817659860637
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7514881834720438,
-            "mdp.reward.position": 42.93824482682389
+            "mdp.gamma": 0.8739277690953954,
+            "mdp.reward.position": 49.73676763285876
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.15865726541867997,
-            "mdp.reward.position": 33.486332154957125
+            "mdp.gamma": 0.8798739162233276,
+            "mdp.reward.position": 49.369718369115176
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.29257285116586684,
-            "mdp.reward.position": 49.890415740915806
+            "mdp.gamma": 0.9361882940881757,
+            "mdp.reward.position": 32.296022002195244
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9582392008716288,
-            "mdp.reward.position": 20.001800386042763
+            "mdp.gamma": 0.11145511769778649,
+            "mdp.reward.position": 30.02936685776329
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.13127806536315167,
-            "mdp.reward.position": 43.197721183695286
+            "mdp.gamma": 0.06901575727201648,
+            "mdp.reward.position": 34.29879833746073
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6890000915684981,
-            "mdp.reward.position": 0.8249237728220449
+            "mdp.gamma": 0.9651623187175418,
+            "mdp.reward.position": 40.643671687539346
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.674063365152989,
-            "mdp.reward.position": 48.186442454566404
+            "mdp.gamma": 0.3191317745060096,
+            "mdp.reward.position": 48.37441379740505
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.1939870764932793,
-            "mdp.reward.position": 9.314840898002297
+            "mdp.gamma": 0.679946313394161,
+            "mdp.reward.position": 27.409429408757024
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.5622293089223974,
-            "mdp.reward.position": 16.397057125369408
+            "mdp.gamma": 0.0910432606781113,
+            "mdp.reward.position": 15.05456063998009
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7765210046285308,
-            "mdp.reward.position": 9.812326993659143
+            "mdp.gamma": 0.169861157430098,
+            "mdp.reward.position": 20.871474129917566
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9499021245030154,
-            "mdp.reward.position": 36.02483453075249
+            "mdp.gamma": 0.7400444827112429,
+            "mdp.reward.position": 45.558579128658366
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.288410962840729,
-            "mdp.reward.position": 30.560807209463242
+            "mdp.gamma": 0.5452821431520566,
+            "mdp.reward.position": 18.109051009915017
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7489765113303992,
-            "mdp.reward.position": 12.317598578745525
+            "mdp.gamma": 0.939155239021958,
+            "mdp.reward.position": 33.507527208596535
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.28883299275817065,
-            "mdp.reward.position": 47.50426778046374
+            "mdp.gamma": 0.03077834532666568,
+            "mdp.reward.position": 20.54555515421984
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.22247618778279454,
-            "mdp.reward.position": 12.614079070023593
+            "mdp.gamma": 0.9524627585311323,
+            "mdp.reward.position": 40.45376603027272
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7671531205234772,
-            "mdp.reward.position": 33.657917427641756
+            "mdp.gamma": 0.2511581926649157,
+            "mdp.reward.position": 38.177902913647394
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.25718242393391355,
-            "mdp.reward.position": 33.20710331064058
+            "mdp.gamma": 0.4386802581016237,
+            "mdp.reward.position": 6.387004122157175
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7500898166170213,
-            "mdp.reward.position": 8.135586286817464
+            "mdp.gamma": 0.3059438556857552,
+            "mdp.reward.position": 36.23393125300447
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6585215447076511,
-            "mdp.reward.position": 24.513312330512615
+            "mdp.gamma": 0.6665366433310276,
+            "mdp.reward.position": 47.65629094053929
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6959588056642092,
-            "mdp.reward.position": 10.679626361750149
+            "mdp.gamma": 0.36281318953848396,
+            "mdp.reward.position": 20.354996752206983
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.45505265861549704,
-            "mdp.reward.position": 7.977420012458541
+            "mdp.gamma": 0.9392862302815479,
+            "mdp.reward.position": 36.303868523584775
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.2747305654817679,
-            "mdp.reward.position": 7.3001580056971385
+            "mdp.gamma": 0.5967327166445524,
+            "mdp.reward.position": 16.7641864467995
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.05948943590094691,
-            "mdp.reward.position": 25.00459893141623
+            "mdp.gamma": 0.988199691778573,
+            "mdp.reward.position": 2.342806499170602
         },
-        -1
+        -0.24523906409740448
     ],
     [
         {
-            "mdp.gamma": 0.21324899479839687,
-            "mdp.reward.position": 24.04667234792247
+            "mdp.gamma": 0.6300008479914194,
+            "mdp.reward.position": 45.87145713825927
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9005871469633314,
-            "mdp.reward.position": 44.552704636550125
+            "mdp.gamma": 0.8856406499292324,
+            "mdp.reward.position": 20.569789658042946
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.38505913561587723,
-            "mdp.reward.position": 0.6990541862081978
+            "mdp.gamma": 0.30560842221094653,
+            "mdp.reward.position": 10.467460329596962
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6108609232458018,
-            "mdp.reward.position": 36.2214784302908
+            "mdp.gamma": 0.5622968222037751,
+            "mdp.reward.position": 3.8677682444553882
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8512819966197188,
-            "mdp.reward.position": 26.669418021445225
+            "mdp.gamma": 0.9840867921536092,
+            "mdp.reward.position": 0.6255345559729453
         },
-        -1
+        -0.4113943576812744
     ],
     [
         {
-            "mdp.gamma": 0.26292125580290315,
-            "mdp.reward.position": 37.719531294584996
+            "mdp.gamma": 0.7563286667904492,
+            "mdp.reward.position": 0.9759927810833513
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.2731125537682326,
-            "mdp.reward.position": 17.813729149965347
+            "mdp.gamma": 0.9845542797936674,
+            "mdp.reward.position": 0.2567375563626517
         },
-        -1
+        -0.33201542496681213
     ],
     [
         {
-            "mdp.gamma": 0.22311588662635629,
-            "mdp.reward.position": 43.227710791441524
+            "mdp.gamma": 0.9843393539147534,
+            "mdp.reward.position": 0.8858566568145987
         },
-        -1
+        -0.25202709436416626
     ],
     [
         {
-            "mdp.gamma": 0.3529926626121075,
-            "mdp.reward.position": 27.137766454616497
+            "mdp.gamma": 0.9755867583531292,
+            "mdp.reward.position": 1.956368194140251
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.12399647779798939,
-            "mdp.reward.position": 29.78845025571498
+            "mdp.gamma": 0.988214643500342,
+            "mdp.reward.position": 3.1147390781142645
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.14882450355122911,
-            "mdp.reward.position": 35.47761588250016
+            "mdp.gamma": 0.9811149159661077,
+            "mdp.reward.position": 0.4533662985003517
         },
-        -1
+        -0.5075052976608276
     ],
     [
         {
-            "mdp.gamma": 0.7533058529269837,
-            "mdp.reward.position": 2.14459290999896
+            "mdp.gamma": 0.9998916719645479,
+            "mdp.reward.position": 12.319854140282555
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8024544795874974,
-            "mdp.reward.position": 38.72943320501099
+            "mdp.gamma": 0.986465670387801,
+            "mdp.reward.position": 1.927197601002177
         },
-        -1
+        -0.17577095329761505
     ],
     [
         {
-            "mdp.gamma": 0.6807622208310895,
-            "mdp.reward.position": 26.449180027110547
+            "mdp.gamma": 0.9808870767407296,
+            "mdp.reward.position": 1.53992846934638
         },
-        -1
+        -0.19765682518482208
     ],
     [
         {
-            "mdp.gamma": 0.8289365830351356,
-            "mdp.reward.position": 49.25110205584296
+            "mdp.gamma": 0.43558365201497773,
+            "mdp.reward.position": 17.42848551920735
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7819124333013077,
-            "mdp.reward.position": 45.5884280151489
+            "mdp.gamma": 0.9881499243105395,
+            "mdp.reward.position": 1.4790332192136713
         },
-        -1
+        -0.22804850339889526
     ],
     [
         {
-            "mdp.gamma": 0.6750201339114655,
-            "mdp.reward.position": 31.977380427353598
+            "mdp.gamma": 0.03989023104201639,
+            "mdp.reward.position": 20.742241464559346
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.4136434820757895,
-            "mdp.reward.position": 12.899149085866778
+            "mdp.gamma": 0.9884404615308268,
+            "mdp.reward.position": 2.286144453123912
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6209562587755393,
-            "mdp.reward.position": 28.368403820651455
+            "mdp.gamma": 0.6944706163945964,
+            "mdp.reward.position": 8.55996237533288
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7029674069583967,
-            "mdp.reward.position": 23.139720357646727
+            "mdp.gamma": 0.9841394251187296,
+            "mdp.reward.position": 0.6438382163571954
         },
-        -1
+        -0.21540769934654236
     ],
     [
         {
-            "mdp.gamma": 0.8582973944882938,
-            "mdp.reward.position": 2.5864641978570138
+            "mdp.gamma": 0.15453119485259048,
+            "mdp.reward.position": 26.78236044441168
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.015572538695112437,
-            "mdp.reward.position": 2.5754882442743323
+            "mdp.gamma": 0.9999503387485171,
+            "mdp.reward.position": 20.7562534774446
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6668798469232687,
-            "mdp.reward.position": 3.565399806570413
+            "mdp.gamma": 0.9882339726568798,
+            "mdp.reward.position": 1.9844833902009695
         },
-        -1
+        -0.16623714566230774
     ],
     [
         {
-            "mdp.gamma": 0.6945276817467456,
-            "mdp.reward.position": 30.63066028023606
+            "mdp.gamma": 0.9801092621191863,
+            "mdp.reward.position": 0.8641256521024598
         },
-        -1
+        -0.2501158118247986
     ],
     [
         {
-            "mdp.gamma": 0.9143687151938427,
-            "mdp.reward.position": 30.751269436374233
+            "mdp.gamma": 0.9844949477404354,
+            "mdp.reward.position": 3.1973414936269986
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.08571130548738815,
-            "mdp.reward.position": 17.848756924895238
+            "mdp.gamma": 0.9799791230047769,
+            "mdp.reward.position": 0.2648808465525232
         },
-        -1
+        -0.2783023715019226
     ],
     [
         {
-            "mdp.gamma": 0.1241822788209267,
-            "mdp.reward.position": 11.869287135746065
+            "mdp.gamma": 0.9823535839775324,
+            "mdp.reward.position": 0.827454731703442
         },
-        -1
+        -0.19404089450836182
     ],
     [
         {
-            "mdp.gamma": 0.6113831365562562,
-            "mdp.reward.position": 11.901734849743134
+            "mdp.gamma": 0.3033820282672074,
+            "mdp.reward.position": 15.898034952472951
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.3619225930431599,
-            "mdp.reward.position": 33.900306359875756
+            "mdp.gamma": 0.985694167005342,
+            "mdp.reward.position": 2.3868356905931587
         },
-        -1
+        -0.22999674081802368
     ],
     [
         {
-            "mdp.gamma": 0.007433037701946366,
-            "mdp.reward.position": 31.805079989482017
+            "mdp.gamma": 0.9885438754293444,
+            "mdp.reward.position": 2.380709953024623
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.23133160522477636,
-            "mdp.reward.position": 24.59517448864053
+            "mdp.gamma": 0.03172840127766352,
+            "mdp.reward.position": 29.01800024535121
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9882070283263731,
-            "mdp.reward.position": 7.918507140062064
+            "mdp.gamma": 0.5252260492129919,
+            "mdp.reward.position": 44.30526182813942
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6800443504819365,
-            "mdp.reward.position": 4.013752229934731
+            "mdp.gamma": 0.9845773834346631,
+            "mdp.reward.position": 1.4532986505368384
         },
-        -1
+        -0.14065226912498474
     ],
     [
         {
-            "mdp.gamma": 0.30102427117013275,
-            "mdp.reward.position": 30.89812831800221
+            "mdp.gamma": 0.9825320021435818,
+            "mdp.reward.position": 2.409345591421541
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.1981099419372262,
-            "mdp.reward.position": 26.13842822870296
+            "mdp.gamma": 0.9856321364980757,
+            "mdp.reward.position": 1.7842629477243466
         },
-        -1
+        -0.6888247728347778
     ],
     [
         {
-            "mdp.gamma": 0.8862580513372509,
-            "mdp.reward.position": 23.50852906883541
+            "mdp.gamma": 0.9809675571351847,
+            "mdp.reward.position": 2.3909655995268175
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.19898444061021148,
-            "mdp.reward.position": 4.743310492497693
+            "mdp.gamma": 0.9842224139249517,
+            "mdp.reward.position": 0.8878830380178115
         },
-        -1
+        -0.3837224245071411
     ],
     [
         {
-            "mdp.gamma": 0.2714711639580193,
-            "mdp.reward.position": 16.22572511239738
+            "mdp.gamma": 0.9839788068178342,
+            "mdp.reward.position": 2.309469925675245
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7303927756761657,
-            "mdp.reward.position": 27.830034698546918
+            "mdp.gamma": 0.9807769831060023,
+            "mdp.reward.position": 2.223815302727661
         },
-        -1
+        -0.15589189529418945
     ],
     [
         {
-            "mdp.gamma": 0.8362466963194067,
-            "mdp.reward.position": 8.891205423347737
+            "mdp.gamma": 0.9788247290387585,
+            "mdp.reward.position": 1.540369227173144
         },
-        -1
+        -0.3237004578113556
     ],
     [
         {
-            "mdp.gamma": 0.7889450286988597,
-            "mdp.reward.position": 25.5635753968254
+            "mdp.gamma": 0.9803367521049648,
+            "mdp.reward.position": 0.6499520192537855
         },
-        -1
+        -0.1613042652606964
     ],
     [
         {
-            "mdp.gamma": 0.0596966554355276,
-            "mdp.reward.position": 43.54878019284908
+            "mdp.gamma": 0.9822336119984462,
+            "mdp.reward.position": 1.6435993044127073
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.04718947466074552,
-            "mdp.reward.position": 2.8530948071308515
+            "mdp.gamma": 0.9854297806306537,
+            "mdp.reward.position": 3.058027484987269
         },
-        -1
+        -0.20136162638664246
     ],
     [
         {
-            "mdp.gamma": 0.7997654576109954,
-            "mdp.reward.position": 44.17118291582937
+            "mdp.gamma": 0.9861774483124044,
+            "mdp.reward.position": 0.877632723598254
         },
-        -1
+        -0.0972454696893692
     ],
     [
         {
-            "mdp.gamma": 0.3631546184958714,
-            "mdp.reward.position": 0.6442886923487323
+            "mdp.gamma": 0.9832812479865619,
+            "mdp.reward.position": 0.8772260675847576
         },
-        -1
+        -0.2023426592350006
     ],
     [
         {
-            "mdp.gamma": 0.6552143412133227,
-            "mdp.reward.position": 40.49177744574142
+            "mdp.gamma": 0.9823509739422067,
+            "mdp.reward.position": 1.4744385664581139
         },
-        -1
+        -0.16512535512447357
     ],
     [
         {
-            "mdp.gamma": 0.6947658466324731,
-            "mdp.reward.position": 30.738535836366527
+            "mdp.gamma": 0.9938787692209777,
+            "mdp.reward.position": 1.9844593421955825
         },
-        -1
+        -0.2209363728761673
     ],
     [
         {
-            "mdp.gamma": 0.9174622638948463,
-            "mdp.reward.position": 4.752107526480004
+            "mdp.gamma": 0.9922604483253202,
+            "mdp.reward.position": 11.934469186384561
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.12368930002613499,
-            "mdp.reward.position": 6.570426597150153
+            "mdp.gamma": 0.98153067004993,
+            "mdp.reward.position": 1.4935152381623906
         },
-        -1
+        -0.2348405122756958
     ],
     [
         {
-            "mdp.gamma": 0.2573203046422108,
-            "mdp.reward.position": 2.9432704159368273
+            "mdp.gamma": 0.9822615366273538,
+            "mdp.reward.position": 0.5123813066025829
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.26013342686605856,
-            "mdp.reward.position": 19.39934704266682
+            "mdp.gamma": 0.983861628239325,
+            "mdp.reward.position": 0.6631047684816982
         },
-        -1
+        -0.18020421266555786
     ],
     [
         {
-            "mdp.gamma": 0.0971273569872837,
-            "mdp.reward.position": 8.721419066272729
+            "mdp.gamma": 0.9822908611671767,
+            "mdp.reward.position": 2.2216971541161423
         },
-        -1
+        -0.505695641040802
     ],
     [
         {
-            "mdp.gamma": 0.3587749858381818,
-            "mdp.reward.position": 48.631397586541645
+            "mdp.gamma": 0.9796749550964123,
+            "mdp.reward.position": 2.229580746239063
         },
-        -1
+        -0.19992896914482117
     ],
     [
         {
-            "mdp.gamma": 0.9529296555789143,
-            "mdp.reward.position": 11.057188416357878
+            "mdp.gamma": 0.9875075914731531,
+            "mdp.reward.position": 0.7850354784380009
         },
-        -1
+        -0.497276246547699
     ],
     [
         {
-            "mdp.gamma": 0.07049902960493903,
-            "mdp.reward.position": 25.46622806790654
+            "mdp.gamma": 0.9936588969153795,
+            "mdp.reward.position": 1.9688375826051319
         },
-        -1
+        -0.21242894232273102
     ],
     [
         {
-            "mdp.gamma": 0.8639668677098028,
-            "mdp.reward.position": 42.13161191185618
+            "mdp.gamma": 0.9784687993644189,
+            "mdp.reward.position": 2.2672269198775687
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.4364178075438576,
-            "mdp.reward.position": 17.418770745533607
+            "mdp.gamma": 0.9802106312867535,
+            "mdp.reward.position": 0.38684777611111
         },
-        -1
+        -0.3291264772415161
     ],
     [
         {
-            "mdp.gamma": 0.5283459620940806,
-            "mdp.reward.position": 3.6638590875169132
+            "mdp.gamma": 0.9862897439163814,
+            "mdp.reward.position": 1.9703902242814375
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6460751305320952,
-            "mdp.reward.position": 7.998451715842691
+            "mdp.gamma": 0.957471560423907,
+            "mdp.reward.position": 0.26566647522662246
         },
-        -1
+        -0.300041139125824
     ],
     [
         {
-            "mdp.gamma": 0.8610594499537857,
-            "mdp.reward.position": 36.78800391105542
+            "mdp.gamma": 0.9845430217749208,
+            "mdp.reward.position": 1.1670960257494034
         },
-        -1
+        -0.19192294776439667
     ],
     [
         {
-            "mdp.gamma": 0.570906144078855,
-            "mdp.reward.position": 35.80528220083814
+            "mdp.gamma": 0.9757733855275358,
+            "mdp.reward.position": 0.8417571151621062
         },
-        -1
+        -0.29238036274909973
     ],
     [
         {
-            "mdp.gamma": 0.35814489780050784,
-            "mdp.reward.position": 32.067440248789296
+            "mdp.gamma": 0.9845880439651462,
+            "mdp.reward.position": 3.040862525490035
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.12678801304107024,
-            "mdp.reward.position": 22.284631943743477
+            "mdp.gamma": 0.9590439896343561,
+            "mdp.reward.position": 0.30043972731922386
         },
-        -1
+        -0.48986878991127014
     ],
     [
         {
-            "mdp.gamma": 0.17184506165964386,
-            "mdp.reward.position": 12.862536129708403
+            "mdp.gamma": 0.9973450306541488,
+            "mdp.reward.position": 17.6753012997941
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6963438949242022,
-            "mdp.reward.position": 7.810439738240555
+            "mdp.gamma": 0.9801439531297158,
+            "mdp.reward.position": 0.6606620275147301
         },
-        -1
+        -0.1896391361951828
     ],
     [
         {
-            "mdp.gamma": 0.9400204390609838,
-            "mdp.reward.position": 22.607482465827534
+            "mdp.gamma": 0.9878470461491726,
+            "mdp.reward.position": 1.5010981616483399
         },
-        -1
+        -0.14216390252113342
     ],
     [
         {
-            "mdp.gamma": 0.723637473931578,
-            "mdp.reward.position": 6.905063065482292
+            "mdp.gamma": 0.9081577923248684,
+            "mdp.reward.position": 0.26961798455959474
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.4919884922567054,
-            "mdp.reward.position": 19.432693454521914
+            "mdp.gamma": 0.9796783148105762,
+            "mdp.reward.position": 1.4318896688673532
         },
-        -1
+        -0.20341791212558746
     ],
     [
         {
-            "mdp.gamma": 0.04998148637574107,
-            "mdp.reward.position": 22.220565368292295
+            "mdp.gamma": 0.9900964195861983,
+            "mdp.reward.position": 2.0014160683278215
         },
-        -1
+        -0.18052320182323456
     ],
     [
         {
-            "mdp.gamma": 0.845869696609259,
-            "mdp.reward.position": 27.29409435221922
+            "mdp.gamma": 0.9902065169100163,
+            "mdp.reward.position": 1.9267297394398364
         },
-        -1
+        -0.13922113180160522
     ],
     [
         {
-            "mdp.gamma": 0.850326961100773,
-            "mdp.reward.position": 30.462116142764856
+            "mdp.gamma": 0.9819030653430566,
+            "mdp.reward.position": 1.5217532931584121
         },
-        -1
+        -0.2028290182352066
     ],
     [
         {
-            "mdp.gamma": 0.4212653109947271,
-            "mdp.reward.position": 13.692317914569124
+            "mdp.gamma": 0.988824048075254,
+            "mdp.reward.position": 2.0289325539469996
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8271725070402497,
-            "mdp.reward.position": 10.818292132303743
+            "mdp.gamma": 0.9976576943746784,
+            "mdp.reward.position": 1.4543024683297046
         },
-        -1
+        -0.10343368351459503
     ],
     [
         {
-            "mdp.gamma": 0.38597914833541447,
-            "mdp.reward.position": 43.24163273753826
+            "mdp.gamma": 0.9859397001018165,
+            "mdp.reward.position": 1.4833645469881973
         },
-        -1
+        -0.291371613740921
     ],
     [
         {
-            "mdp.gamma": 0.1737692126944913,
-            "mdp.reward.position": 39.26447082510211
+            "mdp.gamma": 0.9808658984721129,
+            "mdp.reward.position": 0.4448900687788748
         },
-        -1
+        -0.20080551505088806
     ],
     [
         {
-            "mdp.gamma": 0.29526776171535896,
-            "mdp.reward.position": 3.3837512937630656
+            "mdp.gamma": 0.9914147879110436,
+            "mdp.reward.position": 1.4730794477669729
         },
-        -1
+        -0.12200696021318436
     ],
     [
         {
-            "mdp.gamma": 0.37154528705186685,
-            "mdp.reward.position": 18.124090301369844
+            "mdp.gamma": 0.96329994501073,
+            "mdp.reward.position": 1.4759455867100646
         },
-        -1
+        -0.14398673176765442
     ],
     [
         {
-            "mdp.gamma": 0.6475503510414151,
-            "mdp.reward.position": 0.8770737748498958
+            "mdp.gamma": 0.9871885332147838,
+            "mdp.reward.position": 1.5264212659359677
         },
-        -1
+        -0.3908665180206299
     ],
     [
         {
-            "mdp.gamma": 0.7086163461136503,
-            "mdp.reward.position": 43.690704502892544
+            "mdp.gamma": 0.9911057965997944,
+            "mdp.reward.position": 1.177940929995347
         },
-        -1
+        -0.1913595050573349
     ],
     [
         {
-            "mdp.gamma": 0.7061418394176523,
-            "mdp.reward.position": 44.16809044236666
+            "mdp.gamma": 0.9880477132500378,
+            "mdp.reward.position": 1.5035994544576603
         },
-        -1
+        -0.18464519083499908
     ],
     [
         {
-            "mdp.gamma": 0.9787788882944818,
-            "mdp.reward.position": 32.664393376315005
+            "mdp.gamma": 0.9012425562947141,
+            "mdp.reward.position": 0.26401879365714476
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9753841053668089,
-            "mdp.reward.position": 2.0047612762753184
+            "mdp.gamma": 0.9812310067445834,
+            "mdp.reward.position": 1.9129454238646426
         },
-        -1
+        -0.21201060712337494
     ],
     [
         {
-            "mdp.gamma": 0.14341482496823565,
-            "mdp.reward.position": 21.49498938510318
+            "mdp.gamma": 0.9945603100840072,
+            "mdp.reward.position": 1.464563390751239
         },
-        -1
+        -0.10624182224273682
     ],
     [
         {
-            "mdp.gamma": 0.8820758537504495,
-            "mdp.reward.position": 0.8843247960226841
+            "mdp.gamma": 0.9878697591724002,
+            "mdp.reward.position": 0.3776835480244045
         },
-        -1
+        -0.6158231496810913
     ],
     [
         {
-            "mdp.gamma": 0.27774859159645715,
-            "mdp.reward.position": 33.793949324629466
+            "mdp.gamma": 0.9850176145521439,
+            "mdp.reward.position": 2.3579996945703394
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.09586415349891486,
-            "mdp.reward.position": 45.20665546174172
+            "mdp.gamma": 0.9834786516712818,
+            "mdp.reward.position": 1.4847303472699358
         },
-        -1
+        -0.10814900696277618
     ],
     [
         {
-            "mdp.gamma": 0.05864924813876016,
-            "mdp.reward.position": 48.085762956664034
+            "mdp.gamma": 0.9840422256826789,
+            "mdp.reward.position": 0.7400228568149536
         },
-        -1
+        -0.25159937143325806
     ],
     [
         {
-            "mdp.gamma": 0.3428415958135146,
-            "mdp.reward.position": 36.0282768956762
+            "mdp.gamma": 0.9835364374938952,
+            "mdp.reward.position": 1.5082688388457999
         },
-        -1
+        -0.4085853397846222
     ],
     [
         {
-            "mdp.gamma": 0.9327957202527997,
-            "mdp.reward.position": 22.858137110640413
+            "mdp.gamma": 0.9964611555661115,
+            "mdp.reward.position": 1.4777909387739208
         },
-        -1
+        -0.1516457051038742
     ],
     [
         {
-            "mdp.gamma": 0.9999653974810917,
-            "mdp.reward.position": 11.509397944149303
+            "mdp.gamma": 0.6750453479302683,
+            "mdp.reward.position": 21.276496243189136
         },
-        -0.11550279706716537
+        -1
     ],
     [
         {
-            "mdp.gamma": 0.15614275173830905,
-            "mdp.reward.position": 4.781648420073559
+            "mdp.gamma": 0.997104072139191,
+            "mdp.reward.position": 1.4120829432951232
         },
-        -1
+        -0.2572840452194214
     ],
     [
         {
-            "mdp.gamma": 0.577215117187122,
-            "mdp.reward.position": 12.370148843372125
+            "mdp.gamma": 0.9937810316810918,
+            "mdp.reward.position": 2.365492625279364
         },
-        -1
+        -0.3359277546405792
     ],
     [
         {
-            "mdp.gamma": 0.10176122764139206,
-            "mdp.reward.position": 9.606428105778159
+            "mdp.gamma": 0.9784990914836569,
+            "mdp.reward.position": 1.2076540273203706
         },
-        -1
+        -0.1246553510427475
     ],
     [
         {
-            "mdp.gamma": 0.964599382657527,
-            "mdp.reward.position": 7.184836192400485
+            "mdp.gamma": 0.974380657647919,
+            "mdp.reward.position": 1.4464555919292466
         },
-        -1
+        -0.3085043132305145
     ],
     [
         {
-            "mdp.gamma": 0.9868836996888761,
-            "mdp.reward.position": 43.31275744311488
+            "mdp.gamma": 0.9919806247116516,
+            "mdp.reward.position": 1.9441422128122732
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6361246143964034,
-            "mdp.reward.position": 46.8681217934182
+            "mdp.gamma": 0.9899274403488227,
+            "mdp.reward.position": 1.4238719121127452
         },
-        -1
+        -0.20923414826393127
     ],
     [
         {
-            "mdp.gamma": 0.7575036394258462,
-            "mdp.reward.position": 26.269252997788968
+            "mdp.gamma": 0.9667360328508714,
+            "mdp.reward.position": 1.4434747135082526
         },
-        -1
+        -0.1850934624671936
     ],
     [
         {
-            "mdp.gamma": 0.9290058688435994,
-            "mdp.reward.position": 1.8203733441484349
+            "mdp.gamma": 0.9757759601295748,
+            "mdp.reward.position": 0.250266485501327
         },
-        -1
+        -0.618539035320282
     ],
     [
         {
-            "mdp.gamma": 0.04387572980147081,
-            "mdp.reward.position": 21.175545649371752
+            "mdp.gamma": 0.9221626786058071,
+            "mdp.reward.position": 0.6615919129574155
         },
-        -1
+        -0.2509012818336487
     ],
     [
         {
-            "mdp.gamma": 0.9771576646331432,
-            "mdp.reward.position": 19.44856152297449
+            "mdp.gamma": 0.9786153515533244,
+            "mdp.reward.position": 0.8464655957203637
         },
-        -1
+        -0.07482611387968063
     ],
     [
         {
-            "mdp.gamma": 0.072644516831743,
-            "mdp.reward.position": 31.051428507975587
+            "mdp.gamma": 0.9927757952051249,
+            "mdp.reward.position": 2.3337927612143483
         },
-        -1
+        -0.5823854804039001
     ],
     [
         {
-            "mdp.gamma": 0.24220116522216306,
-            "mdp.reward.position": 15.343943519767766
+            "mdp.gamma": 0.9751247926381591,
+            "mdp.reward.position": 1.2154920652847234
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.8386460978856934,
-            "mdp.reward.position": 22.32328363353834
+            "mdp.gamma": 0.9818543238839619,
+            "mdp.reward.position": 1.458848564819365
         },
-        -1
+        -0.05973999947309494
     ],
     [
         {
-            "mdp.gamma": 0.6647168764545069,
-            "mdp.reward.position": 43.54497557794284
+            "mdp.gamma": 0.9104406272839218,
+            "mdp.reward.position": 1.4581898882422117
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.19592936256192184,
-            "mdp.reward.position": 48.8240458284505
+            "mdp.gamma": 0.9252693148310047,
+            "mdp.reward.position": 0.6660425634686717
         },
-        -1
+        -0.22011388838291168
     ],
     [
         {
-            "mdp.gamma": 0.5892291169220879,
-            "mdp.reward.position": 20.82381571369568
+            "mdp.gamma": 0.9880647533026199,
+            "mdp.reward.position": 0.690663098116856
         },
-        -1
+        -0.1638757884502411
     ],
     [
         {
-            "mdp.gamma": 0.777250223736323,
-            "mdp.reward.position": 5.801305725292316
+            "mdp.gamma": 0.9887979936062128,
+            "mdp.reward.position": 1.2206243657443494
         },
-        -1
+        -0.17375536262989044
     ],
     [
         {
-            "mdp.gamma": 0.7181647147455258,
-            "mdp.reward.position": 0.88042767002528
+            "mdp.gamma": 0.9842309016203141,
+            "mdp.reward.position": 1.2383434635709456
         },
-        -1
+        -0.10570035129785538
     ],
     [
         {
-            "mdp.gamma": 0.7618815198946203,
-            "mdp.reward.position": 2.9830405349355438
+            "mdp.gamma": 0.9802633416400796,
+            "mdp.reward.position": 0.6992007668544353
         },
-        -1
+        -0.1475786566734314
     ],
     [
         {
-            "mdp.gamma": 0.01633127947084556,
-            "mdp.reward.position": 13.67819589909724
+            "mdp.gamma": 0.9974703539534411,
+            "mdp.reward.position": 0.9403864441846321
         },
-        -1
+        -0.1076042652130127
     ],
     [
         {
-            "mdp.gamma": 0.3496461177247222,
-            "mdp.reward.position": 17.73791756384308
+            "mdp.gamma": 0.9864777319996136,
+            "mdp.reward.position": 1.2284681907077433
         },
-        -1
+        -0.07737542688846588
     ],
     [
         {
-            "mdp.gamma": 0.09296542564257704,
-            "mdp.reward.position": 34.13539824927566
+            "mdp.gamma": 0.9933259666897589,
+            "mdp.reward.position": 1.401249712280117
         },
-        -1
+        -0.09582427144050598
     ],
     [
         {
-            "mdp.gamma": 0.37790477338517614,
-            "mdp.reward.position": 40.10193977060453
+            "mdp.gamma": 0.9923499581300482,
+            "mdp.reward.position": 1.3846148839799788
         },
-        -1
+        -0.2985242009162903
     ],
     [
         {
-            "mdp.gamma": 0.42235821328354506,
-            "mdp.reward.position": 32.222117873054415
+            "mdp.gamma": 0.984825245324034,
+            "mdp.reward.position": 1.2060497493894373
         },
-        -1
+        -0.13286611437797546
     ],
     [
         {
-            "mdp.gamma": 0.7190643790617656,
-            "mdp.reward.position": 35.57997814222701
+            "mdp.gamma": 0.9911412419880277,
+            "mdp.reward.position": 1.9073097777645764
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.9060779522909714,
-            "mdp.reward.position": 6.142250550197498
+            "mdp.gamma": 0.98711497286745,
+            "mdp.reward.position": 1.4209633003209932
         },
-        -1
+        -0.36286041140556335
     ],
     [
         {
-            "mdp.gamma": 0.7279047456996349,
-            "mdp.reward.position": 29.214484820400145
+            "mdp.gamma": 0.999069505312215,
+            "mdp.reward.position": 0.9598724911220768
         },
-        -1
+        -0.3818134665489197
     ],
     [
         {
-            "mdp.gamma": 0.6012823695999864,
-            "mdp.reward.position": 1.73564562375082
+            "mdp.gamma": 0.9528633258483921,
+            "mdp.reward.position": 2.2275680742298185
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.0986385501935163,
-            "mdp.reward.position": 35.821579097667964
+            "mdp.gamma": 0.9818124592189116,
+            "mdp.reward.position": 1.9530459928740584
         },
-        -1
+        -0.18464359641075134
     ],
     [
         {
-            "mdp.gamma": 0.7567792799367007,
-            "mdp.reward.position": 18.642594712061662
+            "mdp.gamma": 0.9901136455395216,
+            "mdp.reward.position": 0.8234978723470732
         },
-        -1
+        -0.1584174931049347
     ],
     [
         {
-            "mdp.gamma": 0.522355057642007,
-            "mdp.reward.position": 25.530826870277817
+            "mdp.gamma": 0.9324996323925102,
+            "mdp.reward.position": 0.66896295177164
         },
-        -1
+        -0.17329862713813782
     ],
     [
         {
-            "mdp.gamma": 0.7792931430033647,
-            "mdp.reward.position": 36.790799272644136
+            "mdp.gamma": 0.9992108836738315,
+            "mdp.reward.position": 0.9164904454941281
         },
-        -1
+        -0.19176717102527618
     ],
     [
         {
-            "mdp.gamma": 0.6217805403258745,
-            "mdp.reward.position": 31.395905582405476
+            "mdp.gamma": 0.9868612094518842,
+            "mdp.reward.position": 1.1391426040870123
         },
-        -1
+        -0.21810920536518097
     ],
     [
         {
-            "mdp.gamma": 0.5755244091187312,
-            "mdp.reward.position": 7.82779307659815
+            "mdp.gamma": 0.9902287818404969,
+            "mdp.reward.position": 1.1195381993297449
         },
-        -1
+        -0.21352829039096832
     ],
     [
         {
-            "mdp.gamma": 0.867127938383794,
-            "mdp.reward.position": 45.70179427659802
+            "mdp.gamma": 0.9141892635871477,
+            "mdp.reward.position": 1.475644789753655
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.3103193105253016,
-            "mdp.reward.position": 33.27166221252744
+            "mdp.gamma": 0.9851503970354527,
+            "mdp.reward.position": 0.8217273482505394
         },
-        -1
+        -0.10603837668895721
     ],
     [
         {
-            "mdp.gamma": 0.005947967414398958,
-            "mdp.reward.position": 37.06699638764198
+            "mdp.gamma": 0.6008273669219363,
+            "mdp.reward.position": 33.61812045885828
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.7407753077777942,
-            "mdp.reward.position": 44.699654251941084
+            "mdp.gamma": 0.707797076897178,
+            "mdp.reward.position": 19.009417880747502
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.22870838673995042,
-            "mdp.reward.position": 23.06341035536894
+            "mdp.gamma": 0.9703016904946162,
+            "mdp.reward.position": 1.4797641821736929
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.6053696910263758,
-            "mdp.reward.position": 47.03735538662468
+            "mdp.gamma": 0.9844809135873837,
+            "mdp.reward.position": 0.43135205876678184
         },
-        -1
+        -0.3732481896877289
     ],
     [
         {
-            "mdp.gamma": 0.9145804583075938,
-            "mdp.reward.position": 14.381309748485577
+            "mdp.gamma": 0.9588407524643839,
+            "mdp.reward.position": 1.500570270082885
         },
         -1
     ],
     [
         {
-            "mdp.gamma": 0.003406481869228206,
-            "mdp.reward.position": 49.29250840041263
+            "mdp.gamma": 0.9922992053721222,
+            "mdp.reward.position": 1.145430374261014
         },
-        -1
+        -0.2618280053138733
     ],
     [
         {
-            "mdp.gamma": 0.3541939346972648,
-            "mdp.reward.position": 36.8346510135271
+            "mdp.gamma": 0.9828598869751103,
+            "mdp.reward.position": 0.6812158277456404
         },
-        -1
+        -0.2708616852760315
     ],
     [
         {
-            "mdp.gamma": 0.26383336399145885,
-            "mdp.reward.position": 34.23971811748984
+            "mdp.gamma": 0.9924454938521494,
+            "mdp.reward.position": 0.8923619539602912
         },
-        -1
+        -0.10534016042947769
     ],
     [
         {
-            "mdp.gamma": 0.8996870204339843,
-            "mdp.reward.position": 40.91213752788524
+            "mdp.gamma": 0.9867182498065048,
+            "mdp.reward.position": 0.8583616757250001
         },
-        -1
+        -0.34567612409591675
     ]
 ]

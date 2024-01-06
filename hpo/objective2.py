@@ -1,9 +1,10 @@
 import json
 import subprocess
 import random
+import math
 
 
-with open('parameters/default.json') as f:
+with open('../parameters/default.json') as f:
   default_params = json.loads(f.read())
 
 def nested_dict(input_dict):
@@ -44,14 +45,14 @@ def evaluate(params):
   with open('parameters_temp.json', 'w') as f:
     json.dump(merged, f, indent=4)
 
-  subprocess.call(['cmake-build-release/src/hpo', "-f", "parameters_temp.json", "-r", "results.json", "-s", str(seed)])
+  subprocess.call(['../cmake-build-release/src/hpo', "-f", "parameters_temp.json", "-r", "results.json", "-s", str(seed)])
 
   with open('results.json') as f:
     results = json.loads(f.read())
 
   episode_length_mean = results['EpisodeLengthMean']
   max_position_error_after_100 = results['MaxErrorMean(Position, after 100 steps)']
-  return -max_position_error_after_100 if episode_length_mean > 400 else -1 
+  return -max_position_error_after_100 if not math.isinf(max_position_error_after_100) and episode_length_mean > 300 else -1 
 #   position_error_after_100_steps_mean = results['MaxErrorMean(Position, after 100 steps)']
 #   if episode_length_mean < 400 or position_error_after_100_steps_mean < 0:
 #     return 0

@@ -4,10 +4,9 @@ using CSV
 using Statistics
 using GLM
 using Plots
-using GaussianProcesses
 using Random
-using Optim
 using LinearAlgebra
+using Latexify
 
 json_data = JSON.parsefile("transferability_assessment/data/data_table.json")
 df = DataFrame(json_data)
@@ -71,11 +70,54 @@ for col in names(missing_df)
 end
 dropmissing!(missing_df)
 
-CSV.write("transferability_assessment/data/regression_data.csv", nan_df)
-CSV.write("transferability_assessment/data/regression_data_clean.csv", missing_df)
+# CSV.write("transferability_assessment/data/regression_data.csv", nan_df)
+# CSV.write("transferability_assessment/data/regression_data_clean.csv", missing_df)
+
+
+nan_df = CSV.read("transferability_assessment/data/regression_data.csv", DataFrame)
+missing_df = CSV.read("transferability_assessment/data/regression_data_clean.csv", DataFrame)
 missing_df = DataFrame(shuffle(eachrow(missing_df)))
 
-@assert all(missing_df.success .== 1.0)
+replace_nan_with_missing(x) = isnan(x) ? missing : x
+for col in names(nan_df[!, Not(["rmse_without_z", "success"])])
+    println(col)
+    transform!(nan_df, col => ByRow(replace_nan_with_missing) => col)
+end
+
+nan_df[!, "success_simulation"]= any.(eachrow(ismissing.(nan_df[!, Not(["rmse_without_z", "success"])]))) .== false
+
+nan_df_simulation = deepcopy(nan_df)
+dropmissing!(nan_df)
+
+sum(nan_df[!, "success"])
+size(nan_df)
+
+predictor_vars = names(nan_df[!, Not(["rmse_without_z", "success", "success_simulation"])])
+model_description = Term(Symbol("success")) ~ sum(Term.(Symbol.(predictor_vars)))
+model = glm(model_description, nan_df, Binomial(), LogitLink())
+
+nan_df[!, "predicted"] = predict(model, nan_df)
+
+p = plot(size=(600, 200), margin = 3Plots.mm)
+histogram!(p, nan_df[nan_df[!, "success"] .== 1.0, :][!, "predicted"], label="Success", alpha=0.5, bins=10)
+histogram!(p, nan_df[nan_df[!, "success"] .== 0.0, :][!, "predicted"], label="Crash", alpha=0.5, bins=10)
+xlabel!("Predicted Success")
+ylabel!("Count")
+savefig(p, "transferability_assessment/figures/logistic_regression_success_histogram.pdf")
+
+success_give_no_simulation_success = sum(nan_df_simulation[nan_df_simulation[!, "success_simulation"] .== false, :][!, "success"])
+no_success_give_no_simulation_success = sum(nan_df_simulation[nan_df_simulation[!, "success_simulation"] .== false, :][!, "success"] .== 0.0)
+success_give_simulation_success = sum(nan_df_simulation[nan_df_simulation[!, "success_simulation"] .== true, :][!, "success"])
+no_success_give_simulation_success = sum(nan_df_simulation[nan_df_simulation[!, "success_simulation"] .== true, :][!, "success"] .== 0.0)
+
+# independent variable on top, dependent variable on the side
+matrix = [
+    success_give_simulation_success success_give_no_simulation_success;
+    no_success_give_simulation_success no_success_give_no_simulation_success
+]
+# latex
+
+latexify(matrix)
 
 
 begin
@@ -91,13 +133,16 @@ y = y[order]
 normalized_df = deepcopy(missing_df)
 # zscore_normalize!(col) = (col .-= mean(col)) ./= std(col)
 # foreach(zscore_normalize!, eachcol(normalized_df))
-train_points = 120
+train_points = length(y)
 X_train = X[:, 1:train_points]
 y_train = y[1:train_points]
-X_test = X[:, train_points+1:end]
-y_test = y[train_points+1:end]
+X_test, y_test = if train_points == length(y)
+    X_train, y_train
+else
+    X[:, train_points+1:end], y[train_points+1:end]
+end
 
-regularization_term = 1.0
+regularization_term = 10.0
 X_pad = vcat(ones(1, size(X_train, 2)), X_train)
 weights = pinv(X_pad * transpose(X_pad) + I*regularization_term) * X_pad * y_train
 

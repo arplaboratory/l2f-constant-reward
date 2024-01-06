@@ -2,6 +2,10 @@ using Plots
 using OrderedCollections
 using JSON
 using ColorSchemes
+using PyCall
+using Conda
+
+Conda.add("gpytorch")
 
 color_palette = ColorSchemes.tab10
 

@@ -3,11 +3,13 @@ from objective2 import evaluate
 import numpy as np
 import matplotlib.pyplot as plt
 import json
+import sklearn.gaussian_process.kernels
 
 pbounds = {
+    'mdp.reward.position': (0, 50),
     'mdp.gamma': (0, 1),
-    'mdp.reward.position': (0, 50)
 }
+length_scales = [(v[1] - v[0])/10 for k, v in sorted(pbounds.items(), key=lambda x: x[0])]
 
 trace = []
 minimize_metric = False
@@ -23,6 +25,7 @@ optimizer = BayesianOptimization(
     pbounds=pbounds,
     random_state=1,
 )
+optimizer.set_gp_params(normalize_y=True, kernel=sklearn.gaussian_process.kernels.Matern(length_scale=length_scales), n_restarts_optimizer=20) 
 
 optimizer.maximize(
     init_points=0,
