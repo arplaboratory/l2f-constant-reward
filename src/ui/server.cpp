@@ -11,13 +11,7 @@
 #include <boost/beast/websocket.hpp>
 #include <filesystem>
 #include <fstream>
-#include <rl_tools/operations/cpu_mux.h>
-#include <learning_to_fly/simulator/operations_cpu.h>
-#include <learning_to_fly/simulator/ui.h>
-namespace rlt = rl_tools;
-
-//#include "../td3/parameters.h"
-#include "../training.h"
+#include <nlohmann/json.hpp>
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -368,28 +362,30 @@ void http_server(tcp::acceptor& acceptor, tcp::socket& socket, State& state){
 int main(int argc, char* argv[]) {
     std::cout << "Note: This executable should be executed in the context (working directory) of the main repo e.g. ./build/src/rl_environments_multirotor_ui 0.0.0.0 8000" << std::endl;
     State state;
-    try{
-        // Check command line arguments.
-        if(argc != 3){
-            std::cerr << "Usage: " << argv[0] << " <address> <port> (e.g. \'0.0.0.0 8000\' for localhost 8000)\n";
-            return EXIT_FAILURE;
-        }
 
-        auto const address = net::ip::make_address(argv[1]);
-        unsigned short port = static_cast<unsigned short>(std::atoi(argv[2]));
-
-        net::io_context ioc{1};
-
-        tcp::acceptor acceptor{ioc, {address, port}};
-        tcp::socket socket{ioc};
-        http_server(acceptor, socket, state);
-
-        std::cout << "Web interface coming up at: http://" << address << ":" << port << std::endl;
-
-        ioc.run();
-    }
-    catch(std::exception const& e){
-        std::cerr << "Error: " << e.what() << std::endl;
+    if(argc != 3){
+        std::cerr << "Usage: " << argv[0] << " <address> <port> (e.g. \'0.0.0.0 8000\' for localhost 8000)\n";
         return EXIT_FAILURE;
     }
+
+    auto const address = net::ip::make_address(argv[1]);
+    unsigned short port = static_cast<unsigned short>(std::atoi(argv[2]));
+
+    net::io_context ioc{1};
+
+    tcp::acceptor acceptor{ioc, {address, port}};
+    tcp::socket socket{ioc};
+    http_server(acceptor, socket, state);
+
+    std::cout << "Web interface coming up at: http://" << address << ":" << port << std::endl;
+
+    boost::asio::signal_set signals(ioc, SIGINT);
+
+    signals.async_wait(
+        [&](const boost::system::error_code& error, int signal_number) {
+            ioc.stop();
+        }
+    );
+
+    ioc.run();
 }

@@ -1,0 +1,15 @@
+FROM arpllab/learning_to_fly as builder
+COPY ./src /test/src
+COPY ./external /test/external
+COPY ./CMakeLists.txt /test/
+WORKDIR /
+RUN mkdir build_ui
+WORKDIR /build_ui
+RUN cmake ../test -DCMAKE_BUILD_TYPE=Release -DBUILD_UI_SERVER_ONLY=ON
+RUN cmake --build . --target ui_server
+
+FROM ubuntu:22.04
+COPY --from=builder /build_ui/src/ui/ui_server /usr/local/bin/ui_server
+COPY ./src/ui /ui/src/ui
+WORKDIR /ui
+CMD ["ui_server", "0.0.0.0", "8000"]

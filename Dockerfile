@@ -21,7 +21,7 @@ WORKDIR /
 RUN mkdir build
 WORKDIR /build
 RUN cmake ../learning_to_fly -DCMAKE_BUILD_TYPE=Release -DRL_TOOLS_BACKEND_ENABLE_MKL:BOOL=ON -DRL_TOOLS_DISABLE_CPU_SPECIFIC_OPTIMIZATIONS:BOOL=ON
-RUN cmake --build . -j$(nproc)
+RUN cmake --build . #-j$(nproc)
 
 WORKDIR /learning_to_fly
 RUN echo "#!/bin/bash" > /init.sh && \

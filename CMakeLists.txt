@@ -6,6 +6,7 @@ project(learning_to_fly_hpo)
 
 set(CMAKE_CXX_STANDARD 17)
 
+if(NOT BUILD_UI_SERVER_ONLY)
 find_package(HDF5)
 if(HDF5_FOUND)
     set(RL_TOOLS_ENABLE_HDF5 ON)
@@ -19,8 +20,6 @@ if(Protobuf_FOUND)
     set(RL_TOOLS_ENABLE_TENSORBOARD ON)
 endif()
 set(RL_TOOLS_ENABLE_CLI11 ON)
-set(RL_TOOLS_ENABLE_JSON ON)
-set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
 
 if(APPLE)
     set(RL_TOOLS_BACKEND_ENABLE_ACCELERATE ON)
@@ -28,6 +27,9 @@ endif()
 
 add_library(learning_to_fly INTERFACE)
 target_include_directories(learning_to_fly INTERFACE include)
+endif()
+set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
+set(RL_TOOLS_ENABLE_JSON ON)
 
 #set(RL_TOOLS_ENABLE_TESTS ON)
 add_subdirectory(external/rl_tools)

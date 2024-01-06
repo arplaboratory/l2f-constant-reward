@@ -16,10 +16,10 @@ class Drone{
     const clockwise_rotor_material = new THREE.MeshLambertMaterial({color: 0x00FF00})
     const counter_clockwise_rotor_material = new THREE.MeshLambertMaterial({color: 0xFF0000})
 
-    const coordinateSystemLength = 10 * model.mass
+    const coordinateSystemLength = Math.cbrt(model.mass)
     const coordinateSystemThickness = 0.01 * coordinateSystemLength
 
-    const centerSize = model.mass / 2
+    const centerSize = Math.cbrt(model.mass) / 10
     const centerForm = new THREE.BoxGeometry(centerSize, centerSize, centerSize*0.3)
     const center = new THREE.Mesh( centerForm, material);
     // this.drone.quaternion.set(Math.sqrt(0.5), Math.sqrt(0.5), 0,0) // ENUtoNED
@@ -125,7 +125,7 @@ class Drone{
       const force_magnitude = (rot_rate - avg_rot_rate)/max_rpm * 10///1000
       // const force_magnitude = (rot_rate - min_rpm) / (max_rpm - min_rpm)
       forceArrow.setDirection(new THREE.Vector3(0, 0, rot_rate)) //Math.sign(force_magnitude)))
-      forceArrow.setLength(this.model.mass) //Math.abs(force_magnitude))
+      forceArrow.setLength(Math.cbrt(this.model.mass)/10) //Math.abs(force_magnitude))
       // const c1 = [1, 0, 0]
       // const c2 = [0, 1, 0]
       // const upper_rot_rate_limit = 10000
