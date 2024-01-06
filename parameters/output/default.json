@@ -1,0 +1,187 @@
+{
+    "requires_processing": "false",
+    "mdp": {
+        "gamma": 0.95,
+        "reward": {
+            "type": "Squared",
+            "scale": 1.0,
+            "constant": 1,
+            "termination_penalty": 0,
+            "position": 0.5,
+            "orientation": 0.5,
+            "linear_velocity": 0.0,
+            "angular_velocity": 0,
+            "linear_acceleration": 0.0,
+            "angular_acceleration": 0.0,
+            "action_baseline": 0.4582053118721884,
+            "calculate_action_baseline": true,
+            "action": 0.0
+        },
+        "init": {
+            "guidance": 0,
+            "max_position": 0.5,
+            "max_angle": 1.57,
+            "max_linear_velocity": 0.5,
+            "max_angular_velocity": 1.0
+        },
+        "termination": {
+            "enabled": true,
+            "position_threshold": 0.6,
+            "linear_velocity_threshold": 10,
+            "angular_velocity_threshold": 40
+        },
+        "curriculum": {
+            "position": {
+                "factor": 1.1,
+                "limit": 2
+            },
+            "orientation": {
+                "factor": 1.1,
+                "limit": 2
+            },
+            "linear_velocity": {
+                "factor": 1.0,
+                "limit": 100
+            },
+            "linear_acceleration": {
+                "factor": 2.0,
+                "limit": 0.0
+            },
+            "angular_acceleration": {
+                "factor": 1.2,
+                "limit": 0.0
+            },
+            "action": {
+                "factor": 1.0,
+                "limit": 0.0
+            }
+        }
+    },
+    "off_policy_runner": {
+        "exploration_noise_std": 0.1
+    },
+    "td3": {
+        "target_action_noise_std": 0.1,
+        "target_action_noise_clip": 0.3
+    },
+    "dynamics": {
+        "n_rotors": 4,
+        "rotor_positions": [
+            [
+                0.176776695296636,
+                -0.176776695296636,
+                0
+            ],
+            [
+                -0.176776695296636,
+                0.176776695296636,
+                0
+            ],
+            [
+                0.176776695296636,
+                0.176776695296636,
+                0
+            ],
+            [
+                -0.176776695296636,
+                -0.176776695296636,
+                0
+            ]
+        ],
+        "rotor_thrust_directions": [
+            [
+                0,
+                0,
+                1
+            ],
+            [
+                0,
+                0,
+                1
+            ],
+            [
+                0,
+                0,
+                1
+            ],
+            [
+                0,
+                0,
+                1
+            ]
+        ],
+        "rotor_torque_directions": [
+            [
+                0,
+                0,
+                -1
+            ],
+            [
+                0,
+                0,
+                -1
+            ],
+            [
+                0,
+                0,
+                1
+            ],
+            [
+                0,
+                0,
+                1
+            ]
+        ],
+        "rotor_thrust_coefficients": [
+            1.425,
+            0,
+            15.85
+        ],
+        "torque_constant": 0.2,
+        "mass": 2.0,
+        "gravity": [
+            0,
+            0,
+            -9.81
+        ],
+        "J": [
+            [
+                0.0619,
+                0,
+                0
+            ],
+            [
+                0,
+                0.0694,
+                0
+            ],
+            [
+                0,
+                0,
+                0.11104000000000001
+            ]
+        ],
+        "motor_time_constant": 0.03,
+        "action_limit": {
+            "lower_bound": 0.3,
+            "upper_bound": 0.7
+        },
+        "J_inv": [
+            [
+                16.155088852988694,
+                0.0,
+                0.0
+            ],
+            [
+                0.0,
+                14.40922190201729,
+                0.0
+            ],
+            [
+                0.0,
+                0.0,
+                9.005763688760807
+            ]
+        ]
+    }
+}

@@ -1,9 +1,7 @@
 #include <queue>
 #include <vector>
 #include <mutex>
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
 #include <filesystem>
-#endif
 
 namespace learning_to_fly{
     template <typename T_CONFIG>
@@ -30,12 +28,19 @@ namespace learning_to_fly{
             Schedule position = {1.2, 40};
             Schedule orientation = {1.0, 100};
             Schedule linear_velocity = {1.4, 1};
+            Schedule linear_acceleration = {1.0, 0};
+            Schedule angular_acceleration = {1.0, 0};
             Schedule action = {1.4, 1};
+            Schedule init_position = {1.0, INFINITY};
+            Schedule init_orientation = {1.0, INFINITY};
+            Schedule init_linear_velocity = {1.0, INFINITY};
+            Schedule init_angular_velocity = {1.0, INFINITY};
+            Schedule termination_position = {1.0, INFINITY};
+            Schedule termination_linear_velocity = {1.0, INFINITY};
+            Schedule termination_angular_velocity = {1.0, INFINITY};
         };
         Curriculum curriculum;
-#ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
         std::filesystem::path parameters_path;
         std::filesystem::path results_path;
-#endif
     };
 }

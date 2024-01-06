@@ -8,6 +8,7 @@
 *.bin
 /results
 .DS_Store
+/logs_old
 
 results.json
 validation.json

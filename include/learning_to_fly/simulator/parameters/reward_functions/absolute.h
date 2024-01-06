@@ -19,6 +19,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         T linear_acceleration;
         T angular_acceleration;
         T action_baseline;
+        bool calculate_action_baseline;
         T action;
         struct Components{
             T orientation_cost;
@@ -125,6 +126,10 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
     RL_TOOLS_FUNCTION_PLACEMENT typename SPEC::T reward(DEVICE& device, const rl::environments::Multirotor<SPEC>& env, const rl::environments::multirotor::parameters::reward_functions::Absolute<T>& params, const typename rl::environments::Multirotor<SPEC>::State& state, const Matrix<ACTION_SPEC>& action,  const typename rl::environments::Multirotor<SPEC>::State& next_state, RNG& rng){
         auto components = reward_components(device, env, params, state, action, next_state, rng);
         return components.reward;
+    }
+    template<typename DEVICE, typename T>
+    RL_TOOLS_FUNCTION_PLACEMENT constexpr auto name(DEVICE& device, const rl::environments::multirotor::parameters::reward_functions::Absolute<T>& params){
+        return "absolute";
     }
 }
 

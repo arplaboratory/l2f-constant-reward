@@ -12,6 +12,16 @@ target_link_libraries(
 )
 endif()
 
+add_executable(training_headless_x500 training.cpp)
+target_link_libraries(
+        training_headless_x500
+        PRIVATE
+        rl_tools
+        learning_to_fly
+)
+target_compile_definitions(training_headless_x500 PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+target_compile_definitions(training_headless_x500 PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
+
 add_executable(training_headless training.cpp)
 target_link_libraries(
         training_headless
@@ -19,6 +29,7 @@ target_link_libraries(
         rl_tools
         learning_to_fly
 )
+
 add_executable(training_benchmark training.cpp)
 target_link_libraries(
         training_benchmark

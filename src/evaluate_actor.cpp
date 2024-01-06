@@ -26,7 +26,7 @@ namespace TEST_DEFINITIONS{
     namespace parameter_set = parameters;
     template <typename BASE_SPEC>
     struct SpecEval: BASE_SPEC{
-        static constexpr bool DISTURBANCE = false;
+        static constexpr bool DISTURBANCE = true;
         static constexpr bool OBSERVATION_NOISE = true;
         static constexpr bool ROTOR_DELAY = true;
         static constexpr bool ACTION_HISTORY = BASE_SPEC::ROTOR_DELAY && BASE_SPEC::ACTION_HISTORY;
@@ -48,8 +48,8 @@ namespace TEST_DEFINITIONS{
     constexpr bool DEACTIVATE_OBSERVATION_NOISE = true;
     constexpr bool INJECT_EXPLORATION_NOISE = false;
     constexpr bool DISABLE_DISTURBANCES = true;
-    constexpr bool AMPLIFY_DISTURBANCES = true;
-    constexpr TI N_ENVIRONMENTS = 100;
+    constexpr bool AMPLIFY_DISTURBANCES = false;
+    constexpr TI N_ENVIRONMENTS = 10;
     constexpr T max_pos_diff = 0.6;
     constexpr T max_vel_diff = 5;
     constexpr T time_lapse = 1.0;
@@ -159,7 +159,7 @@ int main(int argc, char** argv) {
         T reward_acc = 0;
         env.parameters = penv::parameters;
         if(!SAME_CONFIG_AS_IN_TRAINING && INIT_SIMPLE){
-            env.parameters.mdp.init = rlt::rl::environments::multirotor::parameters::init::simple<T, TI, 4, penv::REWARD_FUNCTION>;
+            env.parameters.mdp.init = rlt::rl::environments::multirotor::parameters::init::simple<typename decltype(env.parameters)::SPEC>;
         }
         if(!SAME_CONFIG_AS_IN_TRAINING && DEACTIVATE_OBSERVATION_NOISE){
             env.parameters.mdp.observation_noise.position = 0;
@@ -189,7 +189,7 @@ int main(int argc, char** argv) {
             env.parameters.dynamics.J_inv[1][1] /= J_factor;
             env.parameters.dynamics.J_inv[2][2] /= J_factor;
             env.parameters.dynamics.action_limit.max *= max_rpm_factor;
-            env.parameters.dynamics.rpm_time_constant *= rpm_time_constant_factor;
+            env.parameters.dynamics.motor_time_constant *= rpm_time_constant_factor;
         }
         else{
             std::cout << "Using nominal domain parameters" << std::endl;
@@ -200,10 +200,13 @@ int main(int argc, char** argv) {
         if(!SAME_CONFIG_AS_IN_TRAINING && DISABLE_DISTURBANCES){
             env.parameters.disturbances.random_force.mean = 0;
             env.parameters.disturbances.random_force.std = 0;
+            env.parameters.disturbances.random_torque.mean = 0;
+            env.parameters.disturbances.random_torque.std = 0;
         }
         else{
             if(AMPLIFY_DISTURBANCES){
-                env.parameters.disturbances.random_force.std *= 2;
+                env.parameters.disturbances.random_force.std = 1;
+                env.parameters.disturbances.random_torque.std = 0.01;
             }
         }
         env.parameters.mdp.init.guidance = 0;

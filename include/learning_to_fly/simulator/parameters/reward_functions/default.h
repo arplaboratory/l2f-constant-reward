@@ -3,7 +3,16 @@
 #include "sq_exp.h"
 #include "squared.h"
 #include "absolute.h"
-#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (0.334)
+//#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (0.334)
+// (sqrt(1.00 * 9.81/4/35) - 0.1)/(0.5 - 0.1) * 2 - 1
+// kf: 35
+//#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (-0.17644957999866362)
+// kf: 23.5
+//#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (0.11525309261164662)
+// x500 sim
+//#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (0.7574823462630856)
+// x500 real
+#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE (0.4582053118721884)
 namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
     template<typename T>
     constexpr AbsExp<T> reward_263 = {
@@ -327,6 +336,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         0.01, // linear_acceleration
         0.01, // angular_acceleration
         RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+        false,
         0, // action
     };
 
@@ -343,6 +353,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0.1, // linear_acceleration
             0.001, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // action baseline
+            false,
             20, // action
     };
 
@@ -359,6 +370,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // action baseline
+            false,
             0, // action
     };
     template<typename T>
@@ -374,6 +386,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // action baseline
+            false,
             0, // action
     };
     template<typename T>
@@ -389,6 +402,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // action baseline
+            false,
             1, // action
     };
     template<typename T>
@@ -404,6 +418,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             0.01, // action
     };
     template<typename T>
@@ -419,6 +434,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             0.01, // action
     };
     template<typename T>
@@ -434,6 +450,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             1.00, // action
     };
     template<typename T>
@@ -449,6 +466,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             0.0, // action
     };
     template<typename T>
@@ -464,6 +482,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
+            false,
             0.0, // action
     };
     template<typename T>
@@ -479,6 +498,7 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
             0, // linear_acceleration
             0, // angular_acceleration
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE, // RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_REWARD_FUNCTIONS_DEFAULT_ACTION_BASELINE
-            0.01, // action
+            false,
+            0.1, // action
     };
 }

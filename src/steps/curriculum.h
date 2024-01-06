@@ -38,6 +38,22 @@ namespace learning_to_fly {
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/linear_velocity_weight", linear_velocity_weight);
                         }
                         {
+                            T linear_acceleration_weight = env.parameters.mdp.reward.linear_acceleration;
+                            linear_acceleration_weight *= ts.curriculum.linear_acceleration.factor;
+                            T linear_acceleration_weight_limit = ts.curriculum.linear_acceleration.limit;
+                            linear_acceleration_weight = linear_acceleration_weight > linear_acceleration_weight_limit ? linear_acceleration_weight_limit : linear_acceleration_weight;
+                            env.parameters.mdp.reward.linear_acceleration = linear_acceleration_weight;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/linear_acceleration_weight", linear_acceleration_weight);
+                        }
+                        {
+                            T angular_acceleration_weight = env.parameters.mdp.reward.angular_acceleration;
+                            angular_acceleration_weight *= ts.curriculum.angular_acceleration.factor;
+                            T angular_acceleration_weight_limit = ts.curriculum.angular_acceleration.limit;
+                            angular_acceleration_weight = angular_acceleration_weight > angular_acceleration_weight_limit ? angular_acceleration_weight_limit : angular_acceleration_weight;
+                            env.parameters.mdp.reward.angular_acceleration = angular_acceleration_weight;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/angular_acceleration_weight", angular_acceleration_weight);
+                        }
+                        {
                             T action_weight = env.parameters.mdp.reward.action;
                             action_weight *= ts.curriculum.action.factor;
                             T action_weight_limit = ts.curriculum.action.limit;

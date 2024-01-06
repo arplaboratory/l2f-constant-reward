@@ -1,12 +1,12 @@
 #include "../../multirotor.h"
 
-#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION (0.2)
-#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY (1)
+#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION (0.5)
+#define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY (0.5)
 #define RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_ANGULAR_VELOCITY (1)
 
 namespace rl_tools::rl::environments::multirotor::parameters::init{
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization all_around = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization all_around = {
             0.1, // guidance
             0.3, // position
             3.14,   // orientation
@@ -16,8 +16,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             -1,  // min rpm
             +1,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization all_around_2 = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization all_around_2 = {
             0.1, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             3.14,   // orientation
@@ -27,8 +27,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             -0,  // min rpm
             +0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_all_around = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_all_around = {
             0.1, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             3.14,   // orientation
@@ -38,8 +38,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,  // min rpm
             0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_small_angle = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_small_angle = {
             0.1, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             10.0/180.0*3.14,   // orientation
@@ -49,8 +49,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,  // min rpm
             0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_big_angle = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_big_angle = {
             0.1, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             20.0/180.0 * 3.14,   // orientation
@@ -60,8 +60,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,  // min rpm
             0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_bigger_angle = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_bigger_angle = {
             0.1, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             45.0/180.0 * 3.14,   // orientation
@@ -71,9 +71,9 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,  // min rpm
             0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization orientation_biggest_angle = {
-            0.7, // guidance
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_biggest_angle = {
+            0.0, // guidance
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
             90.0/180.0 * 3.14,   // orientation
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY,   // linear velocity
@@ -82,8 +82,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,  // min rpm
             0,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization all_around_simplified = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization all_around_simplified = {
             0.1, // guidance
             0.3, // position
             0,   // orientation
@@ -93,8 +93,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             -1,  // min rpm
             +1,  // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization simple = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization simple = {
             0,   // guidance
             0,   // position
             0,   // orientation
@@ -104,8 +104,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             0,   // min rpm
             0,   // max rpm
     };
-    template<typename T, typename TI, TI ACTION_DIM, typename REWARD_FUNCTION>
-    constexpr typename ParametersBase<T, TI, ACTION_DIM, REWARD_FUNCTION>::MDP::Initialization all_positions = {
+    template<typename SPEC>
+    constexpr typename ParametersBase<SPEC>::MDP::Initialization all_positions = {
             0.5, // guidance
             0.3, // position
             0,   // orientation
