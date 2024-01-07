@@ -2,7 +2,7 @@
     "requires_processing": "false",
     "rl": {
         "td3": {
-            "ignore_termination": false,
+            "ignore_termination": true,
             "target_action_noise_std": 0.1,
             "target_action_noise_clip": 0.3
         },
@@ -11,9 +11,9 @@
         },
         "optimizer": {
             "weight_decay": {
-                "base": 0.0001,
-                "input": 0.0001,
-                "output": 0.0001
+                "base": 0.0,
+                "input": 0.0,
+                "output": 0.0
             },
             "learning_rate": {
                 "bias_factor": 1
@@ -80,11 +80,11 @@
     "disturbances": {
         "random_force": {
             "mean": 0,
-            "std": 0.49050000000000005
+            "std": 0
         },
         "random_torque": {
             "mean": 0,
-            "std": 0.009810000000000001
+            "std": 0
         }
     },
     "dynamics": {

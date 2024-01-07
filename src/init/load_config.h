@@ -11,6 +11,7 @@ namespace learning_to_fly{
     namespace _init{
         template <typename T_CONFIG>
         void load_config(TrainingState<T_CONFIG>& ts){
+            using T = typename T_CONFIG::T;
             std::filesystem::path parameters_path;
             parameters_path = ts.parameters_path;
             std::cout << "Loading parameters from: " << parameters_path << std::endl;
@@ -101,6 +102,11 @@ namespace learning_to_fly{
                     }
                 }
                 if(rl.contains("optimizer")){
+                    if(rl["optimizer"].contains("weight_decay")){
+                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["base"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY) < 1e-6, "Weight decay should match the constexpr value");
+                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["input"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY_INPUT) < 1e-6, "Weight decay should match the constexpr value");
+                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["output"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY_OUTPUT) < 1e-6, "Weight decay should match the constexpr value");
+                    }
                 }
                 if(rl.contains("off_policy_runner")){
                     if(rl["off_policy_runner"].contains("exploration_noise_std")){

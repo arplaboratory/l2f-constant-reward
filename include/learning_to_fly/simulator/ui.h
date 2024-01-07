@@ -27,6 +27,9 @@ namespace rl_tools::rl::environments::multirotor {
         net::io_context ioc;
         websocket::stream<tcp::socket> ws{ioc};
         std::string ns = "";
+        bool display_global_coordinate_system = true;
+        bool display_imu_coordinate_system = true;
+        bool display_actions = true;
     };
     template <typename DEVICE, typename ENVIRONMENT>
     nlohmann::json state_message(DEVICE& dev, rl::environments::multirotor::UI<ENVIRONMENT>& ui, const typename ENVIRONMENT::State& state){
@@ -102,9 +105,9 @@ namespace rl_tools::rl::environments::multirotor {
             }}
         };
         message["data"]["model"]["gravity"] = {0.0, 0.0, -9.81};
-        message["data"]["display_options"]["displayGlobalCoordinateSystem"] = false;
-        message["data"]["display_options"]["displayIMUCoordinateSystem"] = false;
-        message["data"]["display_options"]["displayActions"] = false;
+        message["data"]["display_options"]["displayGlobalCoordinateSystem"] = ui.display_global_coordinate_system;
+        message["data"]["display_options"]["displayIMUCoordinateSystem"] = ui.display_imu_coordinate_system;
+        message["data"]["display_options"]["displayActions"] = ui.display_actions;
         std:: cout << message << std::endl;
         return message;
     }
