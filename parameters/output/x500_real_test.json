@@ -21,7 +21,7 @@
         }
     },
     "mdp": {
-        "gamma": 0.95,
+        "gamma": 0.97,
         "reward": {
             "type": "absolute",
             "scale": 1.0,
@@ -32,7 +32,7 @@
             "linear_velocity": 0.05,
             "angular_velocity": 0,
             "linear_acceleration": 0.0,
-            "angular_acceleration": 0.0,
+            "angular_acceleration": 0.01,
             "action_baseline": 0.4582053118721884,
             "calculate_action_baseline": true,
             "action": 0.0
@@ -74,12 +74,12 @@
                 "limit": 0.0
             },
             "angular_acceleration": {
-                "factor": 1.2,
-                "limit": 0.0
+                "factor": 1.0,
+                "limit": 10000.0
             },
             "action": {
                 "factor": 1.0,
-                "limit": 0.0
+                "limit": 2.0
             }
         }
     },
