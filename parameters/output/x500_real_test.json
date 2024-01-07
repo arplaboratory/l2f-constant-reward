@@ -28,7 +28,7 @@
             "constant": 1,
             "termination_penalty": 0,
             "position": 0.5,
-            "orientation": 0.5,
+            "orientation": 0.05,
             "linear_velocity": 0.0,
             "angular_velocity": 0,
             "linear_acceleration": 0.0,
