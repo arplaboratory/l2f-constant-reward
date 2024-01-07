@@ -41,7 +41,7 @@ namespace TEST_DEFINITIONS{
     using UI = rlt::rl::environments::multirotor::UI<ENVIRONMENT>;
 
     constexpr bool TRAJECTORY_TRACKING = false;
-    constexpr TI MAX_EPISODE_LENGTH = TRAJECTORY_TRACKING ? 3000 : 600;
+    constexpr TI MAX_EPISODE_LENGTH = TRAJECTORY_TRACKING ? 3000 : 1000;
     constexpr bool SAME_CONFIG_AS_IN_TRAINING = false;
     constexpr bool RANDOMIZE_DOMAIN_PARAMETERS = false;
     constexpr bool INIT_SIMPLE = false;

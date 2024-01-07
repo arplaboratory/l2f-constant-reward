@@ -46,7 +46,7 @@ namespace learning_to_fly{
                 static constexpr T TARGET_NEXT_ACTION_NOISE_CLIP = 0.5;
                 static constexpr T TARGET_NEXT_ACTION_NOISE_STD = 0.2;
                 static constexpr T GAMMA = 0.99;
-                static constexpr bool IGNORE_TERMINATION = false;
+                static constexpr bool IGNORE_TERMINATION = true;
             };
 
             using TD3_PARAMETERS = TD3PendulumParameters;

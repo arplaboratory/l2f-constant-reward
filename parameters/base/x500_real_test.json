@@ -50,6 +50,12 @@
       "linear_velocity_threshold": 10,
       "angular_velocity_threshold": 40
     },
+    "observation_noise": {
+      "position": 0.00,
+      "orientation": 0.000,
+      "linear_velocity": 0.0,
+      "angular_velocity": 0.0
+    },
     "curriculum": {
       "position": {
         "factor": 1.1,
