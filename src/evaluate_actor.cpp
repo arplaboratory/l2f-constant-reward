@@ -157,7 +157,17 @@ int main(int argc, char** argv) {
         }
 
         T reward_acc = 0;
+        std::string parameters_path = "parameters/output/x500_real_test.json";
+        std::cout << "Loading parameters from: " << parameters_path << std::endl;
+        std::ifstream parameters_file(parameters_path);
+        if(!parameters_file.is_open()) {
+            std::cout << "Could not open parameters file: " << parameters_path << "\n";
+            std::abort();
+        }
+        nlohmann::json parameters_json;
+        parameters_file >> parameters_json;
         env.parameters = penv::parameters;
+        rlt::load_config(dev, env.parameters, parameters_json);
         if(!SAME_CONFIG_AS_IN_TRAINING && INIT_SIMPLE){
             env.parameters.mdp.init = rlt::rl::environments::multirotor::parameters::init::simple<typename decltype(env.parameters)::SPEC>;
         }

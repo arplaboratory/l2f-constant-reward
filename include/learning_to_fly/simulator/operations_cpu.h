@@ -204,6 +204,27 @@ namespace rl_tools{
         }
     }
     template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::MDP::ObservationNoise& parameters, nlohmann::json config){
+        if(config.contains("mdp")) {
+            auto mdp = config["mdp"];
+            if (mdp.contains("observation_noise")) {
+                auto observation_noise = mdp["observation_noise"];
+                if (observation_noise.contains("position")) {
+                    parameters.position = observation_noise["position"];
+                }
+                if (observation_noise.contains("orientation")) {
+                    parameters.orientation = observation_noise["orientation"];
+                }
+                if (observation_noise.contains("linear_velocity")) {
+                    parameters.linear_velocity = observation_noise["linear_velocity"];
+                }
+                if (observation_noise.contains("angular_velocity")) {
+                    parameters.angular_velocity = observation_noise["angular_velocity"];
+                }
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::MDP::Initialization& parameters, nlohmann::json config){
         if(config.contains("mdp")) {
             auto mdp_json = config["mdp"];
@@ -253,6 +274,7 @@ namespace rl_tools{
         load_config<DEV_SPEC, SPEC>(device, parameters.reward, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.init, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.termination, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.observation_noise, config);
     }
     template <typename DEV_SPEC, typename SPEC>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>& parameters, nlohmann::json config){
