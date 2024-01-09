@@ -138,7 +138,7 @@ namespace rl_tools{
         ui.ws.read(buffer);
         std::cout << beast::make_printable(buffer.data()) << std::endl;
         auto message_string = beast::buffers_to_string(buffer.data());
-        std::cout << message_string << std::endl;
+        std::cout << "Handshake received: " << message_string << std::endl;
         buffer.consume(buffer.size());
         auto message = nlohmann::json::parse(message_string);
         ui.ns = message["data"]["namespace"];

@@ -75,9 +75,11 @@ int main(int argc, char** argv) {
     CLI::App app;
     std::string arg_run = "", arg_checkpoint = "";
     DEVICE::index_t startup_timeout = 0;
+    std::string arg_parameters_path = "parameters/output/x500_real_test.json";
     app.add_option("--run", arg_run, "path to the run's directory");
     app.add_option("--checkpoint", arg_checkpoint, "path to the checkpoint");
     app.add_option("--timeout", startup_timeout, "time to wait after first render");
+    app.add_option("--parameters", arg_parameters_path, "parameter file");
 
     CLI11_PARSE(app, argc, argv);
     DEVICE dev;
@@ -157,11 +159,10 @@ int main(int argc, char** argv) {
         }
 
         T reward_acc = 0;
-        std::string parameters_path = "parameters/output/x500_real_test.json";
-        std::cout << "Loading parameters from: " << parameters_path << std::endl;
-        std::ifstream parameters_file(parameters_path);
+        std::cout << "Loading parameters from: " << arg_parameters_path << std::endl;
+        std::ifstream parameters_file(arg_parameters_path);
         if(!parameters_file.is_open()) {
-            std::cout << "Could not open parameters file: " << parameters_path << "\n";
+            std::cout << "Could not open parameters file: " << arg_parameters_path << "\n";
             std::abort();
         }
         nlohmann::json parameters_json;

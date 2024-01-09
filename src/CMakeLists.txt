@@ -34,6 +34,15 @@ target_link_libraries(
         rl_tools
         learning_to_fly
 )
+add_executable(evaluate_actor_squared_reward evaluate_actor.cpp)
+target_link_libraries(
+        evaluate_actor_squared_reward
+        PRIVATE
+        rl_tools
+        learning_to_fly
+)
+target_compile_definitions(evaluate_actor_squared_reward PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+target_compile_definitions(evaluate_actor_squared_reward PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
 
 add_executable(hpo training.cpp)
 target_link_libraries(

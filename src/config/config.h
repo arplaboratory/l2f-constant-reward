@@ -46,7 +46,7 @@ namespace learning_to_fly{
                 static constexpr T TARGET_NEXT_ACTION_NOISE_CLIP = 0.5;
                 static constexpr T TARGET_NEXT_ACTION_NOISE_STD = 0.2;
                 static constexpr T GAMMA = 0.99;
-                static constexpr bool IGNORE_TERMINATION = true;
+                static constexpr bool IGNORE_TERMINATION = false;
             };
 
             using TD3_PARAMETERS = TD3PendulumParameters;
@@ -74,7 +74,7 @@ namespace learning_to_fly{
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;
 #ifndef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
-            static constexpr TI STEP_LIMIT = 10000001;
+            static constexpr TI STEP_LIMIT = 3000001;
 #else
             static constexpr TI STEP_LIMIT = 300001;
 #endif
