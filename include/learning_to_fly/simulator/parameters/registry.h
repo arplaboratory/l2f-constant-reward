@@ -43,7 +43,7 @@ namespace rl_tools::rl::environments::multirotor::parameters{
             }else if constexpr (SPEC::MODEL == REGISTRY::fs_base){
                 return "fs_base";
             }else{
-                static_assert(utils::typing::dependent_false<REGISTRY>, "Unknown model");
+                static_assert(utils::typing::dependent_false<SPEC>, "Unknown model");
             }
         }();
     }

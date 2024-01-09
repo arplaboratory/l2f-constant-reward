@@ -398,6 +398,6 @@ namespace rl_tools::rl::environments{
         typename SPEC::PARAMETERS::Dynamics current_dynamics;
     };
 }
-#include "parameters/registry.h">
+#include "parameters/registry.h"
 
 #endif

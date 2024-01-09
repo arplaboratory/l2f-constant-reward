@@ -11,11 +11,11 @@
 #include <nlohmann/json.hpp>
 
 namespace rl_tools::rl::environments::multirotor {
-    namespace beast = boost::beast;         // from <boost/beast.hpp>
-    namespace http = beast::http;           // from <boost/beast/http.hpp>
-    namespace websocket = beast::websocket; // from <boost/beast/websocket.hpp>
-    namespace net = boost::asio;            // from <boost/asio.hpp>
-    using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+    namespace beast = boost::beast;
+    namespace http = beast::http;
+    namespace websocket = beast::websocket;
+    namespace net = boost::asio;
+    using tcp = boost::asio::ip::tcp;
 
     template <typename T_ENVIRONMENT>
     struct UI{
@@ -26,6 +26,10 @@ namespace rl_tools::rl::environments::multirotor {
         std::string port;
         net::io_context ioc;
         websocket::stream<tcp::socket> ws{ioc};
+        std::string ns = "";
+        bool display_global_coordinate_system = true;
+        bool display_imu_coordinate_system = true;
+        bool display_actions = true;
     };
     template <typename DEVICE, typename ENVIRONMENT>
     nlohmann::json state_message(DEVICE& dev, rl::environments::multirotor::UI<ENVIRONMENT>& ui, const typename ENVIRONMENT::State& state){
@@ -69,6 +73,7 @@ namespace rl_tools::rl::environments::multirotor {
     template <typename DEVICE, typename ENVIRONMENT>
     nlohmann::json model_message(DEVICE& dev, ENVIRONMENT& env, rl::environments::multirotor::UI<ENVIRONMENT>& ui){
         nlohmann::json message;
+        message["namespace"] = ui.ns;
         message["channel"] = "addDrone";
         message["data"]["id"] = ui.id;
         message["data"]["origin"] = {ui.origin[0], ui.origin[1], ui.origin[2]};
@@ -100,9 +105,9 @@ namespace rl_tools::rl::environments::multirotor {
             }}
         };
         message["data"]["model"]["gravity"] = {0.0, 0.0, -9.81};
-        message["data"]["display_options"]["displayGlobalCoordinateSystem"] = false;
-        message["data"]["display_options"]["displayIMUCoordinateSystem"] = false;
-        message["data"]["display_options"]["displayActions"] = false;
+        message["data"]["display_options"]["displayGlobalCoordinateSystem"] = ui.display_global_coordinate_system;
+        message["data"]["display_options"]["displayIMUCoordinateSystem"] = ui.display_imu_coordinate_system;
+        message["data"]["display_options"]["displayActions"] = ui.display_actions;
         std:: cout << message << std::endl;
         return message;
     }
@@ -123,20 +128,22 @@ namespace rl_tools{
         ui.origin[0] = 0;
         ui.origin[1] = 0;
         ui.origin[2] = 0;
-        try
-        {
-            tcp::resolver resolver{ui.ioc};
-            auto const results = resolver.resolve(ui.host, ui.port);
+        tcp::resolver resolver{ui.ioc};
+        auto const results = resolver.resolve(ui.host, ui.port);
 
-            net::connect(ui.ws.next_layer(), results.begin(), results.end());
-            ui.ws.handshake(ui.host, "/");
+        net::connect(ui.ws.next_layer(), results.begin(), results.end());
+        ui.ws.handshake(ui.host, "/backend");
+        std::cout << "Waiting for handshake" << std::endl;
+        boost::beast::flat_buffer buffer;
+        ui.ws.read(buffer);
+        std::cout << beast::make_printable(buffer.data()) << std::endl;
+        auto message_string = beast::buffers_to_string(buffer.data());
+        std::cout << message_string << std::endl;
+        buffer.consume(buffer.size());
+        auto message = nlohmann::json::parse(message_string);
+        ui.ns = message["data"]["namespace"];
 
-            ui.ws.write(net::buffer(model_message(dev, env, ui).dump()));
-        }
-        catch(std::exception const& e)
-        {
-            std::cerr << "Error: " << e.what() << std::endl;
-        }
+        ui.ws.write(net::buffer(model_message(dev, env, ui).dump()));
     }
     template <typename DEVICE, typename ENVIRONMENT>
     void set_state(DEVICE& dev, rl::environments::multirotor::UI<ENVIRONMENT>& ui, const typename ENVIRONMENT::State& state){

@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
     for(TI env_i=0; env_i < N_ENVIRONMENTS; env_i++){
         auto& ui = uis[env_i];
         ui.host = "localhost";
-        ui.port = "8080";
+        ui.port = "8000";
         ui.id = env_i;
         rlt::init(dev, env, ui);
     }

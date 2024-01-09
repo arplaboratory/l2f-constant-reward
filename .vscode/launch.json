@@ -63,6 +63,15 @@
             "program": "ax_test.py",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Bayesian Optimization Plot",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/hpo", 
+            "program": "plot.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

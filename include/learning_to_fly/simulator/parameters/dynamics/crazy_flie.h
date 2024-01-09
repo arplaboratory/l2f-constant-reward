@@ -1,4 +1,5 @@
-
+#ifndef LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_CRAZY_FLIE_H
+#define LEARNING_TO_FLY_SIMULATOR_PARAMETERS_DYNAMICS_CRAZY_FLIE_H
 #include "../../multirotor.h"
 
 namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
@@ -97,3 +98,5 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
             {0, 21702},
     };
 }
+
+#endif

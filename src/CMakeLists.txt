@@ -1,17 +1,5 @@
 
-if(RL_TOOLS_ENABLE_JSON AND RL_TOOLS_ENABLE_BOOST_BEAST)
-find_package(Boost REQUIRED)
-message(STATUS "Boost version: ${Boost_VERSION}")
-add_executable(ui ui/ui.cpp)
-target_link_libraries(
-        ui
-        PRIVATE
-        rl_tools
-        learning_to_fly
-        Boost::boost
-)
-endif()
-
+if(NOT BUILD_UI_SERVER_ONLY)
 add_executable(training_headless_x500 training.cpp)
 target_link_libraries(
         training_headless_x500
@@ -90,3 +78,6 @@ endif()
 if(RL_TOOLS_BACKEND_ENABLE_CUDA)
     add_subdirectory(cuda)
 endif()
+endif()
+
+add_subdirectory(ui)

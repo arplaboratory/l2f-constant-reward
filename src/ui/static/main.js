@@ -101,7 +101,7 @@ window.onload = function(){
     return renderer.domElement.toDataURL("image/png");
   }
 
-  var ws = new WebSocket('ws://' + window.location.host + "/ws");
+  var ws = new WebSocket('ws://' + window.location.host + "/ui");
 
   ws.onopen = function(event) {
     console.log('Connection opened:', event);
