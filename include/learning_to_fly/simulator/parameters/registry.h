@@ -3,13 +3,15 @@
 #include "dynamics/race.h"
 #include "dynamics/x500_real.h"
 #include "dynamics/x500_sim.h"
+#include "dynamics/fs.h"
 namespace rl_tools::rl::environments::multirotor::parameters{
     namespace dynamics{
         enum class REGISTRY{
             crazyflie,
             mrs,
             x500_real,
-            x500_sim
+            x500_sim,
+            fs_base
         };
         template <typename SPEC>
         constexpr auto registry = [](){
@@ -21,6 +23,8 @@ namespace rl_tools::rl::environments::multirotor::parameters{
                 return dynamics::x500::real<SPEC>;
             }else if constexpr (SPEC::MODEL == REGISTRY::x500_sim){
                 return dynamics::x500::sim<SPEC>;
+            }else if constexpr (SPEC::MODEL == REGISTRY::fs_base){
+                return dynamics::fs::base<SPEC>;
             }else{
                 static_assert(utils::typing::dependent_false<SPEC>, "Unknown model");
             }
@@ -36,6 +40,8 @@ namespace rl_tools::rl::environments::multirotor::parameters{
                 return "x500_real";
             }else if constexpr (SPEC::MODEL == REGISTRY::x500_sim){
                 return "x500_sim";
+            }else if constexpr (SPEC::MODEL == REGISTRY::fs_base){
+                return "fs_base";
             }else{
                 static_assert(utils::typing::dependent_false<REGISTRY>, "Unknown model");
             }
