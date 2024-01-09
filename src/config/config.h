@@ -74,7 +74,7 @@ namespace learning_to_fly{
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;
 #ifndef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
-            static constexpr TI STEP_LIMIT = 3000001;
+            static constexpr TI STEP_LIMIT = 10000001;
 #else
             static constexpr TI STEP_LIMIT = 300001;
 #endif
@@ -82,7 +82,7 @@ namespace learning_to_fly{
             static constexpr TI REPLAY_BUFFER_CAP = STEP_LIMIT;
             static constexpr TI ENVIRONMENT_STEP_LIMIT = 500;
             static constexpr TI ENVIRONMENT_STEP_LIMIT_EVALUATION = 500;
-            static constexpr TI BASE_SEED = 1;
+            static constexpr TI BASE_SEED = 0;
             static constexpr bool CONSTRUCT_LOGGER = false;
             using OFF_POLICY_RUNNER_SPEC = rlt::rl::components::off_policy_runner::Specification<T, TI, ENVIRONMENT, N_ENVIRONMENTS, ASYMMETRIC_OBSERVATIONS, REPLAY_BUFFER_CAP, ENVIRONMENT_STEP_LIMIT, rlt::rl::components::off_policy_runner::DefaultParameters<T>, false, true, 1000>;
             using OFF_POLICY_RUNNER_TYPE = rlt::rl::components::OffPolicyRunner<OFF_POLICY_RUNNER_SPEC>;

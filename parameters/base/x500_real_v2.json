@@ -2,7 +2,7 @@
   "requires_processing": true,
   "rl": {
     "td3": {
-      "ignore_termination": true,
+      "ignore_termination": false,
       "target_action_noise_std": 0.1,
       "target_action_noise_clip": 0.3
     },
@@ -11,9 +11,9 @@
     },
     "optimizer": {
       "weight_decay": {
-        "base":  0.000,
-        "input": 0.000,
-        "output": 0.000
+        "base":  0.0001,
+        "input": 0.0001,
+        "output": 0.0001
       },
       "learning_rate": {
         "bias_factor": 1
@@ -21,34 +21,34 @@
     }
   },
   "mdp": {
-    "gamma": 0.97,
+    "gamma": 0.99,
     "reward": {
-      "type": "absolute",
+      "type": "squared",
       "scale": 1.00,
       "constant": 1,
       "termination_penalty": 0,
       "position": 0.5,
       "orientation": 0.5,
-      "linear_velocity": 0.05,
+      "linear_velocity": 0.0,
       "angular_velocity": 0,
       "linear_acceleration": 0.0,
-      "angular_acceleration": 0.01,
+      "angular_acceleration": 0.0,
       "action_baseline": 0.4582053118721884,
       "calculate_action_baseline": true,
-      "action": 0.0
+      "action": 0.10
     },
     "init": {
-      "guidance": 0,
-      "max_position": 0.5,
+      "guidance": 0.1,
+      "max_position": 0.2,
       "max_angle": 1.57,
-      "max_linear_velocity": 0.5,
+      "max_linear_velocity": 1.0,
       "max_angular_velocity": 1.0
     },
     "termination": {
       "enabled": true,
-      "position_threshold": 3.0,
-      "linear_velocity_threshold": 10,
-      "angular_velocity_threshold": 40
+      "position_threshold": 2,
+      "linear_velocity_threshold": 1000,
+      "angular_velocity_threshold": 1000
     },
     "observation_noise": {
       "position": 0.00,
@@ -58,28 +58,28 @@
     },
     "curriculum": {
       "position": {
-        "factor": 1.0,
+        "factor": 1.1,
         "limit": 2
       },
       "orientation": {
-        "factor": 1.0,
+        "factor": 1.1,
         "limit": 2
       },
       "linear_velocity": {
           "factor": 1.0,
-          "limit": 0.2
+          "limit": 100
       },
       "linear_acceleration": {
         "factor": 2.0,
         "limit": 0.0
       },
       "angular_acceleration": {
-        "factor": 1.0,
-        "limit": 10000.0
+        "factor": 1.2,
+        "limit": 0.0
       },
       "action": {
-        "factor": 1.0,
-        "limit": 2.0
+        "factor": 2.0,
+        "limit": 4.0
       }
     }
   },

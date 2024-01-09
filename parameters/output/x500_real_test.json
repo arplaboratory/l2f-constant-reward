@@ -21,7 +21,7 @@
         }
     },
     "mdp": {
-        "gamma": 0.95,
+        "gamma": 0.97,
         "reward": {
             "type": "absolute",
             "scale": 1.0,
@@ -29,10 +29,10 @@
             "termination_penalty": 0,
             "position": 0.5,
             "orientation": 0.5,
-            "linear_velocity": 0.0,
+            "linear_velocity": 0.05,
             "angular_velocity": 0,
             "linear_acceleration": 0.0,
-            "angular_acceleration": 0.0,
+            "angular_acceleration": 0.01,
             "action_baseline": 0.4582053118721884,
             "calculate_action_baseline": true,
             "action": 0.0
@@ -46,34 +46,40 @@
         },
         "termination": {
             "enabled": true,
-            "position_threshold": 0.6,
+            "position_threshold": 3.0,
             "linear_velocity_threshold": 10,
             "angular_velocity_threshold": 40
         },
+        "observation_noise": {
+            "position": 0.0,
+            "orientation": 0.0,
+            "linear_velocity": 0.0,
+            "angular_velocity": 0.0
+        },
         "curriculum": {
             "position": {
-                "factor": 1.1,
+                "factor": 1.0,
                 "limit": 2
             },
             "orientation": {
-                "factor": 1.1,
+                "factor": 1.0,
                 "limit": 2
             },
             "linear_velocity": {
                 "factor": 1.0,
-                "limit": 100
+                "limit": 0.2
             },
             "linear_acceleration": {
                 "factor": 2.0,
                 "limit": 0.0
             },
             "angular_acceleration": {
-                "factor": 1.2,
-                "limit": 0.0
+                "factor": 1.0,
+                "limit": 10000.0
             },
             "action": {
                 "factor": 1.0,
-                "limit": 0.0
+                "limit": 2.0
             }
         }
     },

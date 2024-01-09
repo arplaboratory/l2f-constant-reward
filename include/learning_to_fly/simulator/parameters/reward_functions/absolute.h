@@ -39,7 +39,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         using TI = typename DEVICE::index_t;
         constexpr TI ACTION_DIM = rl::environments::Multirotor<SPEC>::ACTION_DIM;
         typename rl::environments::multirotor::parameters::reward_functions::Absolute<T>::Components components;
-        components.orientation_cost = 1 - state.orientation[0] * state.orientation[0]; //math::abs(device.math, 2 * math::acos(device.math, quaternion_w));
+//        components.orientation_cost = 1 - state.orientation[0] * state.orientation[0]; //math::abs(device.math, 2 * math::acos(device.math, quaternion_w));
+        components.orientation_cost = math::abs(device.math, state.orientation[3]);
         components.position_cost = 0;
         components.position_cost += math::abs(device.math, state.position[0]);
         components.position_cost += math::abs(device.math, state.position[1]);

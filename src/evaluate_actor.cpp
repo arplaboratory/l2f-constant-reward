@@ -41,7 +41,7 @@ namespace TEST_DEFINITIONS{
     using UI = rlt::rl::environments::multirotor::UI<ENVIRONMENT>;
 
     constexpr bool TRAJECTORY_TRACKING = false;
-    constexpr TI MAX_EPISODE_LENGTH = TRAJECTORY_TRACKING ? 3000 : 600;
+    constexpr TI MAX_EPISODE_LENGTH = TRAJECTORY_TRACKING ? 3000 : 1000;
     constexpr bool SAME_CONFIG_AS_IN_TRAINING = false;
     constexpr bool RANDOMIZE_DOMAIN_PARAMETERS = false;
     constexpr bool INIT_SIMPLE = false;
@@ -157,7 +157,17 @@ int main(int argc, char** argv) {
         }
 
         T reward_acc = 0;
+        std::string parameters_path = "parameters/output/x500_real_test.json";
+        std::cout << "Loading parameters from: " << parameters_path << std::endl;
+        std::ifstream parameters_file(parameters_path);
+        if(!parameters_file.is_open()) {
+            std::cout << "Could not open parameters file: " << parameters_path << "\n";
+            std::abort();
+        }
+        nlohmann::json parameters_json;
+        parameters_file >> parameters_json;
         env.parameters = penv::parameters;
+        rlt::load_config(dev, env.parameters, parameters_json);
         if(!SAME_CONFIG_AS_IN_TRAINING && INIT_SIMPLE){
             env.parameters.mdp.init = rlt::rl::environments::multirotor::parameters::init::simple<typename decltype(env.parameters)::SPEC>;
         }
