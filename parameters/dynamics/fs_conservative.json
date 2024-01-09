@@ -1,0 +1,37 @@
+{
+  "dynamics": {
+    "n_rotors": 4,
+    "rotor_positions": [
+      [  0.20895, -0.240666, 0 ],
+      [ -0.20895,  0.240666, 0 ],
+      [  0.20895,  0.240666, 0 ],
+      [ -0.20895, -0.240666, 0 ]
+    ],
+    "rotor_thrust_directions": [
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1],
+      [0, 0, 1]
+    ],
+    "rotor_torque_directions": [
+      [0, 0, -1],
+      [0, 0, -1],
+      [0, 0,  1],
+      [0, 0,  1]
+    ],
+    "rotor_thrust_coefficients": [2.55643, 0, 28.06559],
+    "rotor_torque_constant": 0.01492,
+    "mass": 3.35000,
+    "gravity": [0, 0, -9.81],
+    "J": [
+      [ 0.11361, 0.0, 0.0 ],
+      [ 0.0, 0.12552, 0.0 ],
+      [ 0.0, 0.0, 0.22822 ]
+    ],
+    "motor_time_constant": 0.06532,
+    "action_limit": {
+      "lower_bound": 0.3,
+      "upper_bound": 0.7
+    }
+  }
+}
