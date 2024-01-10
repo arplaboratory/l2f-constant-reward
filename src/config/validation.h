@@ -38,13 +38,13 @@ namespace learning_to_fly{
             Component<MaxErrorStd <ANGULAR_ACCELERATION, TI, 100>,
             Component<MaxErrorMean<ANGULAR_ACCELERATION, TI, 200>,
             Component<MaxErrorStd <ANGULAR_ACCELERATION, TI, 200>,
-//            Component<MaxErrorMean<ACTION, TI,   0>,
-//            Component<MaxErrorStd <ACTION, TI,   0>,
-//            Component<MaxErrorMean<ACTION, TI, 100>,
-//            Component<MaxErrorStd <ACTION, TI, 100>,
-//            Component<MaxErrorMean<ACTION, TI, 200>,
-//            Component<MaxErrorStd <ACTION, TI, 200>,
-            FinalComponent>>>>>>>>>>>>>>>>>>>>>;
+            Component<MaxErrorMean<ACTION, TI,   0>,
+            Component<MaxErrorStd <ACTION, TI,   0>,
+            Component<MaxErrorMean<ACTION, TI, 100>,
+            Component<MaxErrorStd <ACTION, TI, 100>,
+            Component<MaxErrorMean<ACTION, TI, 200>,
+            Component<MaxErrorStd <ACTION, TI, 200>,
+            FinalComponent>>>>>>>>>>>>>>>>>>>>>>>>>>>;
             using METRICS = DefaultMetrics<ADDITIONAL_METRICS>;
         };
     }
