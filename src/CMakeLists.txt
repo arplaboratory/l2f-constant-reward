@@ -1,14 +1,14 @@
 
 if(NOT BUILD_UI_SERVER_ONLY)
-add_executable(training_headless_x500 training.cpp)
+add_executable(training_headless_sq_rwd_wd training.cpp)
 target_link_libraries(
-        training_headless_x500
+        training_headless_sq_rwd_wd
         PRIVATE
         rl_tools
         learning_to_fly
 )
-target_compile_definitions(training_headless_x500 PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
-target_compile_definitions(training_headless_x500 PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
+target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
 
 add_executable(training_headless training.cpp)
 target_link_libraries(
@@ -34,15 +34,15 @@ target_link_libraries(
         rl_tools
         learning_to_fly
 )
-add_executable(evaluate_actor_squared_reward evaluate_actor.cpp)
+add_executable(evaluate_actor_sq_rwd_wd evaluate_actor.cpp)
 target_link_libraries(
-        evaluate_actor_squared_reward
+        evaluate_actor_sq_rwd_wd
         PRIVATE
         rl_tools
         learning_to_fly
 )
-target_compile_definitions(evaluate_actor_squared_reward PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
-target_compile_definitions(evaluate_actor_squared_reward PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
+target_compile_definitions(evaluate_actor_sq_rwd_wd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+target_compile_definitions(evaluate_actor_sq_rwd_wd PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
 
 add_executable(hpo training.cpp)
 target_link_libraries(
