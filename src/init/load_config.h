@@ -86,6 +86,18 @@ namespace learning_to_fly{
                         ts.curriculum.termination_angular_velocity.factor = curriculum_json["termination_angular_velocity"]["factor"];
                         ts.curriculum.termination_angular_velocity.limit = curriculum_json["termination_angular_velocity"]["limit"];
                     }
+                    if(curriculum_json.contains("exploration_noise")){
+                        ts.curriculum.exploration_noise.factor = curriculum_json["exploration_noise"]["factor"];
+                        ts.curriculum.exploration_noise.limit = curriculum_json["exploration_noise"]["limit"];
+                    }
+                    if(curriculum_json.contains("target_next_action_noise_std")){
+                        ts.curriculum.target_next_action_noise_std.factor = curriculum_json["target_next_action_noise_std"]["factor"];
+                        ts.curriculum.target_next_action_noise_std.limit = curriculum_json["target_next_action_noise_std"]["limit"];
+                    }
+                    if(curriculum_json.contains("target_next_action_noise_clip")){
+                        ts.curriculum.target_next_action_noise_clip.factor = curriculum_json["target_next_action_noise_clip"]["factor"];
+                        ts.curriculum.target_next_action_noise_clip.limit = curriculum_json["target_next_action_noise_clip"]["limit"];
+                    }
                 }
             }
             if(parameters_json.contains("rl")){
