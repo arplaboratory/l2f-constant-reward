@@ -17,8 +17,15 @@ namespace rl_tools::rl::utils::validation{
                 ANGULAR_VELOCITY,
                 ANGULAR_ACCELERATION,
                 ACTION,
+                ACTION_RELATIVE,
             };
         }
+        template <enum multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP = 0>
+        struct MeanErrorMean: Metric{
+            using TI = T_TI;
+            static constexpr enum multirotor::MultirotorQuantity QUANTITY = T_QUANTITY;
+            static constexpr TI START_STEP = T_START_STEP;
+        };
         template <enum multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP = 0>
         struct MaxErrorMean: Metric{
             using TI = T_TI;
@@ -51,12 +58,20 @@ namespace rl_tools{
                     return "AngularVelocity";
                 case rl::utils::validation::metrics::multirotor::ANGULAR_ACCELERATION:
                     return "AngularAcceleration";
+                case rl::utils::validation::metrics::multirotor::ACTION:
+                    return "Action";
+                case rl::utils::validation::metrics::multirotor::ACTION_RELATIVE:
+                    return "ActionRelative";
                 default:
                     return "Unknown";
             }
         }
     }
 
+    template <enum rl::utils::validation::metrics::multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP>
+    auto constexpr name(rl::utils::validation::metrics::MeanErrorMean<T_QUANTITY, T_TI, T_START_STEP>){
+        return std::string("MeanErrorMean(") + rl::utils::validation::metrics::multirotor::name(T_QUANTITY) + std::string(", after ") + std::to_string(T_START_STEP) + std::string(" steps)");
+    }
     template <enum rl::utils::validation::metrics::multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP>
     auto constexpr name(rl::utils::validation::metrics::MaxErrorMean<T_QUANTITY, T_TI, T_START_STEP>){
         return std::string("MaxErrorMean(") + rl::utils::validation::metrics::multirotor::name(T_QUANTITY) + std::string(", after ") + std::to_string(T_START_STEP) + std::string(" steps)");
@@ -129,10 +144,46 @@ namespace rl_tools{
                 case rl::utils::validation::metrics::multirotor::ACTION:
                     for(TI action_i=0; action_i < ACTION_SPEC::COLS; action_i++){
                         T baseline_diff = env.parameters.dynamics.hovering_throttle - get(action, 0, action_i);
-                        distance += math::abs(device.math, baseline_diff);
+                        distance += math::abs(device.math, baseline_diff) / ACTION_SPEC::COLS;
                     }
+                    break;
+                case rl::utils::validation::metrics::multirotor::ACTION_RELATIVE:
+                    for(TI action_i=0; action_i < ACTION_SPEC::COLS; action_i++){
+                        T baseline_diff = env.parameters.dynamics.hovering_throttle - get(action, 0, action_i);
+                        T relative = baseline_diff / env.parameters.dynamics.hovering_throttle;
+                        distance += math::abs(device.math, relative) / ACTION_SPEC::COLS;
+                    }
+                    break;
             }
             return distance;
+        }
+    }
+    template <typename DEVICE, typename SPEC, enum rl::utils::validation::metrics::multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP>
+    typename SPEC::T evaluate(DEVICE& device, rl::utils::validation::metrics::MeanErrorMean<T_QUANTITY, T_TI, T_START_STEP>, rl::utils::validation::Task<SPEC>& task){
+        utils::assert_exit(device, task.completed, "Task is not completed");
+        using TI = typename SPEC::TI;
+        using T = typename SPEC::T;
+        T acc = 0;
+        TI count = 0;
+        for(TI episode_i = 0; episode_i < SPEC::N_EPISODES; episode_i++){
+            auto& eb = task.episode_buffer[episode_i];
+            auto& env = task.environment[episode_i];
+            if(task.episode_length[episode_i] == SPEC::MAX_EPISODE_LENGTH){
+                for(TI step_i = T_START_STEP; step_i < task.episode_length[episode_i]; step_i++){
+                    auto& state = get(eb.states, step_i, 0);
+                    auto action = row(device, eb.actions, step_i);
+                    auto& next_state = get(eb.next_states, step_i, 0);
+                    T error = rl::utils::validation::metrics::multirotor::get_quantity(device, env, T_QUANTITY, state, action, next_state, task.environment[0].parameters.integration.dt);
+                    acc += error;
+                    count += 1;
+                }
+            }
+        }
+        if(count == 0){
+            return math::nan<T>(device.math);
+        }
+        else{
+            return acc / count;
         }
     }
     template <typename DEVICE, typename SPEC, enum rl::utils::validation::metrics::multirotor::MultirotorQuantity T_QUANTITY, typename T_TI, T_TI T_START_STEP>
