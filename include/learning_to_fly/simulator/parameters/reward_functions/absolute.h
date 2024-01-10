@@ -18,8 +18,6 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         T angular_velocity;
         T linear_acceleration;
         T angular_acceleration;
-        T action_baseline;
-        bool calculate_action_baseline;
         T action;
         struct Components{
             T orientation_cost;
@@ -70,8 +68,10 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
         components.angular_acc_cost /= env.parameters.integration.dt;
 
         components.action_cost = 0;
-        for(TI i = 0; i < ACTION_DIM; i++){
-            T action_diff = math::abs(device.math, get(action, 0, i) - params.action_baseline);
+        for(TI action_i = 0; action_i < ACTION_DIM; action_i++){
+            T half_range = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2;
+            T action_value = get(action, 0, action_i) * half_range + env.parameters.dynamics.action_limit.min + half_range;
+            T action_diff = math::abs(device.math, action_value - params.dynamics.hovering_throttle);
             components.action_cost += action_diff;
         }
         components.weighted_cost = params.position * components.position_cost + params.orientation * components.orientation_cost + params.linear_velocity * components.linear_vel_cost + params.angular_velocity * components.angular_vel_cost + params.linear_acceleration * components.linear_acc_cost + params.angular_acceleration * components.angular_acc_cost + params.action * components.action_cost;

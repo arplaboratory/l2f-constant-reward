@@ -94,6 +94,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::dynamics{
             },
             // T, RPM time constant
             0.03,
+            // hovering throttle (julia): sqrt((mass * 9.81/4 - thrust_curve[1])/thrust_curve[3]),
+            0.4685705492468035,
             // action limit
             {0.3, 0.7},
         };

@@ -228,12 +228,12 @@ namespace rl_tools{
         env.current_dynamics = env.parameters.dynamics;
         // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
         // todo:
-        if(env.parameters.mdp.reward.calculate_action_baseline){
-            utils::assert_exit(device, env.current_dynamics.rotor_thrust_coefficients[1] == 0, "linear thrust coefficient not handled yet");
-            T hover_thrust = env.current_dynamics.mass * (-1) * env.current_dynamics.gravity[2];
-            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.rotor_thrust_coefficients[0]) / env.current_dynamics.rotor_thrust_coefficients[2]);
-//            env.parameters.mdp.reward.action_baseline *= 0.8;
-        }
+//        if(env.parameters.mdp.reward.calculate_action_baseline){
+//            utils::assert_exit(device, env.current_dynamics.rotor_thrust_coefficients[1] == 0, "linear thrust coefficient not handled yet");
+//            T hover_thrust = env.current_dynamics.mass * (-1) * env.current_dynamics.gravity[2];
+//            env.parameters.mdp.reward.action_baseline = math::sqrt(device.math, (hover_thrust / 4 - env.current_dynamics.rotor_thrust_coefficients[0]) / env.current_dynamics.rotor_thrust_coefficients[2]);
+////            env.parameters.mdp.reward.action_baseline *= 0.8;
+//        }
 
     }
     template<typename DEVICE, typename T, typename TI, typename SPEC>

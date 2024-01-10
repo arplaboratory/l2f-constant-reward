@@ -33,6 +33,7 @@ namespace rl_tools::rl::environments::multirotor{
             T J[3][3];
             T J_inv[3][3];
             T motor_time_constant;
+            T hovering_throttle;
             ActionLimit action_limit;
         };
         struct Integration{

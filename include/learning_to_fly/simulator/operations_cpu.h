@@ -92,6 +92,9 @@ namespace rl_tools{
                 if(config["dynamics"].contains("motor_time_constant")){
                     parameters.motor_time_constant = config["dynamics"]["motor_time_constant"];
                 }
+                if(config["dynamics"].contains("hovering_throttle")){
+                    parameters.hovering_throttle = config["dynamics"]["hovering_throttle"];
+                }
                 if(config["dynamics"].contains("action_limit")){
                     auto action_limit = config["dynamics"]["action_limit"];
                     if(action_limit.contains("upper_bound")){
@@ -143,12 +146,6 @@ namespace rl_tools{
                 if(reward_json.contains("angular_acceleration")){
                     parameters.angular_acceleration = reward_json["angular_acceleration"];
                 }
-                if(reward_json.contains("action_baseline")){
-                    parameters.action_baseline = reward_json["action_baseline"];
-                }
-                if(reward_json.contains("calculate_action_baseline")){
-                    parameters.calculate_action_baseline = reward_json["calculate_action_baseline"];
-                }
                 if(reward_json.contains("action")){
                     parameters.action = reward_json["action"];
                 }
@@ -190,12 +187,6 @@ namespace rl_tools{
                 }
                 if(reward_json.contains("angular_acceleration")){
                     parameters.angular_acceleration = reward_json["angular_acceleration"];
-                }
-                if(reward_json.contains("action_baseline")){
-                    parameters.action_baseline = reward_json["action_baseline"];
-                }
-                if(reward_json.contains("calculate_action_baseline")){
-                    parameters.calculate_action_baseline = reward_json["calculate_action_baseline"];
                 }
                 if(reward_json.contains("action")){
                     parameters.action = reward_json["action"];
