@@ -80,6 +80,18 @@
             "action": {
                 "factor": 2.0,
                 "limit": 4.0
+            },
+            "target_next_action_noise_std": {
+                "factor": 1.0,
+                "limit": 0
+            },
+            "target_next_action_noise_clip": {
+                "factor": 1.0,
+                "limit": 0
+            },
+            "exploration_noise": {
+                "factor": 1.0,
+                "limit": 0
             }
         }
     },

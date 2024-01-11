@@ -82,11 +82,11 @@ namespace learning_to_fly {
             if(CONFIG::ABLATION_SPEC::EXPLORATION_NOISE_DECAY == true){
                 if(ts.step % 100000 == 0 && ts.step >= 500000){
                     ts.off_policy_runner.parameters.exploration_noise *= ts.curriculum.exploration_noise.factor;
-                    ts.off_policy_runner.parameters.exploration_noise = rlt::math::min(ts.device.math, ts.off_policy_runner.parameters.exploration_noise, ts.curriculum.exploration_noise.limit);
+                    ts.off_policy_runner.parameters.exploration_noise = rlt::math::max(ts.device.math, ts.off_policy_runner.parameters.exploration_noise, ts.curriculum.exploration_noise.limit);
                     ts.actor_critic.target_next_action_noise_std *= ts.curriculum.target_next_action_noise_std.factor;
-                    ts.actor_critic.target_next_action_noise_std = rlt::math::min(ts.device.math, ts.actor_critic.target_next_action_noise_std, ts.curriculum.target_next_action_noise_std.limit);
+                    ts.actor_critic.target_next_action_noise_std = rlt::math::max(ts.device.math, ts.actor_critic.target_next_action_noise_std, ts.curriculum.target_next_action_noise_std.limit);
                     ts.actor_critic.target_next_action_noise_clip *= ts.curriculum.target_next_action_noise_clip.factor;
-                    ts.actor_critic.target_next_action_noise_clip = rlt::math::min(ts.device.math, ts.actor_critic.target_next_action_noise_clip, ts.curriculum.target_next_action_noise_clip.limit);
+                    ts.actor_critic.target_next_action_noise_clip = rlt::math::max(ts.device.math, ts.actor_critic.target_next_action_noise_clip, ts.curriculum.target_next_action_noise_clip.limit);
                 }
             }
         }

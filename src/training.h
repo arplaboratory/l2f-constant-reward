@@ -37,6 +37,8 @@ namespace learning_to_fly{
         using ABLATION_SPEC = typename CONFIG::ABLATION_SPEC;
         ts.env_parameters_base = parameters::environment<T, TI, ABLATION_SPEC>::parameters;
         ts.env_parameters_base_eval = parameters::environment<T, TI, config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
+        ts.off_policy_runner.parameters = CONFIG::off_policy_runner_parameters;
+
         _init::load_config(ts);
 
         for (auto& env : ts.envs) {
@@ -50,7 +52,8 @@ namespace learning_to_fly{
         rlt::set_step(ts.device, ts.device.logger, 0);
         rlt::add_scalar(ts.device, ts.device.logger, "loop/seed", effective_seed);
         rlt::rl::algorithms::td3::loop::init(ts, effective_seed);
-        ts.off_policy_runner.parameters = CONFIG::off_policy_runner_parameters;
+
+        _init::load_config(ts); // to overwrite the default off_policy_runner.parameters
 
         for(typename CONFIG::ENVIRONMENT& env: ts.validation_envs){
             env.parameters = ts.env_parameters_base;
