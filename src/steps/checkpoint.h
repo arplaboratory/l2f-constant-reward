@@ -70,6 +70,7 @@ namespace learning_to_fly {
                         actor_output_file << "\n" << "   " << "char name[] = \"" << ts.run_name << "_" << checkpoint_name << "\";";
                         actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " action_limit_lower = " << ts.env_parameters_base.dynamics.action_limit.min << ";";
                         actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " action_limit_upper = " << ts.env_parameters_base.dynamics.action_limit.max << ";";
+                        actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " init_max_position = " << ts.off_policy_runner.envs[0].parameters.mdp.init.max_position << ";";
                         actor_output_file << "\n" << "   " << "char commit_hash[] = \"" << RL_TOOLS_STRINGIFY(RL_TOOLS_COMMIT_HASH) << "\";";
                         actor_output_file << "\n" << "}";
                         rlt::free(ts.device, observation);
