@@ -11,9 +11,9 @@
     },
     "optimizer": {
       "weight_decay": {
-        "base":  0.000,
-        "input": 0.000,
-        "output": 0.000
+        "base":  0.0001,
+        "input": 0.0001,
+        "output": 0.0001
       },
       "learning_rate": {
         "bias_factor": 1
@@ -21,16 +21,16 @@
     }
   },
   "mdp": {
-    "gamma": 0.98,
+    "gamma": 0.99,
     "reward": {
-      "type": "absolute",
+      "type": "squared",
       "scale": 1.00,
       "constant": 1,
       "termination_penalty": 0,
       "position": 0.5,
       "orientation": 0.5,
-      "linear_velocity": 0.05,
-      "angular_velocity": 0.05,
+      "linear_velocity": 0.0,
+      "angular_velocity": 0,
       "linear_acceleration": 0.0,
       "angular_acceleration": 0.0,
       "action_baseline": 0.4582053118721884,
@@ -38,30 +38,36 @@
       "action": 0.10
     },
     "init": {
-      "guidance": 0.2,
+      "guidance": 0.7,
       "max_position": 0.2,
-      "max_angle": 3.14,
+      "max_angle": 1.57,
       "max_linear_velocity": 1.0,
       "max_angular_velocity": 1.0
     },
     "termination": {
       "enabled": true,
-      "position_threshold": 10,
+      "position_threshold": 0.6,
       "linear_velocity_threshold": 1000,
       "angular_velocity_threshold": 1000
     },
+    "observation_noise": {
+      "position": 0.05,
+      "orientation": 0.001,
+      "linear_velocity": 0.1,
+      "angular_velocity": 0.2
+    },
     "curriculum": {
       "position": {
-        "factor": 1.0,
+        "factor": 1.1,
         "limit": 2
       },
       "orientation": {
-        "factor": 1.0,
+        "factor": 1.1,
         "limit": 2
       },
       "linear_velocity": {
-          "factor": 1.0,
-          "limit": 100
+        "factor": 1.0,
+        "limit": 100
       },
       "linear_acceleration": {
         "factor": 2.0,
@@ -72,20 +78,8 @@
         "limit": 0.0
       },
       "action": {
-        "factor": 1.06,
-        "limit": 0.5
-      },
-      "exploration_noise": {
-        "factor": 1.0,
-        "limit": 10000.0
-      },
-      "target_next_action_noise_std": {
-        "factor": 1.0,
-        "limit": 10000.0
-      },
-      "target_next_action_noise_clip": {
-        "factor": 1.0,
-        "limit": 10000.0
+        "factor": 2.0,
+        "limit": 4.0
       }
     }
   },
