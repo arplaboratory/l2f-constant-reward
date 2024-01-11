@@ -21,7 +21,7 @@
     }
   },
   "mdp": {
-    "gamma": 0.99,
+    "gamma": 0.98,
     "reward": {
       "type": "absolute",
       "scale": 1.00,
@@ -40,13 +40,13 @@
     "init": {
       "guidance": 0.2,
       "max_position": 0.2,
-      "max_angle": 1.57,
+      "max_angle": 3.14,
       "max_linear_velocity": 1.0,
       "max_angular_velocity": 1.0
     },
     "termination": {
       "enabled": true,
-      "position_threshold": 0.6,
+      "position_threshold": 10,
       "linear_velocity_threshold": 1000,
       "angular_velocity_threshold": 1000
     },
