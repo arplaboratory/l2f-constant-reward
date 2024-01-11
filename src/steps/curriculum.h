@@ -61,6 +61,15 @@ namespace learning_to_fly {
                             env.parameters.mdp.reward.action = action_weight;
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/action_weight", action_weight);
                         }
+                        {
+                            T init_max_position = env.parameters.mdp.init.max_position;
+                            init_max_position *= ts.curriculum.init_max_position.factor;
+                            T init_max_position_limit = ts.curriculum.init_max_position.limit;
+                            init_max_position = init_max_position > init_max_position_limit ? init_max_position_limit : init_max_position;
+                            env.parameters.mdp.init.max_position = init_max_position;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_max_position", init_max_position);
+                        }
+
                     }
                     if constexpr(CONFIG::ABLATION_SPEC::RECALCULATE_REWARDS == true){
                         auto start = std::chrono::high_resolution_clock::now();

@@ -98,6 +98,10 @@ namespace learning_to_fly{
                         ts.curriculum.target_next_action_noise_clip.factor = curriculum_json["target_next_action_noise_clip"]["factor"];
                         ts.curriculum.target_next_action_noise_clip.limit = curriculum_json["target_next_action_noise_clip"]["limit"];
                     }
+                    if(curriculum_json.contains("init_max_position")){
+                        ts.curriculum.init_max_position.factor = curriculum_json["init_max_position"]["factor"];
+                        ts.curriculum.init_max_position.limit = curriculum_json["init_max_position"]["limit"];
+                    }
                 }
             }
             if(parameters_json.contains("rl")){
