@@ -58,7 +58,7 @@ namespace learning_to_fly{
         ts.env_parameters_base_eval.mdp.init.guidance = 0; // disable guidance for evaluation
 
         for(typename CONFIG::ENVIRONMENT& env: ts.validation_envs){
-            env.parameters = ts.env_parameters_base;
+            env.parameters = ts.env_parameters_base_eval;
         }
         rlt::malloc(ts.device, ts.validation_actor_buffers);
         rlt::init(ts.device, ts.task, ts.validation_envs, ts.rng_validation);
