@@ -88,7 +88,9 @@ namespace learning_to_fly {
                 }
             }
             if(CONFIG::ABLATION_SPEC::EXPLORATION_NOISE_DECAY == true){
-                if(ts.step % 100000 == 0 && ts.step >= 500000){
+                if(ts.step % 100000 == 0 && ts.step >= 000000){
+                    ts.actor_critic.gamma *= ts.curriculum.gamma.factor;
+                    ts.actor_critic.gamma = rlt::math::min(ts.device.math, ts.actor_critic.gamma, ts.curriculum.gamma.limit);
                     ts.off_policy_runner.parameters.exploration_noise *= ts.curriculum.exploration_noise.factor;
                     ts.off_policy_runner.parameters.exploration_noise = rlt::math::max(ts.device.math, ts.off_policy_runner.parameters.exploration_noise, ts.curriculum.exploration_noise.limit);
                     ts.actor_critic.target_next_action_noise_std *= ts.curriculum.target_next_action_noise_std.factor;

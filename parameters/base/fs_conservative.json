@@ -3,11 +3,11 @@
   "rl": {
     "td3": {
       "ignore_termination": false,
-      "target_action_noise_std": 0.1,
-      "target_action_noise_clip": 0.3
+      "target_action_noise_std": 0.3,
+      "target_action_noise_clip": 0.9
     },
     "off_policy_runner": {
-      "exploration_noise_std": 0.1
+      "exploration_noise_std": 0.3
     },
     "optimizer": {
       "weight_decay": {
@@ -21,7 +21,7 @@
     }
   },
   "mdp": {
-    "gamma": 0.995,
+    "gamma": 0.98,
     "reward": {
       "type": "squared",
       "scale": 1.00,
@@ -58,7 +58,7 @@
     },
     "curriculum": {
       "position": {
-        "factor": 1.0,
+        "factor": 1.02,
         "limit": 2
       },
       "orientation": {
@@ -81,17 +81,21 @@
         "factor": 2.0,
         "limit": 4.0
       },
+      "gamma": {
+        "factor": 1.001,
+        "limit": 0.997
+      },
       "target_next_action_noise_std": {
-        "factor": 1.0,
-        "limit": 0
+        "factor": 0.95,
+        "limit": 0.10
       },
       "target_next_action_noise_clip": {
-        "factor": 1.00,
-        "limit": 0
+        "factor": 0.95,
+        "limit": 0.30
       },
       "exploration_noise": {
-        "factor": 1.00,
-        "limit": 0
+        "factor": 0.95,
+        "limit": 0.1
       },
       "init_guidance": {
         "factor": 0.95,

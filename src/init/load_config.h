@@ -86,6 +86,10 @@ namespace learning_to_fly{
                         ts.curriculum.termination_angular_velocity.factor = curriculum_json["termination_angular_velocity"]["factor"];
                         ts.curriculum.termination_angular_velocity.limit = curriculum_json["termination_angular_velocity"]["limit"];
                     }
+                    if(curriculum_json.contains("gamma")){
+                        ts.curriculum.gamma.factor = curriculum_json["gamma"]["factor"];
+                        ts.curriculum.gamma.limit = curriculum_json["gamma"]["limit"];
+                    }
                     if(curriculum_json.contains("exploration_noise")){
                         ts.curriculum.exploration_noise.factor = curriculum_json["exploration_noise"]["factor"];
                         ts.curriculum.exploration_noise.limit = curriculum_json["exploration_noise"]["limit"];
