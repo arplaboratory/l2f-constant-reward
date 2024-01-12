@@ -178,7 +178,7 @@
             0,
             28.06559
         ],
-        "rotor_torque_constant": 0.01492,
+        "rotor_torque_constant": 0.2,
         "mass": 3.35,
         "gravity": [
             0,
