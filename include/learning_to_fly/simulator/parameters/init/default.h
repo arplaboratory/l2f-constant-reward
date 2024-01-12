@@ -79,8 +79,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY,   // linear velocity
             RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_ANGULAR_VELOCITY,   // angular velocity
             true,// relative rpm
-            0,  // min rpm
-            0,  // max rpm
+            -1,  // min rpm
+            1,  // max rpm
     };
     template<typename SPEC>
     constexpr typename ParametersBase<SPEC>::MDP::Initialization all_around_simplified = {

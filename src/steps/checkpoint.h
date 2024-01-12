@@ -70,7 +70,10 @@ namespace learning_to_fly {
                         actor_output_file << "\n" << "   " << "char name[] = \"" << ts.run_name << "_" << checkpoint_name << "\";";
                         actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " action_limit_lower = " << ts.env_parameters_base.dynamics.action_limit.min << ";";
                         actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " action_limit_upper = " << ts.env_parameters_base.dynamics.action_limit.max << ";";
-                        actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " init_max_position = " << ts.off_policy_runner.envs[0].parameters.mdp.init.max_position << ";";
+                        auto& env = ts.off_policy_runner.envs[0];
+                        actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " init_max_position = " << env.parameters.mdp.init.max_position << ";";
+                        T action_history_init = (env.parameters.dynamics.hovering_throttle - env.parameters.dynamics.action_limit.min) / (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) * 2 - 1;
+                        actor_output_file << "\n" << "   " << "constexpr " << rlt::containers::persist::get_type_string<T>() << " action_history_init = " << action_history_init << ";";
                         actor_output_file << "\n" << "   " << "char commit_hash[] = \"" << RL_TOOLS_STRINGIFY(RL_TOOLS_COMMIT_HASH) << "\";";
                         actor_output_file << "\n" << "}";
                         rlt::free(ts.device, observation);
