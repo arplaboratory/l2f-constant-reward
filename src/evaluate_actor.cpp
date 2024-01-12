@@ -42,7 +42,7 @@ namespace TEST_DEFINITIONS{
 
     constexpr bool TRAJECTORY_TRACKING = false;
     constexpr TI MAX_EPISODE_LENGTH = TRAJECTORY_TRACKING ? 3000 : 1000;
-    constexpr bool SAME_CONFIG_AS_IN_TRAINING = false;
+    constexpr bool SAME_CONFIG_AS_IN_TRAINING = true;
     constexpr bool RANDOMIZE_DOMAIN_PARAMETERS = false;
     constexpr bool INIT_SIMPLE = false;
     constexpr bool DEACTIVATE_OBSERVATION_NOISE = true;

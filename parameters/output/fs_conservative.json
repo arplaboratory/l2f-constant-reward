@@ -27,7 +27,7 @@
             "scale": 1.0,
             "constant": 1,
             "termination_penalty": 0,
-            "position": 0.5,
+            "position": 1.0,
             "orientation": 0.5,
             "linear_velocity": 0.05,
             "angular_velocity": 0.005,
@@ -51,10 +51,10 @@
             "angular_velocity_threshold": 30
         },
         "observation_noise": {
-            "position": 0.05,
-            "orientation": 0.001,
-            "linear_velocity": 0.1,
-            "angular_velocity": 0.2
+            "position": 0.0,
+            "orientation": 0.0,
+            "linear_velocity": 0.0,
+            "angular_velocity": 0.0
         },
         "curriculum": {
             "position": {
