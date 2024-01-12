@@ -102,6 +102,10 @@ namespace learning_to_fly{
                         ts.curriculum.init_max_position.factor = curriculum_json["init_max_position"]["factor"];
                         ts.curriculum.init_max_position.limit = curriculum_json["init_max_position"]["limit"];
                     }
+                    if(curriculum_json.contains("init_guidance")){
+                        ts.curriculum.init_guidance.factor = curriculum_json["init_guidance"]["factor"];
+                        ts.curriculum.init_guidance.limit = curriculum_json["init_guidance"]["limit"];
+                    }
                 }
             }
             if(parameters_json.contains("rl")){

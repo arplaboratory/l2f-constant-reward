@@ -24,6 +24,12 @@ namespace learning_to_fly{
             set::Component<MeanErrorMean<POSITION, TI, 200>,
             set::Component<MaxErrorMean<POSITION, TI, 200>,
             set::Component<MaxErrorStd <POSITION, TI, 200>,
+            set::Component<MeanErrorMean<POSITION, TI, 300>,
+            set::Component<MaxErrorMean<POSITION, TI, 300>,
+            set::Component<MaxErrorStd <POSITION, TI, 300>,
+            set::Component<MeanErrorMean<POSITION, TI, 400>,
+            set::Component<MaxErrorMean<POSITION, TI, 400>,
+            set::Component<MaxErrorStd <POSITION, TI, 400>,
             set::Component<MeanErrorMean<ANGLE, TI, 100>,
             set::Component<MaxErrorMean<ANGLE, TI, 100>,
             set::Component<MaxErrorStd <ANGLE, TI, 100>,
@@ -66,7 +72,7 @@ namespace learning_to_fly{
             set::Component<MeanErrorMean<ACTION_RELATIVE, TI, 200>,
             set::Component<MaxErrorMean<ACTION_RELATIVE, TI, 200>,
             set::Component<MaxErrorStd <ACTION_RELATIVE, TI, 200>,
-            FinalComponent>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
+            FinalComponent>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>;
             using METRICS = DefaultMetrics<ADDITIONAL_METRICS>;
         };
     }

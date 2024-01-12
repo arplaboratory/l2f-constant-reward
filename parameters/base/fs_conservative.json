@@ -21,7 +21,7 @@
     }
   },
   "mdp": {
-    "gamma": 0.99,
+    "gamma": 0.995,
     "reward": {
       "type": "squared",
       "scale": 1.00,
@@ -38,7 +38,7 @@
       "action": 0.10
     },
     "init": {
-      "guidance": 0.5,
+      "guidance": 1.0,
       "max_position": 2.0,
       "max_angle": 3.14,
       "max_linear_velocity": 1.0,
@@ -91,6 +91,10 @@
       },
       "exploration_noise": {
         "factor": 1.00,
+        "limit": 0
+      },
+      "init_guidance": {
+        "factor": 0.95,
         "limit": 0
       }
     }

@@ -38,10 +38,11 @@ namespace learning_to_fly{
             Schedule termination_position = {1.0, INFINITY};
             Schedule termination_linear_velocity = {1.0, INFINITY};
             Schedule termination_angular_velocity = {1.0, INFINITY};
-            Schedule exploration_noise = {1.0, INFINITY};
-            Schedule target_next_action_noise_std = {1.0, INFINITY};
-            Schedule target_next_action_noise_clip = {1.0, INFINITY};
+            Schedule exploration_noise = {1.0, 0};
+            Schedule target_next_action_noise_std = {1.0, 0};
+            Schedule target_next_action_noise_clip = {1.0, 0};
             Schedule init_max_position = {1.0, INFINITY};
+            Schedule init_guidance = {1.0, 0};
         };
         Curriculum curriculum;
         std::filesystem::path parameters_path;

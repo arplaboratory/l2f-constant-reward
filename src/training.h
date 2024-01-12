@@ -45,6 +45,7 @@ namespace learning_to_fly{
             env.parameters = ts.env_parameters_base;
         }
         ts.env_eval.parameters = ts.env_parameters_base_eval;
+
         TI effective_seed = CONFIG::BASE_SEED + seed;
         ts.run_name = helpers::run_name<ABLATION_SPEC, CONFIG>(effective_seed);
         rlt::construct(ts.device, ts.device.logger, std::string("logs"), ts.run_name);
@@ -54,6 +55,7 @@ namespace learning_to_fly{
         rlt::rl::algorithms::td3::loop::init(ts, effective_seed);
 
         _init::load_config(ts); // to overwrite the default off_policy_runner.parameters
+        ts.env_parameters_base_eval.mdp.init.guidance = 0; // disable guidance for evaluation
 
         for(typename CONFIG::ENVIRONMENT& env: ts.validation_envs){
             env.parameters = ts.env_parameters_base;

@@ -69,6 +69,14 @@ namespace learning_to_fly {
                             env.parameters.mdp.init.max_position = init_max_position;
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_max_position", init_max_position);
                         }
+                        {
+                            T init_guidance = env.parameters.mdp.init.guidance;
+                            init_guidance *= ts.curriculum.init_guidance.factor;
+                            T init_guidance_limit = ts.curriculum.init_guidance.limit;
+                            init_guidance = init_guidance < init_guidance_limit ? init_guidance_limit : init_guidance;
+                            env.parameters.mdp.init.guidance = init_guidance;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_guidance", init_guidance);
+                        }
 
                     }
                     if constexpr(CONFIG::ABLATION_SPEC::RECALCULATE_REWARDS == true){
