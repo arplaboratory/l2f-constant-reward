@@ -43,8 +43,8 @@ namespace learning_to_fly {
                 {
                     // Since checkpointing a full Adam model to code (including gradients and moments of the weights and biases currently does not work)
                     typename CONFIG::ACTOR_CHECKPOINT_TYPE actor_checkpoint;
-                    typename decltype(ts.actor_critic.actor)::template DoubleBuffer<1> actor_buffer;
-                    typename decltype(actor_checkpoint)::template DoubleBuffer<1> actor_checkpoint_buffer;
+                    typename decltype(ts.actor_critic.actor)::template Buffer<1> actor_buffer;
+                    typename decltype(actor_checkpoint)::template Buffer<1> actor_checkpoint_buffer;
                     rlt::malloc(ts.device, actor_checkpoint);
                     rlt::malloc(ts.device, actor_buffer);
                     rlt::malloc(ts.device, actor_checkpoint_buffer);

@@ -6,6 +6,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
 target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
@@ -16,6 +17,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 
 add_executable(training_benchmark training.cpp)
@@ -24,6 +26,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 target_compile_definitions(training_benchmark PRIVATE LEARNING_TO_FLY_IN_SECONDS_BENCHMARK)
 
@@ -33,6 +36,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 add_executable(evaluate_actor_sq_rwd_wd evaluate_actor.cpp)
 target_link_libraries(
@@ -40,6 +44,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 target_compile_definitions(evaluate_actor_sq_rwd_wd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
 target_compile_definitions(evaluate_actor_sq_rwd_wd PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
@@ -50,6 +55,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 target_compile_definitions(hpo PRIVATE LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION)
 target_compile_definitions(hpo PRIVATE LEARNING_TO_FLY_IN_SECONDS_BENCHMARK)
@@ -60,6 +66,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 
 
@@ -70,6 +77,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 endif()
 
@@ -80,6 +88,7 @@ target_link_libraries(
         PRIVATE
         rl_tools
         learning_to_fly
+        CLI11::CLI11
 )
 endif()
 

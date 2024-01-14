@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
     env.parameters = penv::parameters;
     UI uis[N_ENVIRONMENTS];
     typename CONFIG::ACTOR_TYPE actor;
-    typename CONFIG::ACTOR_TYPE::template DoubleBuffer<1> actor_buffer;
+    typename CONFIG::ACTOR_TYPE::template Buffer<1> actor_buffer;
     rlt::MatrixDynamic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::ACTION_DIM>> action;
     rlt::MatrixDynamic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::OBSERVATION_DIM>> observation;
     typename ENVIRONMENT::State states[N_ENVIRONMENTS], target_states[N_ENVIRONMENTS], observation_states[N_ENVIRONMENTS], observation_states_clamped[N_ENVIRONMENTS], next_states[N_ENVIRONMENTS];

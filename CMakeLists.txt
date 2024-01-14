@@ -32,6 +32,7 @@ set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
 set(RL_TOOLS_ENABLE_JSON ON)
 
 #set(RL_TOOLS_ENABLE_TESTS ON)
+set(RL_TOOLS_ENABLE_FAST_MATH ON)
 add_subdirectory(external/rl_tools)
 add_subdirectory(src)
 

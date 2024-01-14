@@ -12,5 +12,6 @@ target_link_libraries(cuda_benchmark
         rl_tools::minimal
         rl_tools::optimizations_cuda
         learning_to_fly
+        CLI11::CLI11
 )
 RL_TOOLS_TAG_IS_CUDA(cuda_benchmark)

@@ -59,7 +59,7 @@ int main(int argc, char** argv){
     using VALIDATION_SPEC = rlt::rl::utils::validation::Specification<T, TI, CONFIG::ENVIRONMENT>;
     using TASK_SPEC = rlt::rl::utils::validation::TaskSpecification<VALIDATION_SPEC, N_VALIDATION_EPISODES, CONFIG::VALIDATION_MAX_EPISODE_LENGTH>;
     rlt::rl::utils::validation::Task<TASK_SPEC> task;
-    typename CONFIG::ACTOR_TYPE::template DoubleBuffer<N_VALIDATION_EPISODES> validation_actor_buffers;
+    typename CONFIG::ACTOR_TYPE::template Buffer<N_VALIDATION_EPISODES> validation_actor_buffers;
     typename CONFIG::ENVIRONMENT validation_envs[N_VALIDATION_EPISODES];
     auto base_parameters_eval = parameters::environment<T, TI, learning_to_fly::config::template ABLATION_SPEC_EVAL<ABLATION_SPEC>>::parameters;
     for(auto& env: validation_envs){

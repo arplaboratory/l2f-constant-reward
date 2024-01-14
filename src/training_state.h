@@ -17,7 +17,7 @@ namespace learning_to_fly{
         // validation
         rlt::rl::utils::validation::Task<typename CONFIG::TASK_SPEC> task;
         typename CONFIG::ENVIRONMENT validation_envs[CONFIG::VALIDATION_N_EPISODES];
-        typename CONFIG::ACTOR_TYPE::template DoubleBuffer<CONFIG::VALIDATION_N_EPISODES> validation_actor_buffers;
+        typename CONFIG::ACTOR_TYPE::template Buffer<CONFIG::VALIDATION_N_EPISODES> validation_actor_buffers;
         typename CONFIG::ENVIRONMENT_PARAMETERS env_parameters_base;
         typename CONFIG::ENVIRONMENT_PARAMETERS env_parameters_base_eval;
         struct Curriculum{
