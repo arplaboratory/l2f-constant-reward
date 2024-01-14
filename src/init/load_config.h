@@ -127,9 +127,14 @@ namespace learning_to_fly{
                 }
                 if(rl.contains("optimizer")){
                     if(rl["optimizer"].contains("weight_decay")){
-                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["base"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY) < 1e-6, "Weight decay should match the constexpr value");
-                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["input"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY_INPUT) < 1e-6, "Weight decay should match the constexpr value");
-                        rlt::utils::assert_exit(ts.device, rlt::math::abs(ts.device.math, (T)rl["optimizer"]["weight_decay"]["output"] - T_CONFIG::OPTIMIZER::PARAMETERS::WEIGHT_DECAY_OUTPUT) < 1e-6, "Weight decay should match the constexpr value");
+                        rlt::utils::assert_exit(ts.device, rl["optimizer"]["weight_decay"]["enable"] == T_CONFIG::OPTIMIZER::SPEC::ENABLE_WEIGHT_DECAY, "Weight decay should match the constexpr value");
+                        auto parameters = ts.actor_optimizer.parameters;
+                        parameters.weight_decay = rl["optimizer"]["weight_decay"]["base"];
+                        parameters.weight_decay_input = rl["optimizer"]["weight_decay"]["input"];
+                        parameters.weight_decay_output = rl["optimizer"]["weight_decay"]["output"];
+                        ts.actor_optimizer.parameters = parameters;
+                        ts.critic_optimizers[0].parameters = parameters;
+                        ts.critic_optimizers[1].parameters = parameters;
                     }
                 }
                 if(rl.contains("off_policy_runner")){

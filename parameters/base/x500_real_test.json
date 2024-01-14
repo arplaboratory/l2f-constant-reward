@@ -11,6 +11,7 @@
     },
     "optimizer": {
       "weight_decay": {
+        "enable": false,
         "base":  0.000,
         "input": 0.000,
         "output": 0.000

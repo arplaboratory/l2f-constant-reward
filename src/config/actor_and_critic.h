@@ -53,15 +53,13 @@ namespace learning_to_fly{
                 using MODEL = Module<LAYER_1, Module<LAYER_2, Module<LAYER_3>>>;
             };
 
-            struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DefaultParameters<T, TI>{
 #ifdef LEARNING_TO_FLY_WEIGHT_DECAY
-                static constexpr T WEIGHT_DECAY = 0.0001;
-                static constexpr T WEIGHT_DECAY_INPUT = 0.0001;
-                static constexpr T WEIGHT_DECAY_OUTPUT = 0.0001;
-                static constexpr T BIAS_LR_FACTOR = 1;
+            static constexpr bool ENABLE_WEIGHT_DECAY = true;
+#else
+            static constexpr bool ENABLE_WEIGHT_DECAY = false;
 #endif
-            };
-            using OPTIMIZER = rlt::nn::optimizers::Adam<OPTIMIZER_PARAMETERS>;
+            using OPTIMIZER_SPEC = rlt::nn::optimizers::adam::Specification<T, TI, ENABLE_WEIGHT_DECAY>;
+            using OPTIMIZER = rlt::nn::optimizers::Adam<OPTIMIZER_SPEC>;
             using ACTOR_TYPE = typename ACTOR<rlt::nn::parameters::Adam>::MODEL;
             using ACTOR_CHECKPOINT_TYPE = typename ACTOR_CHECKPOINT<ACTOR<rlt::nn::parameters::Plain>>::MODEL;
             using ACTOR_TARGET_TYPE = typename ACTOR<rlt::nn::parameters::Plain>::MODEL;
