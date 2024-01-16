@@ -4,7 +4,10 @@ add_executable(training_headless_sq_rwd_wd training.cpp)
 target_link_libraries(
         training_headless_sq_rwd_wd
         PRIVATE
-        rl_tools
+        RLtools::Backend
+        tensorboard_logger
+        HighFive
+        nlohmann_json
         learning_to_fly
         CLI11::CLI11
 )
@@ -15,7 +18,10 @@ add_executable(training_headless training.cpp)
 target_link_libraries(
         training_headless
         PRIVATE
-        rl_tools
+        RLtools::Backend
+        tensorboard_logger
+        HighFive
+        nlohmann_json
         learning_to_fly
         CLI11::CLI11
 )
