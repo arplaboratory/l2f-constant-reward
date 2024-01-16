@@ -74,8 +74,8 @@ namespace parameters{
                             rl_tools::rl::environments::multirotor::parameters::termination::fast_learning<PARAMETERS_SPEC>
                     },
                     typename PARAMETERS_TYPE::Disturbances{
-                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 0.0 * 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;
-                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 0.0 * 1.0 * 9.81 / 1000 * ABLATION_SPEC::DISTURBANCE} // random_torque;
+                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;
+                            typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 1000 * ABLATION_SPEC::DISTURBANCE} // random_torque;
                     }
 
             };
