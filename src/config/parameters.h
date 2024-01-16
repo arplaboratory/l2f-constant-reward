@@ -25,6 +25,7 @@ namespace parameters{
         static constexpr bool ENABLE_CURRICULUM = true;
         static constexpr bool USE_INITIAL_REWARD_FUNCTION = true;
         static constexpr bool INIT_NORMAL = true;
+        static constexpr bool DOMAIN_RANDOMIZATION = true;
     };
     namespace builder {
         namespace rlt = RL_TOOLS_NAMESPACE_WRAPPER::rl_tools;
@@ -72,6 +73,9 @@ namespace parameters{
                                     0, // std of additive gaussian noise onto the normalized action (-1, 1)
                             },
                             rl_tools::rl::environments::multirotor::parameters::termination::fast_learning<PARAMETERS_SPEC>
+                    },
+                    { // domain  randomization
+                        0 * ABLATION_SPEC::DOMAIN_RANDOMIZATION //thrust_coefficients
                     },
                     typename PARAMETERS_TYPE::Disturbances{
                             typename PARAMETERS_TYPE::Disturbances::UnivariateGaussian{0, 1.0 * 9.81 / 20 * ABLATION_SPEC::DISTURBANCE}, // random_force;

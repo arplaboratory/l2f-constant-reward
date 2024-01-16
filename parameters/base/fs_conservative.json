@@ -104,6 +104,9 @@
       }
     }
   },
+  "domain_randomization": {
+    "rotor_thrust_coefficients": 0.1
+  },
   "disturbances": {
     "random_force": {
       "mean": 0,

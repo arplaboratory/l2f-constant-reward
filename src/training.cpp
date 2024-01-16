@@ -54,6 +54,7 @@ struct ABLATION_SPEC: learning_to_fly::config::DEFAULT_ABLATION_SPEC{
     static constexpr bool EXPLORATION_NOISE_DECAY = true;
     static constexpr bool DISTURBANCE = true;
     static constexpr bool OBSERVATION_NOISE = true;
+    static constexpr bool DOMAIN_RANDOMIZATION = true;
 };
 
 int main(int argc, char** argv){

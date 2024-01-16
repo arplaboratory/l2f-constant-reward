@@ -72,9 +72,13 @@ namespace rl_tools::rl::environments::multirotor{
             ActionNoise action_noise;
             Termination termination;
         };
+        struct DomainRandomization{
+            T rotor_thrust_coefficients;
+        };
         Dynamics dynamics;
         Integration integration;
         MDP mdp;
+        DomainRandomization domain_randomization;
     };
     template <typename T, typename TI, typename T_NEXT_COMPONENT>
     struct ParametersDisturbances: T_NEXT_COMPONENT{

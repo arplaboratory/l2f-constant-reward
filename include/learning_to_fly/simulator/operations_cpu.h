@@ -268,9 +268,19 @@ namespace rl_tools{
         load_config<DEV_SPEC, SPEC>(device, parameters.observation_noise, config);
     }
     template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::DomainRandomization& parameters, nlohmann::json config){
+        if(config.contains("domain_randomization")){
+            auto dr = config["domain_randomization"];
+            if(dr.contains("rotor_thrust_coefficients")){
+                parameters.rotor_thrust_coefficients = dr["rotor_thrust_coefficients"];
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>& parameters, nlohmann::json config){
         load_config<DEV_SPEC, SPEC>(device, parameters.dynamics, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.mdp, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.domain_randomization, config);
     }
     template <typename DEV_SPEC, typename T, typename TI, typename NEXT_COMPONENT>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, NEXT_COMPONENT>& parameters, nlohmann::json config){

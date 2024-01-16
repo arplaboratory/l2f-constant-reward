@@ -215,6 +215,10 @@ namespace rl_tools{
     }
     template<typename DEVICE, typename T, typename TI, typename SPEC>
     static void initial_parameters(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateBase<T, TI>& state){
+        env.current_dynamics = env.parameters.dynamics;
+    }
+    template<typename DEVICE, typename T, typename TI, typename SPEC, typename RNG>
+    static void initial_parameters(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateBase<T, TI>& state, RNG& rng){
 //        T J_factor = random::uniform_real_distribution(random_dev, (T)0.5, (T)2, rng);
 //        env.current_dynamics.J[0][0] *= J_factor;
 //        env.current_dynamics.J[1][1] *= J_factor;
@@ -226,6 +230,13 @@ namespace rl_tools{
 //        env.current_dynamics.mass *= mass_factor;
 //        printf("initial state: %f %f %f %f %f %f %f %f %f %f %f %f %f\n", state.state[0], state.state[1], state.state[2], state.state[3], state.state[4], state.state[5], state.state[6], state.state[7], state.state[8], state.state[9], state.state[10], state.state[11], state.state[12]);
         env.current_dynamics = env.parameters.dynamics;
+        T factor = random::normal_distribution::sample(device.random, (T)1, env.parameters.domain_randomization.rotor_thrust_coefficients, rng);
+        T lower = 1 - 3*env.parameters.domain_randomization.rotor_thrust_coefficients;
+        T upper = 1 + 3*env.parameters.domain_randomization.rotor_thrust_coefficients;
+        factor = math::clamp(device.math, factor, lower, upper);
+        for(TI order_i=0; order_i < 3; order_i++){
+            env.current_dynamics.rotor_thrust_coefficients[order_i] *= factor;
+        }
         // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
         // todo:
 //        if(env.parameters.mdp.reward.calculate_action_baseline){
@@ -336,7 +347,7 @@ namespace rl_tools{
             }
         }
 
-        initial_parameters(device, env, state);
+        initial_parameters(device, env, state, rng);
     }
     template<typename DEVICE, typename T_S, typename TI_S, typename SPEC, typename NEXT_COMPONENT, typename RNG>
     RL_TOOLS_FUNCTION_PLACEMENT static void sample_initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateRandomForce<T_S, TI_S, NEXT_COMPONENT>& state, RNG& rng){
