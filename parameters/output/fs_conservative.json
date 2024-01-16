@@ -105,7 +105,8 @@
         }
     },
     "domain_randomization": {
-        "rotor_thrust_coefficients": 0.1
+        "rotor_thrust_coefficients": 0.1,
+        "rotor_torque_constant": 1.0
     },
     "disturbances": {
         "random_force": {
@@ -216,7 +217,7 @@
         ],
         "motor_time_constant": 0.06532,
         "action_limit": {
-            "lower_bound": 0.3,
+            "lower_bound": 0.1,
             "upper_bound": 0.7
         },
         "model": "fs_base",

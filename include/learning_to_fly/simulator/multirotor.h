@@ -74,6 +74,7 @@ namespace rl_tools::rl::environments::multirotor{
         };
         struct DomainRandomization{
             T rotor_thrust_coefficients;
+            T rotor_torque_constant;
         };
         Dynamics dynamics;
         Integration integration;

@@ -230,12 +230,17 @@ namespace rl_tools{
 //        env.current_dynamics.mass *= mass_factor;
 //        printf("initial state: %f %f %f %f %f %f %f %f %f %f %f %f %f\n", state.state[0], state.state[1], state.state[2], state.state[3], state.state[4], state.state[5], state.state[6], state.state[7], state.state[8], state.state[9], state.state[10], state.state[11], state.state[12]);
         env.current_dynamics = env.parameters.dynamics;
-        T factor = random::normal_distribution::sample(device.random, (T)1, env.parameters.domain_randomization.rotor_thrust_coefficients, rng);
-        T lower = 1 - 3*env.parameters.domain_randomization.rotor_thrust_coefficients;
-        T upper = 1 + 3*env.parameters.domain_randomization.rotor_thrust_coefficients;
-        factor = math::clamp(device.math, factor, lower, upper);
-        for(TI order_i=0; order_i < 3; order_i++){
-            env.current_dynamics.rotor_thrust_coefficients[order_i] *= factor;
+        {
+            T factor = random::normal_distribution::sample(device.random, (T)0, env.parameters.domain_randomization.rotor_thrust_coefficients, rng);
+            factor = factor < 0 ? 1/(1-factor) : 1+factor; // reciprocal scale
+            for(TI order_i=0; order_i < 3; order_i++){
+                env.current_dynamics.rotor_thrust_coefficients[order_i] *= factor;
+            }
+        }
+        {
+            T factor = random::normal_distribution::sample(device.random, (T)0, env.parameters.domain_randomization.rotor_torque_constant, rng);
+            factor = factor < 0 ? 1/(1-factor) : 1+factor; // reciprocal scale
+            env.current_dynamics.rotor_torque_constant *= factor;
         }
         // todo: make this more generic (e.g. if thrust vector of (individual) rotors and gravity vector are not aligned)
         // todo:

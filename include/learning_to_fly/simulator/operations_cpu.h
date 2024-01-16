@@ -274,6 +274,9 @@ namespace rl_tools{
             if(dr.contains("rotor_thrust_coefficients")){
                 parameters.rotor_thrust_coefficients = dr["rotor_thrust_coefficients"];
             }
+            if(dr.contains("rotor_torque_constant")){
+                parameters.rotor_torque_constant = dr["rotor_torque_constant"];
+            }
         }
     }
     template <typename DEV_SPEC, typename SPEC>
