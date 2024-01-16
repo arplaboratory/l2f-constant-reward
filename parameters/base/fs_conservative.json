@@ -52,10 +52,10 @@
       "angular_velocity_threshold": 30
     },
     "observation_noise": {
-      "position": 0.00,
-      "orientation": 0.000,
-      "linear_velocity": 0.0,
-      "angular_velocity": 0.0
+      "position":         0.050,
+      "orientation":      0.001,
+      "linear_velocity":  0.100,
+      "angular_velocity": 0.200
     },
     "curriculum": {
       "position": {
