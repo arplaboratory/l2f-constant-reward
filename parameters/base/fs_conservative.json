@@ -143,11 +143,11 @@
   "disturbances": {
     "random_force": {
       "mean": 0,
-      "std": 0.0
+      "std": 0.5
     },
     "random_torque": {
       "mean": 0,
-      "std": 0.00
+      "std": 0.01
     }
   }
 }

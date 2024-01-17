@@ -220,6 +220,9 @@ int main(int argc, char** argv) {
                 env.parameters.disturbances.random_torque.std = 0.01;
             }
         }
+        std::cout << "Disturbances:" << std::endl;
+        std::cout << "    force: " << env.parameters.disturbances.random_force.std << std::endl;
+        std::cout << "    torque: " << env.parameters.disturbances.random_torque.std << std::endl;
         env.parameters.mdp.init.guidance = 0;
         for(TI env_i=0; env_i < N_ENVIRONMENTS; env_i++){
             rlt::sample_initial_state(dev, env, states[env_i], rng);
