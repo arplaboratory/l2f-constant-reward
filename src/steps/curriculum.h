@@ -62,6 +62,14 @@ namespace learning_to_fly {
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/action_weight", action_weight);
                         }
                         {
+                            T init_guidance = env.parameters.mdp.init.guidance;
+                            init_guidance *= ts.curriculum.init_guidance.factor;
+                            T init_guidance_limit = ts.curriculum.init_guidance.limit;
+                            init_guidance = init_guidance < init_guidance_limit ? init_guidance_limit : init_guidance;
+                            env.parameters.mdp.init.guidance = init_guidance;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_guidance", init_guidance);
+                        }
+                        {
                             T init_max_position = env.parameters.mdp.init.max_position;
                             init_max_position *= ts.curriculum.init_max_position.factor;
                             T init_max_position_limit = ts.curriculum.init_max_position.limit;
@@ -70,14 +78,45 @@ namespace learning_to_fly {
                             rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_max_position", init_max_position);
                         }
                         {
-                            T init_guidance = env.parameters.mdp.init.guidance;
-                            init_guidance *= ts.curriculum.init_guidance.factor;
-                            T init_guidance_limit = ts.curriculum.init_guidance.limit;
-                            init_guidance = init_guidance < init_guidance_limit ? init_guidance_limit : init_guidance;
-                            env.parameters.mdp.init.guidance = init_guidance;
-                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_guidance", init_guidance);
+                            T init_max_linear_velocity = env.parameters.mdp.init.max_linear_velocity;
+                            init_max_linear_velocity *= ts.curriculum.init_max_linear_velocity.factor;
+                            T init_max_linear_velocity_limit = ts.curriculum.init_max_linear_velocity.limit;
+                            init_max_linear_velocity = init_max_linear_velocity > init_max_linear_velocity_limit ? init_max_linear_velocity_limit : init_max_linear_velocity;
+                            env.parameters.mdp.init.max_linear_velocity = init_max_linear_velocity;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_max_linear_velocity", init_max_linear_velocity);
                         }
-
+                        {
+                            T init_max_angular_velocity = env.parameters.mdp.init.max_angular_velocity;
+                            init_max_angular_velocity *= ts.curriculum.init_max_angular_velocity.factor;
+                            T init_max_angular_velocity_limit = ts.curriculum.init_max_angular_velocity.limit;
+                            init_max_angular_velocity = init_max_angular_velocity > init_max_angular_velocity_limit ? init_max_angular_velocity_limit : init_max_angular_velocity;
+                            env.parameters.mdp.init.max_angular_velocity = init_max_angular_velocity;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/init_max_angular_velocity", init_max_angular_velocity);
+                        }
+                        {
+                            T termination_position_threshold = env.parameters.mdp.termination.position_threshold;
+                            termination_position_threshold *= ts.curriculum.termination_position_threshold.factor;
+                            T termination_position_threshold_limit = ts.curriculum.termination_position_threshold.limit;
+                            termination_position_threshold = termination_position_threshold > termination_position_threshold_limit ? termination_position_threshold_limit : termination_position_threshold;
+                            env.parameters.mdp.termination.position_threshold = termination_position_threshold;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/termination_position_threshold", termination_position_threshold);
+                        }
+                        {
+                            T termination_linear_velocity_threshold = env.parameters.mdp.termination.linear_velocity_threshold;
+                            termination_linear_velocity_threshold *= ts.curriculum.termination_linear_velocity_threshold.factor;
+                            T termination_linear_velocity_threshold_limit = ts.curriculum.termination_linear_velocity_threshold.limit;
+                            termination_linear_velocity_threshold = termination_linear_velocity_threshold > termination_linear_velocity_threshold_limit ? termination_linear_velocity_threshold_limit : termination_linear_velocity_threshold;
+                            env.parameters.mdp.termination.linear_velocity_threshold = termination_linear_velocity_threshold;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/termination_linear_velocity_threshold", termination_linear_velocity_threshold);
+                        }
+                        {
+                            T termination_angular_velocity_threshold = env.parameters.mdp.termination.angular_velocity_threshold;
+                            termination_angular_velocity_threshold *= ts.curriculum.termination_angular_velocity_threshold.factor;
+                            T termination_angular_velocity_threshold_limit = ts.curriculum.termination_angular_velocity_threshold.limit;
+                            termination_angular_velocity_threshold = termination_angular_velocity_threshold > termination_angular_velocity_threshold_limit ? termination_angular_velocity_threshold_limit : termination_angular_velocity_threshold;
+                            env.parameters.mdp.termination.angular_velocity_threshold = termination_angular_velocity_threshold;
+                            rlt::add_scalar(ts.device, ts.device.logger, "reward_function/termination_angular_velocity_threshold", termination_angular_velocity_threshold);
+                        }
                     }
                     if constexpr(CONFIG::ABLATION_SPEC::RECALCULATE_REWARDS == true){
                         auto start = std::chrono::high_resolution_clock::now();

@@ -101,6 +101,38 @@
       "init_guidance": {
         "factor": 0.95,
         "limit": 0
+      },
+      "init_max_position": {
+        "factor": 1.0,
+        "limit": 1000
+      },
+      "init_max_linear_velocity": {
+        "factor": 1.0,
+        "limit": 1000
+      },
+      "init_max_angular_velocity": {
+        "factor": 1.0,
+        "limit": 2000
+      },
+      "termination_position_threshold": {
+        "factor": 1.0,
+        "limit": 1000
+      },
+      "termination_linear_velocity_threshold": {
+        "factor": 1.0,
+        "limit": 1000
+      },
+      "termination_angular_velocity_threshold": {
+        "factor": 1.0,
+        "limit": 3000
+      },
+      "disturbance_force_std": {
+        "factor": 1.0,
+        "limit": 1000000
+      },
+      "disturbance_torque_std": {
+        "factor": 1.0,
+        "limit": 1000000
       }
     }
   },
@@ -111,11 +143,11 @@
   "disturbances": {
     "random_force": {
       "mean": 0,
-      "std": 0
+      "std": 0.0
     },
     "random_torque": {
       "mean": 0,
-      "std": 0
+      "std": 0.00
     }
   }
 }

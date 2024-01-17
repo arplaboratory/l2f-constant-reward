@@ -102,13 +102,41 @@ namespace learning_to_fly{
                         ts.curriculum.target_next_action_noise_clip.factor = curriculum_json["target_next_action_noise_clip"]["factor"];
                         ts.curriculum.target_next_action_noise_clip.limit = curriculum_json["target_next_action_noise_clip"]["limit"];
                     }
+                    if(curriculum_json.contains("init_guidance")){
+                        ts.curriculum.init_guidance.factor = curriculum_json["init_guidance"]["factor"];
+                        ts.curriculum.init_guidance.limit = curriculum_json["init_guidance"]["limit"];
+                    }
                     if(curriculum_json.contains("init_max_position")){
                         ts.curriculum.init_max_position.factor = curriculum_json["init_max_position"]["factor"];
                         ts.curriculum.init_max_position.limit = curriculum_json["init_max_position"]["limit"];
                     }
-                    if(curriculum_json.contains("init_guidance")){
-                        ts.curriculum.init_guidance.factor = curriculum_json["init_guidance"]["factor"];
-                        ts.curriculum.init_guidance.limit = curriculum_json["init_guidance"]["limit"];
+                    if(curriculum_json.contains("init_max_linear_velocity")){
+                        ts.curriculum.init_max_linear_velocity.factor = curriculum_json["init_max_linear_velocity"]["factor"];
+                        ts.curriculum.init_max_linear_velocity.limit = curriculum_json["init_max_linear_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("init_max_angular_velocity")){
+                        ts.curriculum.init_max_angular_velocity.factor = curriculum_json["init_max_angular_velocity"]["factor"];
+                        ts.curriculum.init_max_angular_velocity.limit = curriculum_json["init_max_angular_velocity"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_position_threshold")){
+                        ts.curriculum.termination_position_threshold.factor = curriculum_json["termination_position_threshold"]["factor"];
+                        ts.curriculum.termination_position_threshold.limit = curriculum_json["termination_position_threshold"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_linear_velocity_threshold")){
+                        ts.curriculum.termination_linear_velocity_threshold.factor = curriculum_json["termination_linear_velocity_threshold"]["factor"];
+                        ts.curriculum.termination_linear_velocity_threshold.limit = curriculum_json["termination_linear_velocity_threshold"]["limit"];
+                    }
+                    if(curriculum_json.contains("termination_angular_velocity_threshold")){
+                        ts.curriculum.termination_angular_velocity_threshold.factor = curriculum_json["termination_angular_velocity_threshold"]["factor"];
+                        ts.curriculum.termination_angular_velocity_threshold.limit = curriculum_json["termination_angular_velocity_threshold"]["limit"];
+                    }
+                    if(curriculum_json.contains("disturbance_force_std")){
+                        ts.curriculum.disturbance_force_std.factor = curriculum_json["disturbance_force_std"]["factor"];
+                        ts.curriculum.disturbance_force_std.limit = curriculum_json["disturbance_force_std"]["limit"];
+                    }
+                    if(curriculum_json.contains("disturbance_torque_std")){
+                        ts.curriculum.disturbance_torque_std.factor = curriculum_json["disturbance_torque_std"]["factor"];
+                        ts.curriculum.disturbance_torque_std.limit = curriculum_json["disturbance_torque_std"]["limit"];
                     }
                 }
             }
