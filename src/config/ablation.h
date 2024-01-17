@@ -10,6 +10,7 @@ namespace learning_to_fly::config{
         static constexpr bool USE_INITIAL_REWARD_FUNCTION = true;
         static constexpr bool INIT_NORMAL = true;
         static constexpr bool EXPLORATION_NOISE_DECAY = true;
+        static constexpr bool DOMAIN_RANDOMIZATION = true;
     };
     template <typename T_ABLATION_SPEC>
     struct ABLATION_SPEC_EVAL: T_ABLATION_SPEC{
