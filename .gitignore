@@ -9,6 +9,8 @@
 /results
 .DS_Store
 /logs_old
+/l2f.egg-info
+/*.so
 
 results.json
 validation.json
