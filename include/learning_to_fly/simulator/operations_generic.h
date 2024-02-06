@@ -210,9 +210,9 @@ RL_TOOLS_NAMESPACE_WRAPPER_END
 RL_TOOLS_NAMESPACE_WRAPPER_START
 namespace rl_tools{
     template<typename DEVICE, typename SPEC>
-    void malloc(DEVICE&, rl::environments::Multirotor<SPEC>){
-
-    }
+    void malloc(DEVICE&, rl::environments::Multirotor<SPEC>){ }
+    template<typename DEVICE, typename SPEC>
+    void init(DEVICE&, rl::environments::Multirotor<SPEC>){ }
     template<typename DEVICE, typename T, typename TI, typename SPEC>
     static void initial_parameters(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateBase<T, TI>& state){
         env.current_dynamics = env.parameters.dynamics;

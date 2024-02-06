@@ -353,8 +353,9 @@ RL_TOOLS_NAMESPACE_WRAPPER_END
 
 RL_TOOLS_NAMESPACE_WRAPPER_START
 namespace rl_tools::rl::environments{
-    template <typename SPEC>
+    template <typename T_SPEC>
     struct Multirotor{
+        using SPEC = T_SPEC;
         using T = typename SPEC::T;
         using TI = typename SPEC::TI;
         using PARAMETERS = typename SPEC::PARAMETERS;

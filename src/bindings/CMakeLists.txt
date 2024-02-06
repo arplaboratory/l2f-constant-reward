@@ -1,0 +1,8 @@
+add_executable(bindings_test l2f.cpp)
+target_compile_definitions(bindings_test PRIVATE TEST)
+target_link_libraries(
+        bindings_test
+        PRIVATE
+        rl_tools
+        learning_to_fly
+)

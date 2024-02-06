@@ -72,6 +72,15 @@
             "program": "plot.py",
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Pybind test",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/bindings", 
+            "program": "test.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
