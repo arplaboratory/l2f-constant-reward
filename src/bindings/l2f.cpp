@@ -26,6 +26,21 @@ void init(DEVICE &device, rlt::rl::environments::Multirotor<typename ENVIRONMENT
     env.parameters = CONFIG::parameters;
 }
 
+struct State{
+    std::array<T, 3> position;
+    std::array<T, 4> orientation;
+    ENVIRONMENT::State state;
+};
+
+void sync(State& state, typename ENVIRONMENT::State& state_real){
+    state.position[0] = state_real.position[0];
+    state.position[1] = state_real.position[1];
+    state.position[2] = state_real.position[2];
+    state.orientation[0] = state_real.orientation[0];
+    state.orientation[1] = state_real.orientation[1];
+    state.orientation[2] = state_real.orientation[2];
+    state.orientation[3] = state_real.orientation[3];
+}
 struct Action{
     std::array<T, ENVIRONMENT::ACTION_DIM> motor_command;
 };
@@ -34,24 +49,28 @@ struct Observation{
     std::array<T, ENVIRONMENT::OBSERVATION_DIM> observation;
 };
 
-void step(DEVICE& device, ENVIRONMENT& env, typename ENVIRONMENT::State& state, Action action, typename ENVIRONMENT::State& next_state, RNG& rng){
+T step(DEVICE& device, ENVIRONMENT& env, State& state, Action action, State& next_state, RNG& rng){
     rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::ACTION_DIM>> motor_commands;
     rlt::malloc(device, motor_commands);
     for(TI action_i=0; action_i < 4; action_i++){
         set(motor_commands, 0, action_i, action.motor_command[action_i]);
     }
-    rlt::step(device, env, state, motor_commands, next_state, rng);
+    T dt = rlt::step(device, env, state.state, motor_commands, next_state.state, rng);
+    sync(next_state, next_state.state);
+    return dt;
 }
-void initial_state(DEVICE& device, ENVIRONMENT& env, typename ENVIRONMENT::State& state){
-    rlt::initial_state(device, env, state);
+void initial_state(DEVICE& device, ENVIRONMENT& env, State& state){
+    rlt::initial_state(device, env, state.state);
+    sync(state, state.state);
 }
-void sample_initial_state(DEVICE& device, ENVIRONMENT& env, typename ENVIRONMENT::State& state, RNG& rng){
-    rlt::sample_initial_state(device, env, state, rng);
+void sample_initial_state(DEVICE& device, ENVIRONMENT& env, State& state, RNG& rng){
+    rlt::sample_initial_state(device, env, state.state, rng);
+    sync(state, state.state);
 }
-void observe(DEVICE& device, ENVIRONMENT& env, typename ENVIRONMENT::State& state, Observation& observation, RNG& rng){
+void observe(DEVICE& device, ENVIRONMENT& env, State& state, Observation& observation, RNG& rng){
     rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::OBSERVATION_DIM>> observation_matrix;
     rlt::malloc(device, observation_matrix);
-    rlt::observe(device, env, state, observation_matrix, rng);
+    rlt::observe(device, env, state.state, observation_matrix, rng);
     for(TI observation_i=0; observation_i < ENVIRONMENT::OBSERVATION_DIM; observation_i++){
         observation.observation[observation_i] = get(observation_matrix, 0, observation_i);
     }
@@ -76,8 +95,10 @@ PYBIND11_MODULE(l2f, m) {
     py::class_<ENVIRONMENT>(m, "Environment")
         .def(py::init<>())
         .def_readwrite("parameters", &ENVIRONMENT::parameters);
-    py::class_<ENVIRONMENT::State>(m, "State")
-        .def(py::init<>());
+    py::class_<State>(m, "State")
+        .def(py::init<>())
+        .def_readwrite("position", &State::position)
+        .def_readwrite("orientation", &State::orientation);
     py::class_<Action>(m, "Action")
         .def(py::init<>())
         .def_readwrite("motor_command", &Action::motor_command);
