@@ -285,7 +285,7 @@ namespace rl_tools{
         initial_state(device, env, static_cast<NEXT_COMPONENT&>(state));
         for(typename DEVICE::index_t i = 0; i < 4; i++){
 //            state.rpm[i] = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2 + env.parameters.dynamics.action_limit.min;
-            state.rpm[i] = env.parameters.dynamics.hovering_throttle;
+            state.rpm[i] = env.parameters.dynamics.hovering_throttle_relative * (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) + env.parameters.dynamics.action_limit.min;
         }
     }
     template<typename DEVICE, typename T, typename TI_H, TI_H HISTORY_LENGTH, typename SPEC, typename NEXT_COMPONENT>

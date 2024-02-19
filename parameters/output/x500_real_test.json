@@ -11,6 +11,7 @@
         },
         "optimizer": {
             "weight_decay": {
+                "enable": false,
                 "base": 0.0,
                 "input": 0.0,
                 "output": 0.0
@@ -212,6 +213,7 @@
                 0.0,
                 9.005763688760807
             ]
-        ]
+        ],
+        "hovering_throttle": 0.4685705492468035
     }
 }

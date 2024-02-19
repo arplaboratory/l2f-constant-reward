@@ -46,6 +46,7 @@ namespace parameters{
             using REWARD_FUNCTION = typename rl_tools::utils::typing::remove_cv<REWARD_FUNCTION_CONST>::type;
 
             constexpr static auto MODEL = rl_tools::rl::environments::multirotor::parameters::dynamics::REGISTRY::crazyflie;
+//            constexpr static auto MODEL = rl_tools::rl::environments::multirotor::parameters::dynamics::REGISTRY::fs_base;
             using PARAMETERS_SPEC = rl_tools::rl::environments::multirotor::ParametersBaseSpecification<T, TI, 4, REWARD_FUNCTION, rl_tools::rl::environments::multirotor::parameters::dynamics::REGISTRY, MODEL>;
             using PARAMETERS_TYPE = rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, rl_tools::rl::environments::multirotor::ParametersBase<PARAMETERS_SPEC>>;
 

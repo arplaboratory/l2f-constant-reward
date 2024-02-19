@@ -51,9 +51,8 @@ namespace rl_tools::rl::environments::multirotor::parameters::reward_functions{
 
         T action_diff[ACTION_DIM];
         for(TI action_i = 0; action_i < ACTION_DIM; action_i++){
-            T half_range = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2;
-            T action_value = get(action, 0, action_i) * half_range + env.parameters.dynamics.action_limit.min + half_range;
-            action_diff[action_i] = action_value - env.parameters.dynamics.hovering_throttle;
+            T action_throttle_relative = (get(action, 0, action_i) + (T)1.0)/(T)2.0;
+            action_diff[action_i] = action_throttle_relative - env.parameters.dynamics.hovering_throttle_relative;
         }
         components.action_cost = utils::vector_operations::norm<DEVICE, T, ACTION_DIM>(action_diff);
         components.action_cost *= components.action_cost;

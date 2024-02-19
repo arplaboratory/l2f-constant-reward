@@ -145,17 +145,16 @@ namespace rl_tools{
                     for(TI action_i=0; action_i < ACTION_SPEC::COLS; action_i++){
                         T half_range = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2;
                         T action_value = get(action, 0, action_i) * half_range + env.parameters.dynamics.action_limit.min + half_range;
-                        T baseline_diff = env.parameters.dynamics.hovering_throttle - action_value;
+                        T hovering_throttle_value = env.parameters.dynamics.hovering_throttle_relative * (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) + env.parameters.dynamics.action_limit.min;
+                        T baseline_diff = action_value - hovering_throttle_value;
                         distance += math::abs(device.math, baseline_diff) / ACTION_SPEC::COLS;
                     }
                     break;
                 case rl::utils::validation::metrics::multirotor::ACTION_RELATIVE:
                     for(TI action_i=0; action_i < ACTION_SPEC::COLS; action_i++){
-                        T half_range = (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) / 2;
-                        T action_value = get(action, 0, action_i) * half_range + env.parameters.dynamics.action_limit.min + half_range;
-                        T baseline_diff = env.parameters.dynamics.hovering_throttle - action_value;
-                        T relative = baseline_diff / env.parameters.dynamics.hovering_throttle;
-                        distance += math::abs(device.math, relative) / ACTION_SPEC::COLS;
+                        T action_throttle_relative = (get(action, 0, action_i) + (T)1.0)/(T)2.0;
+                        T baseline_diff = action_throttle_relative - env.parameters.dynamics.hovering_throttle_relative;
+                        distance += math::abs(device.math, baseline_diff) / ACTION_SPEC::COLS;
                     }
                     break;
             }

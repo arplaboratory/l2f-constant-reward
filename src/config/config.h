@@ -74,7 +74,7 @@ namespace learning_to_fly{
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;
 #ifndef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
-            static constexpr TI STEP_LIMIT = 10000001;
+            static constexpr TI STEP_LIMIT = 1000001;
 #else
             static constexpr TI STEP_LIMIT = 300001;
 #endif

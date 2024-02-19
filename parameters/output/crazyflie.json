@@ -22,84 +22,84 @@
         }
     },
     "mdp": {
-        "gamma": 0.98,
+        "gamma": 0.99,
         "reward": {
             "type": "squared",
             "scale": 1.0,
-            "constant": 1,
+            "constant": 20,
             "termination_penalty": 0,
-            "position": 0.5,
-            "orientation": 0.5,
-            "linear_velocity": 0.05,
-            "angular_velocity": 0.005,
+            "position": 20.0,
+            "orientation": 2.5,
+            "linear_velocity": 0.5,
+            "angular_velocity": 0.0,
             "linear_acceleration": 0.0,
             "angular_acceleration": 0.0,
             "action_baseline": 0.4582053118721884,
             "calculate_action_baseline": true,
-            "action": 0.1
+            "action": 0.5
         },
         "init": {
-            "guidance": 1.0,
-            "max_position": 2.0,
-            "max_angle": 3.14,
+            "guidance": 0.1,
+            "max_position": 0.2,
+            "max_angle": 1.5707963267948966,
             "max_linear_velocity": 1.0,
             "max_angular_velocity": 1.0
         },
         "termination": {
             "enabled": true,
-            "position_threshold": 3,
-            "linear_velocity_threshold": 10,
-            "angular_velocity_threshold": 30
+            "position_threshold": 0.6,
+            "linear_velocity_threshold": 1000,
+            "angular_velocity_threshold": 1000
         },
         "observation_noise": {
-            "position": 0.05,
+            "position": 0.001,
             "orientation": 0.001,
-            "linear_velocity": 0.1,
-            "angular_velocity": 0.2
+            "linear_velocity": 0.002,
+            "angular_velocity": 0.002
         },
         "curriculum": {
             "position": {
-                "factor": 1.02,
-                "limit": 2
+                "factor": 1.2,
+                "limit": 20
             },
             "orientation": {
                 "factor": 1.0,
                 "limit": 1000
             },
             "linear_velocity": {
-                "factor": 1.0,
-                "limit": 10000
+                "factor": 1.4,
+                "limit": 0.5
             },
             "linear_acceleration": {
                 "factor": 1.0,
-                "limit": 0.0
+                "limit": 10000.0
             },
             "angular_acceleration": {
                 "factor": 1.0,
-                "limit": 0.0
+                "limit": 10000.0
             },
             "action": {
-                "factor": 2.0,
-                "limit": 4.0
+                "factor": 1.5,
+                "limit": 0.5
             },
             "gamma": {
-                "factor": 1.001,
-                "limit": 0.997
+                "factor": 1.0,
+                "limit": 0.99999
             },
             "target_next_action_noise_std": {
-                "factor": 0.95,
-                "limit": 0.1
+                "factor": 1.0,
+                "limit": 0.0
             },
             "target_next_action_noise_clip": {
-                "factor": 0.95,
-                "limit": 0.3
+                "factor": 1.0,
+                "limit": 0.0
             },
             "exploration_noise": {
-                "factor": 0.95,
-                "limit": 0.1
+                "factor": 1.0,
+                "limit": 0.0
             },
             "init_guidance": {
-                "factor": 0.95,
+                "factor": 1.0,
                 "limit": 0
             },
             "init_max_position": {
@@ -137,40 +137,40 @@
         }
     },
     "domain_randomization": {
-        "rotor_thrust_coefficients": 0.1,
-        "rotor_torque_constant": 1.0
+        "rotor_thrust_coefficients": 0.0,
+        "rotor_torque_constant": 0.0
     },
     "disturbances": {
         "random_force": {
             "mean": 0,
-            "std": 0.5
+            "std": 0.0
         },
         "random_torque": {
             "mean": 0,
-            "std": 0.01
+            "std": 0.0
         }
     },
     "dynamics": {
         "n_rotors": 4,
         "rotor_positions": [
             [
-                0.20895,
-                -0.240666,
+                0.028,
+                -0.028,
                 0
             ],
             [
-                -0.20895,
-                0.240666,
+                -0.028,
+                -0.028,
                 0
             ],
             [
-                0.20895,
-                0.240666,
+                -0.028,
+                0.028,
                 0
             ],
             [
-                -0.20895,
-                -0.240666,
+                0.028,
+                0.028,
                 0
             ]
         ],
@@ -205,12 +205,12 @@
             [
                 0,
                 0,
-                -1
+                1
             ],
             [
                 0,
                 0,
-                1
+                -1
             ],
             [
                 0,
@@ -219,12 +219,12 @@
             ]
         ],
         "rotor_thrust_coefficients": [
-            2.55643,
             0,
-            28.06559
+            0,
+            3.16e-10
         ],
-        "rotor_torque_constant": 0.2,
-        "mass": 3.35,
+        "rotor_torque_constant": 0.005964552,
+        "mass": 0.027,
         "gravity": [
             0,
             0,
@@ -232,45 +232,45 @@
         ],
         "J": [
             [
-                0.11361,
-                0.0,
-                0.0
+                3.85e-06,
+                0,
+                0
             ],
             [
-                0.0,
-                0.12552,
-                0.0
+                0,
+                3.85e-06,
+                0
             ],
             [
-                0.0,
-                0.0,
-                0.22822
+                0,
+                0,
+                5.9675e-06
             ]
         ],
-        "motor_time_constant": 0.06532,
+        "motor_time_constant": 0.15,
         "action_limit": {
-            "lower_bound": 0.1,
-            "upper_bound": 0.7
+            "lower_bound": 0,
+            "upper_bound": 21702
         },
-        "model": "fs_base",
+        "model": "crazyflie",
         "J_inv": [
             [
-                8.802042073761113,
+                259740.2597402597,
                 0.0,
                 0.0
             ],
             [
                 0.0,
-                7.966857871255577,
+                259740.2597402597,
                 0.0
             ],
             [
                 0.0,
                 0.0,
-                4.3817369205152925
+                167574.36112274823
             ]
         ],
-        "hovering_throttle": 0.44905530730868937,
-        "hovering_throttle_relative": 0.5817588455144823
+        "hovering_throttle": 14475.809152959684,
+        "hovering_throttle_relative": 0.6670265023020774
     }
 }

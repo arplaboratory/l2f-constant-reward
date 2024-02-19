@@ -17,7 +17,7 @@ int run(int argc, char** argv){
 
     TI num_runs = 1;
     app.add_option("-n,--num-runs", num_runs, "Number of runs with different seeds");
-    std::string parameters_path = "parameters/output/x500_real.json";
+    std::string parameters_path = "";
     std::string results_path;
     app.add_option("-f,--parameter-file", parameters_path, "Parameter file to load hyperparameters from");
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION

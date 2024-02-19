@@ -1,6 +1,7 @@
 import l2f
 import json
 from websockets.sync.client import connect
+from collections import deque
 import time
 
 import numpy as np
@@ -107,7 +108,39 @@ def set_state_message(namespace, id, position, orientation, action=None):
 
 
 import torch
-class Actor:
+
+
+class ActorSimulationOptimization:
+    checkpoint = torch.load("/home/jonas/phd/projects/learning_to_fly/ral_rebuttal/checkpoint/torch_save/model.pt")
+    observation_mean = checkpoint["obs_oms.mean"]
+    observation_std = checkpoint["obs_oms.std"]
+
+    W_in = checkpoint["pi.net.0.weight"]
+    b_in = checkpoint["pi.net.0.bias"]
+    act_in = torch.nn.ReLU()
+
+    W_1 = checkpoint["pi.net.2.weight"]
+    b_1 = checkpoint["pi.net.2.bias"]
+    act_1 = torch.nn.ReLU()
+
+    W_out = checkpoint["pi.net.4.weight"]
+    b_out = checkpoint["pi.net.4.bias"]
+    act_out = torch.nn.Identity()
+
+
+    layers = [
+        {"W": W_in, "b": b_in, "act": act_in},
+        {"W": W_1, "b": b_1, "act": act_1},
+        {"W": W_out, "b": b_out, "act": act_out}
+    ]
+
+    def forward(self, x):
+        x = (x - self.observation_mean) / self.observation_std
+        for layer in self.layers:
+            x = layer["act"](x @ layer["W"].T + layer["b"])
+        return x
+
+class ActorSim2MultiReal:
     checkpoint = torch.load("best_000032303_33078272_reward_3.374.pth", map_location=torch.device('cpu'))
 
     model = checkpoint["model"]
@@ -141,7 +174,11 @@ class Actor:
             x = layer["act"](x @ layer["W"].T + layer["b"])
         return x
 
-actor = Actor()
+# baseline = "sim2multireal"
+baseline = "simulation_optimization"
+observation_history_length = 2
+
+actor = ActorSim2MultiReal() if baseline == "sim2multireal" else ActorSimulationOptimization()
 
 def thrust2rpm(thrust):
     return (((thrust + 1)/2) ** 0.5) * 2 - 1
@@ -155,6 +192,8 @@ with connect("ws://localhost:8000/backend") as websocket:
     while True:
         # l2f.sample_initial_state(device, env, state, rng)
         l2f.initial_state(device, env, state)
+        action_history = deque([torch.zeros(4) for _ in range(observation_history_length)], maxlen=observation_history_length)
+        observation_history = None
         for step_i in range(100):
             l2f.observe(device, env, state, observation, rng)
             position_real = state.position
@@ -164,8 +203,19 @@ with connect("ws://localhost:8000/backend") as websocket:
             orientation_matrix = quaternion_to_rotation_matrix(orientation_quaternion)
             linear_velocity = observation.observation[3+4:3+4+3]
             angular_velocity = observation.observation[3+4+3:3+4+3+3]
-            flat_observation = torch.Tensor(np.array([*position, *linear_velocity, *orientation_matrix.ravel(), *angular_velocity]))
+            if baseline == "sim2multireal":
+                flat_observation = torch.Tensor(np.array([*position, *linear_velocity, *orientation_matrix.ravel(), *angular_velocity]))
+            elif baseline == "simulation_optimization":
+                quaternion_xyzw = np.array([*orientation_quaternion[1:], orientation_quaternion[0]])
+                flat_observation_now = torch.Tensor(np.array([*position, *quaternion_xyzw, *linear_velocity, *angular_velocity]))
+                if observation_history is None:
+                    observation_history = deque([flat_observation_now for _ in range(observation_history_length)], maxlen=observation_history_length)
+                else:
+                    observation_history.append(flat_observation_now)
+                flat_observation = torch.concat([torch.concat((fo, fa)) for fo, fa in zip(observation_history, action_history)])
             flat_action = actor.forward(flat_observation).detach().numpy()
+            flat_action = np.clip(flat_action, -1, 1)
+            action_history.append(torch.from_numpy(flat_action))
             print(f"flat_action: {flat_action}")
             action.motor_command = [thrust2rpm(t) for t in flat_action]
             websocket.send(json.dumps(set_state_message(namespace, id, position_real, orientation_real, action=action.motor_command)))

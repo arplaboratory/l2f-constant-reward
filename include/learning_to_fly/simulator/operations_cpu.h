@@ -92,8 +92,8 @@ namespace rl_tools{
                 if(config["dynamics"].contains("motor_time_constant")){
                     parameters.motor_time_constant = config["dynamics"]["motor_time_constant"];
                 }
-                if(config["dynamics"].contains("hovering_throttle")){
-                    parameters.hovering_throttle = config["dynamics"]["hovering_throttle"];
+                if(config["dynamics"].contains("hovering_throttle_relative")){
+                    parameters.hovering_throttle_relative = config["dynamics"]["hovering_throttle_relative"];
                 }
                 if(config["dynamics"].contains("action_limit")){
                     auto action_limit = config["dynamics"]["action_limit"];
