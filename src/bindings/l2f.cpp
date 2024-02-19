@@ -16,7 +16,11 @@ using RNG = decltype(rlt::random::default_engine(typename DEVICE::SPEC::RANDOM{}
 using T = float;
 using TI = typename DEVICE::index_t;
 
-using CONFIG = parameters::environment<T, TI, parameters::DefaultAblationSpec>;
+struct ABLATION_SPEC: parameters::DefaultAblationSpec{
+    static constexpr bool OBSERVATION_NOISE = false;
+};
+
+using CONFIG = parameters::environment<T, TI, ABLATION_SPEC>;
 using ENVIRONMENT = typename CONFIG::ENVIRONMENT;
 
 

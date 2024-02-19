@@ -108,7 +108,38 @@ def set_state_message(namespace, id, position, orientation, action=None):
 
 
 import torch
+import h5py
 
+
+class ActorLearningToFly:
+    checkpoint = h5py.File("../../checkpoints/multirotor_td3/2024_02_19_17_17_22_d+o+a+r+h+c+f+w+e+_000/actor_000000001000000.h5", "r")
+
+    checkpoint["actor"]["layers"]["0"]["weights"]["parameters"][:]
+
+    W_in = checkpoint["actor"]["layers"]["0"]["weights"]["parameters"][:]
+    b_in = checkpoint["actor"]["layers"]["0"]["biases"]["parameters"][:]
+    act_in = np.tanh
+
+    W_1 = checkpoint["actor"]["layers"]["1"]["weights"]["parameters"][:]
+    b_1 = checkpoint["actor"]["layers"]["1"]["biases"]["parameters"][:]
+    act_1 = np.tanh
+
+    W_out = checkpoint["actor"]["layers"]["2"]["weights"]["parameters"][:]
+    b_out = checkpoint["actor"]["layers"]["2"]["biases"]["parameters"][:]
+    act_out = np.tanh
+
+
+    layers = [
+        {"W": W_in, "b": b_in, "act": act_in},
+        {"W": W_1, "b": b_1, "act": act_1},
+        {"W": W_out, "b": b_out, "act": act_out}
+    ]
+
+    def forward(self, x):
+        x = x.detach().numpy()
+        for layer in self.layers:
+            x = layer["act"](x @ layer["W"].T + layer["b"])
+        return torch.from_numpy(x)[0]
 
 class ActorSimulationOptimization:
     checkpoint = torch.load("/home/jonas/phd/projects/learning_to_fly/ral_rebuttal/checkpoint/torch_save/model.pt")
@@ -175,10 +206,11 @@ class ActorSim2MultiReal:
         return x
 
 # baseline = "sim2multireal"
-baseline = "simulation_optimization"
+# baseline = "simulation_optimization"
+baseline = "LearningToFly"
 observation_history_length = 2
 
-actor = ActorSim2MultiReal() if baseline == "sim2multireal" else ActorSimulationOptimization()
+actor = ActorSim2MultiReal() if baseline == "sim2multireal" else (ActorSimulationOptimization() if baseline == "simulation_optimization" else ActorLearningToFly())
 
 def thrust2rpm(thrust):
     return (((thrust + 1)/2) ** 0.5) * 2 - 1
@@ -194,8 +226,9 @@ with connect("ws://localhost:8000/backend") as websocket:
         l2f.initial_state(device, env, state)
         action_history = deque([torch.zeros(4) for _ in range(observation_history_length)], maxlen=observation_history_length)
         observation_history = None
-        for step_i in range(100):
+        for step_i in range(1000):
             l2f.observe(device, env, state, observation, rng)
+
             position_real = state.position
             orientation_real = state.orientation
             position = observation.observation[:3]
@@ -213,6 +246,8 @@ with connect("ws://localhost:8000/backend") as websocket:
                 else:
                     observation_history.append(flat_observation_now)
                 flat_observation = torch.concat([torch.concat((fo, fa)) for fo, fa in zip(observation_history, action_history)])
+            elif baseline == "LearningToFly":
+                flat_observation = torch.Tensor(np.array(observation.observation).copy())
             flat_action = actor.forward(flat_observation).detach().numpy()
             flat_action = np.clip(flat_action, -1, 1)
             action_history.append(torch.from_numpy(flat_action))
@@ -223,6 +258,6 @@ with connect("ws://localhost:8000/backend") as websocket:
             state = next_state
             next_state = l2f.State()
 
-            time.sleep(dt * 10)
+            time.sleep(dt * 1.0)
 
 print("Done")
