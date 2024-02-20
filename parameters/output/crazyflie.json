@@ -150,6 +150,9 @@
             "std": 0.0
         }
     },
+    "integration": {
+        "dt": 0.01
+    },
     "dynamics": {
         "n_rotors": 4,
         "rotor_positions": [

@@ -280,10 +280,20 @@ namespace rl_tools{
         }
     }
     template <typename DEV_SPEC, typename SPEC>
+    void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>::Integration& parameters, nlohmann::json config){
+        if(config.contains("integration")){
+            auto integration = config["integration"];
+            if(integration.contains("dt")){
+                parameters.dt = integration["dt"];
+            }
+        }
+    }
+    template <typename DEV_SPEC, typename SPEC>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersBase<SPEC>& parameters, nlohmann::json config){
         load_config<DEV_SPEC, SPEC>(device, parameters.dynamics, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.mdp, config);
         load_config<DEV_SPEC, SPEC>(device, parameters.domain_randomization, config);
+        load_config<DEV_SPEC, SPEC>(device, parameters.integration, config);
     }
     template <typename DEV_SPEC, typename T, typename TI, typename NEXT_COMPONENT>
     void load_config(devices::CPU<DEV_SPEC>& device, typename rl_tools::rl::environments::multirotor::ParametersDisturbances<T, TI, NEXT_COMPONENT>& parameters, nlohmann::json config){

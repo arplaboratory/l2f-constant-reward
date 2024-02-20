@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "configurePresets": [
+      {
+        "name": "default",
+        "description": "Default build settings",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug",
+          "RL_TOOLS_ENABLE_CLI11": "ON"
+        }
+      }
+    ]
+  }
+  

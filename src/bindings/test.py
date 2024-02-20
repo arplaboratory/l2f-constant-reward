@@ -30,7 +30,9 @@ with open('../../parameters/output/crazyflie.json', 'r') as f:
     parameters_json = json.load(f)
 
 parameters_json["mdp"]["reward"]["type"] = "absolute"
-parameters_json["dynamics"]["rotor_torque_constant"] *= 1.5
+# parameters_json["dynamics"]["rotor_torque_constant"] *= 1.0
+parameters_json["integration"]["dt"] /= 1
+parameters_json["dynamics"]["motor_time_constant"] /= 1
 
 device = l2f.Device()
 rng = l2f.RNG()
@@ -176,6 +178,20 @@ class ActorSimulationOptimization:
         for layer in self.layers:
             x = layer["act"](x @ layer["W"].T + layer["b"])
         return x
+    
+    def write_hdf5(self, filename):
+        with h5py.File(filename, "w") as f:
+            actor = f.create_group("actor")
+            observation_distribution = actor.create_group("observation_distribution")
+            observation_distribution.create_dataset("mean", data=self.observation_mean.reshape(1, -1))
+            observation_distribution.create_dataset("std", data=self.observation_std.reshape(1, -1))
+            layers = actor.create_group("layers")
+            for i, layer in enumerate(self.layers):
+                layer_group = layers.create_group(f"{i}")
+                weights = layer_group.create_group("weights")
+                weights.create_dataset("parameters", data=layer["W"])
+                biases = layer_group.create_group("biases")
+                biases.create_dataset("parameters", data=layer["b"].reshape(1, -1))
 
 class ActorSim2MultiReal:
     checkpoint = torch.load("best_000032303_33078272_reward_3.374.pth", map_location=torch.device('cpu'))
@@ -217,7 +233,11 @@ baseline = "simulation_optimization"
 observation_history_length = 2
 sim_opt_target_position = np.array([0, 0, 1.0])
 
-actor = ActorSim2MultiReal() if baseline == "sim2multireal" else (ActorSimulationOptimization() if baseline == "simulation_optimization" else ActorLearningToFly())
+actor_sim2multi_real = ActorSim2MultiReal()
+actor_simulation_optimization = ActorSimulationOptimization()
+actor_simulation_optimization.write_hdf5("actor_simulation_optimization.h5")
+actor_learning_to_fly = ActorLearningToFly()
+actor = actor_sim2multi_real if baseline == "sim2multireal" else (actor_simulation_optimization if baseline == "simulation_optimization" else actor_learning_to_fly)
 
 def thrust2rpm(thrust):
     return (((thrust + 1)/2) ** 0.5) * 2 - 1
@@ -263,12 +283,13 @@ with connect("ws://localhost:8000/backend") as websocket:
             action_factor = 1
             flat_action = (flat_action + 1) / 2 * action_factor * 2 - action_factor
             print(f"flat_action: {flat_action}")
-            action.motor_command = [thrust2rpm(t) for t in flat_action]
+            # action.motor_command = [thrust2rpm(t) for t in flat_action]
+            action.motor_command = [t for t in flat_action]
             websocket.send(json.dumps(set_state_message(namespace, id, position_real, orientation_real, action=action.motor_command)))
             dt = l2f.step(device, env, state, action, next_state, rng)
             state = next_state
             next_state = l2f.State()
 
-            time.sleep(dt * 10.0)
+            time.sleep(dt * 1.0)
 
 print("Done")
