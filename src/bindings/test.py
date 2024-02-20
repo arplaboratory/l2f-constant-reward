@@ -206,9 +206,10 @@ class ActorSim2MultiReal:
         return x
 
 # baseline = "sim2multireal"
-# baseline = "simulation_optimization"
-baseline = "LearningToFly"
+baseline = "simulation_optimization"
+# baseline = "LearningToFly"
 observation_history_length = 2
+sim_opt_target_position = np.array([0, 0, 1])
 
 actor = ActorSim2MultiReal() if baseline == "sim2multireal" else (ActorSimulationOptimization() if baseline == "simulation_optimization" else ActorLearningToFly())
 
@@ -232,15 +233,15 @@ with connect("ws://localhost:8000/backend") as websocket:
             position_real = state.position
             orientation_real = state.orientation
             position = observation.observation[:3]
-            orientation_quaternion = observation.observation[3:3+4]
+            orientation_quaternion = state.orientation #observation.observation[3:3+4]
             orientation_matrix = quaternion_to_rotation_matrix(orientation_quaternion)
-            linear_velocity = observation.observation[3+4:3+4+3]
-            angular_velocity = observation.observation[3+4+3:3+4+3+3]
+            linear_velocity = observation.observation[3+9:3+9+3]
+            angular_velocity = observation.observation[3+9+3:3+9+3+3]
             if baseline == "sim2multireal":
                 flat_observation = torch.Tensor(np.array([*position, *linear_velocity, *orientation_matrix.ravel(), *angular_velocity]))
             elif baseline == "simulation_optimization":
                 quaternion_xyzw = np.array([*orientation_quaternion[1:], orientation_quaternion[0]])
-                flat_observation_now = torch.Tensor(np.array([*position, *quaternion_xyzw, *linear_velocity, *angular_velocity]))
+                flat_observation_now = torch.Tensor(np.array([*(position + sim_opt_target_position), *quaternion_xyzw, *linear_velocity, *angular_velocity]))
                 if observation_history is None:
                     observation_history = deque([flat_observation_now for _ in range(observation_history_length)], maxlen=observation_history_length)
                 else:
@@ -251,6 +252,8 @@ with connect("ws://localhost:8000/backend") as websocket:
             flat_action = actor.forward(flat_observation).detach().numpy()
             flat_action = np.clip(flat_action, -1, 1)
             action_history.append(torch.from_numpy(flat_action))
+            action_factor = 1
+            flat_action = (flat_action + 1) / 2 * action_factor * 2 - action_factor
             print(f"flat_action: {flat_action}")
             action.motor_command = [thrust2rpm(t) for t in flat_action]
             websocket.send(json.dumps(set_state_message(namespace, id, position_real, orientation_real, action=action.motor_command)))
@@ -258,6 +261,6 @@ with connect("ws://localhost:8000/backend") as websocket:
             state = next_state
             next_state = l2f.State()
 
-            time.sleep(dt * 1.0)
+            time.sleep(dt * 10.0)
 
 print("Done")

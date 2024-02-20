@@ -33,6 +33,8 @@ void init(DEVICE &device, rlt::rl::environments::Multirotor<typename ENVIRONMENT
 struct State{
     std::array<T, 3> position;
     std::array<T, 4> orientation;
+    std::array<T, 3> linear_velocity;
+    std::array<T, 3> angular_velocity;
     ENVIRONMENT::State state;
 };
 
@@ -44,6 +46,12 @@ void sync(State& state, typename ENVIRONMENT::State& state_real){
     state.orientation[1] = state_real.orientation[1];
     state.orientation[2] = state_real.orientation[2];
     state.orientation[3] = state_real.orientation[3];
+    state.linear_velocity[0] = state_real.linear_velocity[0];
+    state.linear_velocity[1] = state_real.linear_velocity[1];
+    state.linear_velocity[2] = state_real.linear_velocity[2];
+    state.angular_velocity[0] = state_real.angular_velocity[0];
+    state.angular_velocity[1] = state_real.angular_velocity[1];
+    state.angular_velocity[2] = state_real.angular_velocity[2];
 }
 struct Action{
     std::array<T, ENVIRONMENT::ACTION_DIM> motor_command;

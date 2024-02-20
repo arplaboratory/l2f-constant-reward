@@ -6,3 +6,4 @@
     - If only run-time variables change the compilation should be automatically skipped by CMake
 
 ## Atoms
+- Check why the last step in the action history is zero after `initial_state`
