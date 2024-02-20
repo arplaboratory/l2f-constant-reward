@@ -3,6 +3,12 @@
 
 #include "../config/parameters.h"
 
+#ifdef RL_TOOLS_ENABLE_JSON
+// for loading the config
+#include <nlohmann/json.hpp>
+#include <learning_to_fly/simulator/operations_cpu.h>
+#endif
+
 namespace rlt = rl_tools;
 
 #ifndef TEST
@@ -22,6 +28,7 @@ struct ABLATION_SPEC: parameters::DefaultAblationSpec{
 
 using CONFIG = parameters::environment<T, TI, ABLATION_SPEC>;
 using ENVIRONMENT = typename CONFIG::ENVIRONMENT;
+using PARAMETERS = typename CONFIG::ENVIRONMENT::PARAMETERS;
 
 
 void init(DEVICE &device, rlt::rl::environments::Multirotor<typename ENVIRONMENT::SPEC>& env){
@@ -60,6 +67,13 @@ struct Action{
 struct Observation{
     std::array<T, ENVIRONMENT::OBSERVATION_DIM> observation;
 };
+
+#ifdef RL_TOOLS_ENABLE_JSON
+void load_config(DEVICE& device, ENVIRONMENT& env, std::string config_string){
+    nlohmann::json parameters_json = nlohmann::json::parse(config_string);
+    rlt::load_config(device, env.parameters, parameters_json);
+}
+#endif
 
 T step(DEVICE& device, ENVIRONMENT& env, State& state, Action action, State& next_state, RNG& rng){
     rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::ACTION_DIM>> motor_commands;
@@ -102,7 +116,7 @@ PYBIND11_MODULE(l2f, m) {
         .def(py::init<>());
     py::class_<RNG>(m, "RNG")
         .def(py::init<>());
-    py::class_<ENVIRONMENT::PARAMETERS>(m, "Parameters")
+    py::class_<PARAMETERS>(m, "Parameters")
         .def(py::init<>());
     py::class_<ENVIRONMENT>(m, "Environment")
         .def(py::init<>())
@@ -124,6 +138,9 @@ PYBIND11_MODULE(l2f, m) {
     m.def("initial_state", &initial_state, "Reset to default state");
     m.def("sample_initial_state", &sample_initial_state, "Reset to random state");
     m.def("observe", &observe, "Observe state");
+#ifdef RL_TOOLS_ENABLE_JSON
+    m.def("load_config", &load_config, "Load config");
+#endif
 }
 #else
 int main(){

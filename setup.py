@@ -22,10 +22,12 @@ ext_modules = [
         include_dirs=[
             get_pybind_include(),
             os.path.join(absolute_path, "include"),
-            os.path.join(absolute_path, "external", "rl_tools", "include")
+            os.path.join(absolute_path, "external", "rl_tools", "include"),
+            os.path.join(absolute_path, "external", "rl_tools", "external", "json", "include"),
         ],
         language='c++',
         extra_compile_args=['-std=c++17'] if not sys.platform.startswith('win') else ['/std:c++17'],
+        define_macros=[('RL_TOOLS_ENABLE_JSON', None)]
     ),
 ]
 

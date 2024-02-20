@@ -26,11 +26,17 @@ def quaternion_to_rotation_matrix(q):
     return R
 
 
+with open('../../parameters/output/crazyflie.json', 'r') as f:
+    parameters_json = json.load(f)
+
+parameters_json["mdp"]["reward"]["type"] = "absolute"
+parameters_json["dynamics"]["rotor_torque_constant"] *= 1.5
 
 device = l2f.Device()
 rng = l2f.RNG()
 env = l2f.Environment()
 l2f.init(device, env)
+l2f.load_config(device, env, json.dumps(parameters_json))
 state, next_state = [l2f.State() for _ in range(2)]
 action = l2f.Action()
 observation, next_observation = [l2f.Observation() for _ in range(2)]
@@ -209,7 +215,7 @@ class ActorSim2MultiReal:
 baseline = "simulation_optimization"
 # baseline = "LearningToFly"
 observation_history_length = 2
-sim_opt_target_position = np.array([0, 0, 1])
+sim_opt_target_position = np.array([0, 0, 1.0])
 
 actor = ActorSim2MultiReal() if baseline == "sim2multireal" else (ActorSimulationOptimization() if baseline == "simulation_optimization" else ActorLearningToFly())
 
@@ -234,6 +240,8 @@ with connect("ws://localhost:8000/backend") as websocket:
             orientation_real = state.orientation
             position = observation.observation[:3]
             orientation_quaternion = state.orientation #observation.observation[3:3+4]
+            if orientation_quaternion[0] < 0:
+                orientation_quaternion = -np.array(orientation_quaternion) # the policy does not seem to like quaternions with a negative real part
             orientation_matrix = quaternion_to_rotation_matrix(orientation_quaternion)
             linear_velocity = observation.observation[3+9:3+9+3]
             angular_velocity = observation.observation[3+9+3:3+9+3+3]
