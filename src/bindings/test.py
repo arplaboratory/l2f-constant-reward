@@ -278,8 +278,8 @@ with connect("ws://localhost:8000/backend") as websocket:
             elif baseline == "LearningToFly":
                 flat_observation = torch.Tensor(np.array(observation.observation).copy())
             flat_action = actor.forward(flat_observation).detach().numpy()
-            flat_action = np.clip(flat_action, -1, 1)
             action_history.append(torch.from_numpy(flat_action))
+            flat_action = np.clip(flat_action, -1, 1)
             action_factor = 1
             flat_action = (flat_action + 1) / 2 * action_factor * 2 - action_factor
             print(f"flat_action: {flat_action}")

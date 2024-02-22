@@ -11,6 +11,7 @@
 /logs_old
 /l2f.egg-info
 /*.so
+/out
 
 results.json
 validation.json

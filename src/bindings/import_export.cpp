@@ -57,8 +57,8 @@ using ACTOR = builder::ACTOR::MODEL;
 
 int main(int argc, char** argv){
     CLI::App app{"Learning to fly"};
-    std::string model_path = "../../../src/bindings/actor_simulation_optimization.h5";
-    std::string model_output_path = "../../../src/bindings/actor_simulation_optimization.h";
+    std::string model_path = "../../../../../src/bindings/actor_simulation_optimization.h5";
+    std::string model_output_path = "../../../../../src/bindings/actor_simulation_optimization.h";
     app.add_option("-m,--model", model_path, "Path to the model file");//->required();
     CLI11_PARSE(app, argc, argv);
 
@@ -73,19 +73,19 @@ int main(int argc, char** argv){
 
     //current cwd
     std::filesystem::path cwd = std::filesystem::current_path();
+    std::cout << "Current path is " << cwd << std::endl;
+    std::cout << "Trying to load from: " << model_path << std::endl;
     rlt::malloc(device, model);
     HighFive::File file(model_path, HighFive::File::ReadOnly);
     auto actor_group = file.getGroup("actor");
     auto observation_distribution_group = actor_group.getGroup("observation_distribution");
     rlt::load(device, observation_mean, observation_distribution_group, "mean");
     rlt::load(device, observation_std, observation_distribution_group, "std");
-    std::cout << "Current path is " << cwd << std::endl;
-    std::cout << "Trying to load from: " << model_path << std::endl;
     rlt::load(device, model, actor_group);
-    auto code_split = rlt::save_code_split(device, model, "actor");
+    auto code_split = rlt::save_code_split(device, model, "actor", true);
 
-    auto observation_mean_split = rlt::save_split(device, observation_mean, "observation_mean");
-    auto observation_std_split = rlt::save_split(device, observation_std, "observation_std");
+    auto observation_mean_split = rlt::save_split(device, observation_mean, "observation_mean", true);
+    auto observation_std_split = rlt::save_split(device, observation_std, "observation_std", true);
 
     auto headers = code_split.header + observation_mean_split.header + observation_std_split.header;
     auto body = code_split.body + observation_mean_split.body + observation_std_split.body;
