@@ -283,7 +283,9 @@ int main(int argc, char** argv) {
                 bool terminated_flag = rlt::terminated(dev, env, observation_state, rng);
                 reward_acc += rlt::reward(dev, env, state, action, next_state, rng);
                 rlt::set_state(dev, ui, state, action);
-                state = next_state;
+                if(!terminated_flag){
+                    state = next_state;
+                }
                 auto end = std::chrono::high_resolution_clock::now();
                 std::chrono::duration<double> diff = end-start;
                 if(startup_timeout > 0 && episode_i == 0 && step_i == 0){

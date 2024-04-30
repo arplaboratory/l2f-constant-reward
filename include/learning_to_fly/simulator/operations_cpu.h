@@ -14,7 +14,7 @@ namespace rl_tools{
         if(config.contains("dynamics")){
             if(config["dynamics"].contains("model")){
                 std::string config_model = config["dynamics"]["model"];
-                utils::assert_exit(device, config_model == rl::environments::multirotor::parameters::dynamics::registry_name<SPEC>, "Model in config file does not match model in parameters file");
+                utils::assert_exit(device, config_model == rl::environments::multirotor::parameters::dynamics::registry_name<SPEC>, "Model \"" + config_model + "\" in config file does not match model \"" + rl::environments::multirotor::parameters::dynamics::registry_name<SPEC> + "\" in parameters file");
             }
             if(config["dynamics"].contains("n_rotors")){
                 typename SPEC::TI num_rotors = config["dynamics"]["n_rotors"];
