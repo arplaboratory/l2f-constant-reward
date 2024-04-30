@@ -45,7 +45,7 @@ namespace learning_to_fly{
                 static constexpr TI ACTOR_TARGET_UPDATE_INTERVAL = 2 * TRAINING_INTERVAL;
                 static constexpr T TARGET_NEXT_ACTION_NOISE_CLIP = 0.5;
                 static constexpr T TARGET_NEXT_ACTION_NOISE_STD = 0.2;
-                static constexpr T GAMMA = 0.99;
+                static constexpr T GAMMA = 0.999;
                 static constexpr bool IGNORE_TERMINATION = false;
             };
 
@@ -69,7 +69,7 @@ namespace learning_to_fly{
             static constexpr TI ACTOR_CHECKPOINT_INTERVAL = 100000;
             static constexpr bool DETERMINISTIC_EVALUATION = !BENCHMARK;
             static constexpr TI EVALUATION_INTERVAL = 50000;
-            static constexpr TI NUM_EVALUATION_EPISODES = 10;
+            static constexpr TI NUM_EVALUATION_EPISODES = 100;
             static constexpr bool COLLECT_EPISODE_STATS = false;
             static constexpr TI EPISODE_STATS_BUFFER_SIZE = 1000;
             static constexpr TI N_ENVIRONMENTS = 1;

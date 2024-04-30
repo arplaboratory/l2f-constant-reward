@@ -14,6 +14,19 @@ target_link_libraries(
 target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
 target_compile_definitions(training_headless_sq_rwd_wd PRIVATE LEARNING_TO_FLY_WEIGHT_DECAY)
 
+add_executable(training_headless_sq_rwd training.cpp)
+target_link_libraries(
+        training_headless_sq_rwd
+        PRIVATE
+        RLtools::Backend
+        tensorboard_logger
+        HighFive
+        nlohmann_json
+        learning_to_fly
+        CLI11::CLI11
+)
+target_compile_definitions(training_headless_sq_rwd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+
 add_executable(training_headless training.cpp)
 target_link_libraries(
         training_headless

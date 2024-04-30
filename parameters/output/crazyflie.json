@@ -11,7 +11,7 @@
         },
         "optimizer": {
             "weight_decay": {
-                "enable": true,
+                "enable": false,
                 "base": 0.0001,
                 "input": 0.0001,
                 "output": 0.0001
@@ -26,17 +26,17 @@
         "reward": {
             "type": "squared",
             "scale": 1.0,
-            "constant": 20,
+            "constant": 1,
             "termination_penalty": 0,
-            "position": 20.0,
-            "orientation": 2.5,
-            "linear_velocity": 0.5,
+            "position": 0.0,
+            "orientation": 0.0,
+            "linear_velocity": 0.0,
             "angular_velocity": 0.0,
             "linear_acceleration": 0.0,
             "angular_acceleration": 0.0,
-            "action_baseline": 0.4582053118721884,
+            "action_baseline": 0.0,
             "calculate_action_baseline": true,
-            "action": 0.5
+            "action": 0.0
         },
         "init": {
             "guidance": 0.1,

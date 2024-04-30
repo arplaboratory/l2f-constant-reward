@@ -74,13 +74,13 @@ namespace rl_tools::rl::environments::multirotor::parameters::init{
     template<typename SPEC>
     constexpr typename ParametersBase<SPEC>::MDP::Initialization orientation_biggest_angle = {
             0.0, // guidance
-            RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
-            90.0/180.0 * 3.14,   // orientation
-            RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY,   // linear velocity
-            RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_ANGULAR_VELOCITY,   // angular velocity
+            0.0, //RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_POSITION,   // position
+            45.0/180.0 * 3.14,   // orientation
+            0.0,//RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_LINEAR_VELOCITY,   // linear velocity
+            0.0,//RL_TOOLS_RL_ENVIRONMENTS_MULTIROTOR_PARAMETERS_INIT_ANGULAR_VELOCITY,   // angular velocity
             true,// relative rpm
-            -1,  // min rpm
-            1,  // max rpm
+            0,  // min rpm
+            0,  // max rpm
     };
     template<typename SPEC>
     constexpr typename ParametersBase<SPEC>::MDP::Initialization all_around_simplified = {
