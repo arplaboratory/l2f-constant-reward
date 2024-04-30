@@ -27,6 +27,12 @@ namespace rl_tools{
         }
         out.orientation[3] = scalar * state.orientation[3];
     }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT, typename T2>
+    RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply(DEVICE& device, const typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state, T2 scalar, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& out){
+        scalar_multiply(device, (const NEXT_COMPONENT&)state, scalar, (NEXT_COMPONENT&)out);
+        out.position_integral = scalar * out.position_integral;
+        out.orientation_integral = scalar * out.orientation_integral;
+    }
     template<typename DEVICE, typename T, typename TI, typename T2, typename NEXT_COMPONENT>
     RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply(DEVICE& device, const typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& state, T2 scalar, typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& out){
         scalar_multiply(device, (const NEXT_COMPONENT&)state, scalar, (NEXT_COMPONENT&)out);
@@ -42,6 +48,10 @@ namespace rl_tools{
     // scalar multiply in place
     template<typename DEVICE, typename T, typename TI, typename T2>
     RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply(DEVICE& device, typename rl::environments::multirotor::StateBase<T, TI>& state, T2 scalar){
+        scalar_multiply(device, state, scalar, state);
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT, typename T2>
+    RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply(DEVICE& device, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state, T2 scalar){
         scalar_multiply(device, state, scalar, state);
     }
     template<typename DEVICE, typename T, typename TI, typename T2, typename NEXT_COMPONENT>
@@ -63,6 +73,12 @@ namespace rl_tools{
             out.angular_velocity[i] += scalar * state.angular_velocity[i];
         }
         out.orientation[3] += scalar * state.orientation[3];
+    }
+    template<typename DEVICE, typename T, typename TI, typename T2, typename NEXT_COMPONENT>
+    RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply_accumulate(DEVICE& device, const typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state, T2 scalar, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& out){
+        scalar_multiply_accumulate(device, static_cast<const NEXT_COMPONENT&>(state), scalar, static_cast<NEXT_COMPONENT&>(out));
+        out.position_integral += scalar * out.position_integral;
+        out.orientation_integral += scalar * out.orientation_integral;
     }
     template<typename DEVICE, typename T, typename TI, typename T2, typename NEXT_COMPONENT>
     RL_TOOLS_FUNCTION_PLACEMENT static void scalar_multiply_accumulate(DEVICE& device, const typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& state, T2 scalar, typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& out){
@@ -88,6 +104,12 @@ namespace rl_tools{
         out.orientation[3] = s1.orientation[3] + s2.orientation[3];
     }
     template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
+    RL_TOOLS_FUNCTION_PLACEMENT static void add_accumulate(DEVICE& device, const typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& s1, const typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& s2, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& out){
+        add_accumulate(device, static_cast<const NEXT_COMPONENT&>(s1), static_cast<const NEXT_COMPONENT&>(s2), static_cast<NEXT_COMPONENT&>(out));
+        out.position_integral = s1.position_integral + s2.position_integral;
+        out.orientation_integral = s1.orientation_integral + s2.orientation_integral;
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
     RL_TOOLS_FUNCTION_PLACEMENT static void add_accumulate(DEVICE& device, const typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& s1, const typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& s2, typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& out){
         add_accumulate(device, static_cast<const NEXT_COMPONENT&>(s1), static_cast<const NEXT_COMPONENT&>(s2), static_cast<NEXT_COMPONENT&>(out));
         for(int i = 0; i < 4; ++i){
@@ -101,6 +123,10 @@ namespace rl_tools{
     }
     template<typename DEVICE, typename T, typename TI>
     RL_TOOLS_FUNCTION_PLACEMENT static void add_accumulate(DEVICE& device, const typename rl::environments::multirotor::StateBase<T, TI>& s, typename rl::environments::multirotor::StateBase<T, TI>& out){
+        add_accumulate(device, s, out, out);
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
+    RL_TOOLS_FUNCTION_PLACEMENT static void add_accumulate(DEVICE& device, const typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& s, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& out){
         add_accumulate(device, s, out, out);
     }
     template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
@@ -173,6 +199,16 @@ namespace rl_tools::rl::environments::multirotor {
         // total flops: (quadrotor): 92 + 16 + 21 + 4 + 9 + 6 + 9 = 157
 //        multirotor_dynamics<DEVICE, T, TI, PARAMETERS>(device, params, (const typename STATE::LATENT_STATE&)state, action, state_change);
 //        multirotor_dynamics(device, params, (const typename STATE::LATENT_STATE&)state, action, state_change);
+    }
+    template<typename DEVICE, typename T, typename TI, typename PARAMETERS, typename NEXT_COMPONENT>
+    RL_TOOLS_FUNCTION_PLACEMENT void multirotor_dynamics(DEVICE& device, const PARAMETERS& params, const StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state, const T* action, StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state_change){
+        multirotor_dynamics(device, params, static_cast<const NEXT_COMPONENT&>(state), action, static_cast<NEXT_COMPONENT&>(state_change));
+        T position_error = state.position[0] * state.position[0] + state.position[1] * state.position[1] + state.position[2] * state.position[2];
+        position_error = math::sqrt(device.math, position_error);
+        T w_clamped = math::clamp(device.math, state.orientation[0], (T)-1, (T)1);
+        T orientation_error = 2*math::acos(device.math, w_clamped);
+        state_change.position_integral = position_error;
+        state_change.orientation_integral = orientation_error;
     }
     template<typename DEVICE, typename T, typename TI, typename PARAMETERS, typename NEXT_COMPONENT>
     RL_TOOLS_FUNCTION_PLACEMENT void multirotor_dynamics(DEVICE& device, const PARAMETERS& params, const StateRandomForce<T, TI, NEXT_COMPONENT>& state, const T* action, StateRandomForce<T, TI, NEXT_COMPONENT>& state_change){
@@ -270,6 +306,12 @@ namespace rl_tools{
         }
         initial_parameters(device, env, state);
     }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT, typename SPEC>
+    static void initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state){
+        initial_state(device, env, static_cast<NEXT_COMPONENT&>(state));
+        state.position_integral = 0;
+        state.orientation_integral = 0;
+    }
     template<typename DEVICE, typename T, typename TI, typename SPEC, typename NEXT_COMPONENT>
     static void initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateRandomForce<T, TI, NEXT_COMPONENT>& state){
         initial_state(device, env, static_cast<NEXT_COMPONENT&>(state));
@@ -298,6 +340,65 @@ namespace rl_tools{
                 state.action_history[step_i][action_i] = (state.rpm[action_i] - env.parameters.dynamics.action_limit.min) / (env.parameters.dynamics.action_limit.max - env.parameters.dynamics.action_limit.min) * 2 - 1;
             }
         }
+    }
+    template<typename DEVICE, typename T, typename TI>
+    static bool is_nan(DEVICE& device, typename rl::environments::multirotor::StateBase<T, TI>& state){
+        bool nan = false;
+        for(typename DEVICE::index_t i = 0; i < 3; i++){
+            nan = nan || math::is_nan(device.math, state.position[i]);
+        }
+        for(typename DEVICE::index_t i = 0; i < 4; i++){
+            nan = nan || math::is_nan(device.math, state.orientation[i]);
+        }
+        for(typename DEVICE::index_t i = 0; i < 3; i++){
+            nan = nan || math::is_nan(device.math, state.linear_velocity[i]);
+        }
+        for(typename DEVICE::index_t i = 0; i < 3; i++){
+            nan = nan || math::is_nan(device.math, state.angular_velocity[i]);
+        }
+        return nan;
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
+    static bool is_nan(DEVICE& device, typename rl::environments::multirotor::StatePoseErrorIntegral<T, TI, NEXT_COMPONENT>& state){
+        is_nan(device, static_cast<NEXT_COMPONENT&>(state));
+        bool nan = false;
+        nan = nan || math::is_nan(device.math, state.position_integral);
+        nan = nan || math::is_nan(device.math, state.orientation_integral);
+        return nan;
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
+    static bool is_nan(DEVICE& device, typename rl::environments::multirotor::StateRandomForce<T, TI, NEXT_COMPONENT>& state){
+        is_nan(device, static_cast<NEXT_COMPONENT&>(state));
+        bool nan = false;
+        nan = nan || math::is_nan(device.math, state.force[0]);
+        nan = nan || math::is_nan(device.math, state.force[1]);
+        nan = nan || math::is_nan(device.math, state.force[2]);
+        nan = nan || math::is_nan(device.math, state.torque[0]);
+        nan = nan || math::is_nan(device.math, state.torque[1]);
+        nan = nan || math::is_nan(device.math, state.torque[2]);
+        return nan;
+    }
+    template<typename DEVICE, typename T, typename TI, typename NEXT_COMPONENT>
+    static bool is_nan(DEVICE& device, typename rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>& state){
+        is_nan(device, static_cast<NEXT_COMPONENT&>(state));
+        bool nan = false;
+        for(typename DEVICE::index_t i = 0; i < 4; i++){
+            nan = nan || math::is_nan(device.math, state.rpm[2]);
+        }
+        return nan;
+    }
+    template<typename DEVICE, typename T, typename TI_H, TI_H HISTORY_LENGTH, typename NEXT_COMPONENT>
+    static bool is_nan(DEVICE& device, typename rl::environments::multirotor::StateRotorsHistory<T, TI_H, HISTORY_LENGTH, NEXT_COMPONENT>& state){
+        using STATE = typename rl::environments::multirotor::StateRotorsHistory<T, TI_H, HISTORY_LENGTH, NEXT_COMPONENT>;
+        using TI = typename DEVICE::index_t;
+        is_nan(device, static_cast<rl::environments::multirotor::StateRotors<T, TI, NEXT_COMPONENT>&>(state));
+        bool nan = false;
+        for(TI step_i = 0; step_i < HISTORY_LENGTH; step_i++){
+            for(TI action_i = 0; action_i < STATE::ACTION_DIM; action_i++){
+                nan = nan || math::is_nan(device.math, state.action_history[step_i][action_i]);
+            }
+        }
+        return nan;
     }
     template<typename DEVICE, typename T, typename TI, typename SPEC, typename RNG, bool INHERIT_GUIDANCE = false>
     RL_TOOLS_FUNCTION_PLACEMENT static void sample_initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateBase<T, TI>& state, RNG& rng, bool inherited_guidance = false){
@@ -353,6 +454,12 @@ namespace rl_tools{
         }
 
         initial_parameters(device, env, state, rng);
+    }
+    template<typename DEVICE, typename T_S, typename TI_S, typename SPEC, typename NEXT_COMPONENT, typename RNG>
+    RL_TOOLS_FUNCTION_PLACEMENT static void sample_initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StatePoseErrorIntegral<T_S, TI_S, NEXT_COMPONENT>& state, RNG& rng){
+        sample_initial_state(device, env, static_cast<NEXT_COMPONENT&>(state), rng);
+        state.position_integral = 0;
+        state.orientation_integral = 0;
     }
     template<typename DEVICE, typename T_S, typename TI_S, typename SPEC, typename NEXT_COMPONENT, typename RNG>
     RL_TOOLS_FUNCTION_PLACEMENT static void sample_initial_state(DEVICE& device, rl::environments::Multirotor<SPEC>& env, typename rl::environments::multirotor::StateRandomForce<T_S, TI_S, NEXT_COMPONENT>& state, RNG& rng){
@@ -422,6 +529,19 @@ namespace rl_tools{
         RL_TOOLS_FUNCTION_PLACEMENT static void observe(DEVICE& device, const rl::environments::Multirotor<SPEC>& env, const STATE& state, rl::environments::multirotor::observation::LastComponent<OBSERVATION_TI>, Matrix<OBS_SPEC>& observation, RNG& rng){
             static_assert(OBS_SPEC::COLS == 0);
             static_assert(OBS_SPEC::ROWS == 1);
+        }
+        template<typename DEVICE, typename SPEC, typename OBSERVATION_SPEC, typename OBS_SPEC, typename RNG>
+        RL_TOOLS_FUNCTION_PLACEMENT static void observe(DEVICE& device, const rl::environments::Multirotor<SPEC>& env, const typename rl::environments::Multirotor<SPEC>::State& state, rl::environments::multirotor::observation::PoseIntegral<OBSERVATION_SPEC>, Matrix<OBS_SPEC>& observation, RNG& rng){
+            using T = typename SPEC::T;
+            using TI = typename DEVICE::index_t;
+            using OBSERVATION = rl::environments::multirotor::observation::PoseIntegral<OBSERVATION_SPEC>;
+            static_assert(OBS_SPEC::COLS >= OBSERVATION::CURRENT_DIM);
+            static_assert(OBS_SPEC::ROWS == 1);
+            set(observation, 0, 0, state.position_integral);
+            set(observation, 0, 1, state.orientation_integral);
+            auto current_observation = view(device, observation, matrix::ViewSpec<1, OBSERVATION::CURRENT_DIM>{}, 0, 0);
+            auto next_observation = view(device, observation, matrix::ViewSpec<1, OBS_SPEC::COLS - OBSERVATION::CURRENT_DIM>{}, 0, OBSERVATION::CURRENT_DIM);
+            observe(device, env, state, typename OBSERVATION::NEXT_COMPONENT{}, next_observation, rng);
         }
         template<typename DEVICE, typename SPEC, typename OBSERVATION_SPEC, typename OBS_SPEC, typename RNG>
         RL_TOOLS_FUNCTION_PLACEMENT static void observe(DEVICE& device, const rl::environments::Multirotor<SPEC>& env, const typename rl::environments::Multirotor<SPEC>::State& state, rl::environments::multirotor::observation::Position<OBSERVATION_SPEC>, Matrix<OBS_SPEC>& observation, RNG& rng){
@@ -721,6 +841,10 @@ namespace rl_tools{
 
         post_integration(device, env, state, action, next_state, rng);
 
+//        utils::assert_exit(device, !math::is_nan(device.math, next_state.position_integral), "pi nan");
+//        utils::assert_exit(device, !math::is_nan(device.math, next_state.orientation_integral), "oi nan");
+//        utils::assert_exit(device, !is_nan(device, action), "action nan");
+//        utils::assert_exit(device, !is_nan(device, next_state), "nan");
         return env.parameters.integration.dt;
     }
 
@@ -738,6 +862,12 @@ namespace rl_tools{
                     return true;
                 }
             }
+        }
+        if(state.position_integral > env.parameters.mdp.termination.position_integral_threshold){
+            return true;
+        }
+        if(state.orientation_integral > env.parameters.mdp.termination.orientation_integral_threshold){
+            return true;
         }
         return false;
     }

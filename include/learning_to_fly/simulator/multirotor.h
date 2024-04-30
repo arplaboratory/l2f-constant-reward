@@ -56,6 +56,8 @@ namespace rl_tools::rl::environments::multirotor{
                 T position_threshold;
                 T linear_velocity_threshold;
                 T angular_velocity_threshold;
+                T position_integral_threshold;
+                T orientation_integral_threshold;
             };
             struct ObservationNoise{
                 T position;
@@ -130,6 +132,23 @@ namespace rl_tools::rl::environments::multirotor{
         template <typename T_TI>
         struct NONE{
             static constexpr T_TI DIM = 0;
+        };
+
+        template <typename T_T, typename T_TI, typename T_NEXT_COMPONENT = LastComponent<T_TI>>
+        struct PoseIntegralSpecification {
+            using T = T_T;
+            using TI = T_TI;
+            using NEXT_COMPONENT = T_NEXT_COMPONENT;
+            static constexpr bool PRIVILEGED = true;
+        };
+        template <typename SPEC>
+        struct PoseIntegral{
+            using T = typename SPEC::T;
+            using TI = typename SPEC::TI;
+            static constexpr bool PRIVILEGED = SPEC::PRIVILEGED;
+            using NEXT_COMPONENT = typename SPEC::NEXT_COMPONENT;
+            static constexpr TI CURRENT_DIM = 2;
+            static constexpr TI DIM = NEXT_COMPONENT::DIM + CURRENT_DIM;
         };
 
         template <typename T_T, typename T_TI, typename T_NEXT_COMPONENT = LastComponent<T_TI>>
@@ -293,6 +312,16 @@ namespace rl_tools::rl::environments::multirotor{
         T angular_velocity[3];
     };
     template <typename T_T, typename T_TI, typename T_NEXT_COMPONENT>
+    struct StatePoseErrorIntegral: T_NEXT_COMPONENT{
+        using NEXT_COMPONENT = T_NEXT_COMPONENT;
+        using T = T_T;
+        using TI = T_TI;
+        static constexpr bool REQUIRES_INTEGRATION = true;
+        static constexpr TI DIM = 2;
+        T position_integral;
+        T orientation_integral;
+    };
+    template <typename T_T, typename T_TI, typename T_NEXT_COMPONENT>
     struct StateRotors: T_NEXT_COMPONENT{
         using T = T_T;
         using TI = T_TI;
@@ -324,7 +353,7 @@ namespace rl_tools::rl::environments::multirotor{
         T force[3];
         T torque[3];
     };
-    
+
     template <typename T, typename TI>
     struct StaticParametersDefault{
 //        static constexpr bool ENFORCE_POSITIVE_QUATERNION = false;
