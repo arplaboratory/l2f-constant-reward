@@ -48,8 +48,8 @@
         "termination": {
             "enabled": true,
             "position_threshold": 0.6,
-            "linear_velocity_threshold": 1000,
-            "angular_velocity_threshold": 1000
+            "linear_velocity_threshold": 50,
+            "angular_velocity_threshold": 50
         },
         "observation_noise": {
             "position": 0.001,
