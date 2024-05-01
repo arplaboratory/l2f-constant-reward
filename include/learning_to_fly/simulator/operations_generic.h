@@ -863,12 +863,12 @@ namespace rl_tools{
                 }
             }
         }
-        if(state.position_integral > env.parameters.mdp.termination.position_integral_threshold){
-            return true;
-        }
-        if(state.orientation_integral > env.parameters.mdp.termination.orientation_integral_threshold){
-            return true;
-        }
+//        if(state.position_integral > env.parameters.mdp.termination.position_integral_threshold){
+//            return true;
+//        }
+//        if(state.orientation_integral > env.parameters.mdp.termination.orientation_integral_threshold){
+//            return true;
+//        }
         return false;
     }
 }

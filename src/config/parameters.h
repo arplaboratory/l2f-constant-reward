@@ -89,8 +89,8 @@ namespace parameters{
 
             struct ENVIRONMENT_STATIC_PARAMETERS{
                 static constexpr TI ACTION_HISTORY_LENGTH = 32;
-                using STATE_BASE = StatePoseErrorIntegral<T, TI, StateBase<T, TI>>;
-//                using STATE_BASE = StateBase<T, TI>;
+//                using STATE_BASE = StatePoseErrorIntegral<T, TI, StateBase<T, TI>>;
+                using STATE_BASE = StateBase<T, TI>;
                 using STATE_TYPE = rlt::utils::typing::conditional_t<ABLATION_SPEC::ROTOR_DELAY,
                     rlt::utils::typing::conditional_t<ABLATION_SPEC::ACTION_HISTORY,
                         StateRotorsHistory<T, TI, ACTION_HISTORY_LENGTH, rlt::utils::typing::conditional_t<ABLATION_SPEC::DISTURBANCE, StateRandomForce<T, TI, STATE_BASE>, STATE_BASE>>,
@@ -102,7 +102,7 @@ namespace parameters{
                                         observation::AngularVelocity<observation::AngularVelocitySpecification<T, TI,
                                                 rlt::utils::typing::conditional_t<ABLATION_SPEC::ACTION_HISTORY, observation::ActionHistory<observation::ActionHistorySpecification<T, TI, ACTION_HISTORY_LENGTH>>, observation::LastComponent<TI>>>>>>>>>>;
                 using OBSERVATION_TYPE_PRIVILEGED = rlt::utils::typing::conditional_t<ABLATION_SPEC::ASYMMETRIC_ACTOR_CRITIC,
-                    observation::PoseIntegral<observation::PoseIntegralSpecification<T, TI,
+//                    observation::PoseIntegral<observation::PoseIntegralSpecification<T, TI,
                         observation::Position<observation::PositionSpecificationPrivileged<T, TI,
                             observation::OrientationRotationMatrix<observation::OrientationRotationMatrixSpecificationPrivileged<T, TI,
                                 observation::LinearVelocity<observation::LinearVelocitySpecificationPrivileged<T, TI,
@@ -122,7 +122,7 @@ namespace parameters{
                                     >>
                                 >>
                             >>
-                        >>
+//                        >>
                     >>,
                     observation::NONE<TI>
                 >;
