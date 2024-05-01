@@ -15,7 +15,7 @@ int run(int argc, char** argv){
     TI base_seed = 0;
     CLI::App app{"Hyperparameter optimization for Learning to Fly in Seconds"};
 
-    TI num_runs = 1;
+    TI num_runs = 10;
     app.add_option("-n,--num-runs", num_runs, "Number of runs with different seeds");
     std::string parameters_path = "";
     std::string results_path;

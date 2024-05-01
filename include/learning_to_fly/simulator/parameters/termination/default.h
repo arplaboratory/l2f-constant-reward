@@ -11,6 +11,6 @@ namespace rl_tools::rl::environments::multirotor::parameters::termination{
         10,         // linear velocity
         10, // angular velocity
         1, // position integral
-        100000, // orientation integral
+        50, // orientation integral
     };
 }

@@ -99,6 +99,16 @@ target_link_libraries(
         CLI11::CLI11
 )
 endif()
+add_executable(evaluate_actor_headless_sq_rwd evaluate_actor_headless.cpp)
+target_link_libraries(
+        evaluate_actor_headless_sq_rwd
+        PRIVATE
+        rl_tools
+        learning_to_fly
+        CLI11::CLI11
+)
+target_compile_definitions(evaluate_actor_headless_sq_rwd PRIVATE LEARNING_TO_FLY_SQUARED_REWARD_FUNCTION)
+
 
 if(LEARNING_TO_FLY_ENABLE_OLD_UI)
 add_executable(evaluate_actor evaluate_actor.cpp)

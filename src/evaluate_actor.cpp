@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     CLI::App app;
     std::string arg_run = "", arg_checkpoint = "";
     DEVICE::index_t startup_timeout = 0;
-    std::string arg_parameters_path = "parameters/output/x500_real_test.json";
+    std::string arg_parameters_path = "parameters/output/crazyflie.json";
     app.add_option("--run", arg_run, "path to the run's directory");
     app.add_option("--checkpoint", arg_checkpoint, "path to the checkpoint");
     app.add_option("--timeout", startup_timeout, "time to wait after first render");
