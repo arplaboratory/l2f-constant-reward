@@ -224,9 +224,9 @@
         "rotor_thrust_coefficients": [
             0,
             0,
-            3.16e-10
+            0.15
         ],
-        "rotor_torque_constant": 0.005964552,
+        "rotor_torque_constant": 4.665e-3,
         "mass": 0.027,
         "gravity": [
             0,
@@ -235,45 +235,45 @@
         ],
         "J": [
             [
-                3.85e-06,
+                1.029e-5,
                 0,
                 0
             ],
             [
                 0,
-                3.85e-06,
+                1.105e-5,
                 0
             ],
             [
                 0,
                 0,
-                5.9675e-06
+                2.005e-5
             ]
         ],
-        "motor_time_constant": 0.15,
+        "motor_time_constant": 0.072,
         "action_limit": {
             "lower_bound": 0,
-            "upper_bound": 21702
+            "upper_bound": 1
         },
         "model": "crazyflie",
         "J_inv": [
             [
-                259740.2597402597,
+                97181.7298347911,
                 0.0,
                 0.0
             ],
             [
                 0.0,
-                259740.2597402597,
+                90497.7375565611,
                 0.0
             ],
             [
                 0.0,
                 0.0,
-                167574.36112274823
+                49875.3117206983
             ]
         ],
-        "hovering_throttle": 14475.809152959684,
-        "hovering_throttle_relative": 0.6670265023020774
+        "hovering_throttle": 0.66,
+        "hovering_throttle_relative": 0.66
     }
 }
