@@ -17,9 +17,13 @@ namespace learning_to_fly{
 #endif
             using ABLATION_SPEC = T_ABLATION_SPEC;
 //            using LOGGER = rlt::LOGGER_FACTORY<>;
+#ifdef RL_TOOLS_ENABLE_TENSORBOARD
             using LOGGER = rlt::LOGGER_FACTORY<rlt::devices::logging::CPU_TENSORBOARD_FREQUENCY_EXTENSION>;
             using DEV_SPEC = rlt::devices::cpu::Specification<rlt::devices::math::CPU, rlt::devices::random::CPU, LOGGER>;
             using DEVICE = rlt::DEVICE_FACTORY<DEV_SPEC>;
+#else
+            using DEVICE = rlt::DEVICE_FACTORY<rlt::devices::DefaultCPUSpecification>;
+#endif
             using T = float;
             using TI = typename DEVICE::index_t;
 

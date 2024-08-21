@@ -25,10 +25,17 @@ if(APPLE)
     set(RL_TOOLS_BACKEND_ENABLE_ACCELERATE ON)
 endif()
 
+find_package(MKL)
+if(MKL_FOUND)
+    set(RL_TOOLS_BACKEND_ENABLE_MKL ON)
+elseif(NOT APPLE)
+    message(WARNING "MKL not found, training will be very slow")
+endif()
+
 add_library(learning_to_fly INTERFACE)
 target_include_directories(learning_to_fly INTERFACE include)
 endif()
-set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
+#set(RL_TOOLS_ENABLE_BOOST_BEAST ON)
 set(RL_TOOLS_ENABLE_JSON ON)
 
 #set(RL_TOOLS_ENABLE_TESTS ON)
