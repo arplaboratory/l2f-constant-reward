@@ -9,7 +9,7 @@ target_link_libraries(
         CLI11::CLI11
 )
 if(RL_TOOLS_ENABLE_TENSORBOARD)
-    target_link_libraries(training_headless tensorboard_logger)
+    target_link_libraries(training_headless PRIVATE tensorboard_logger)
 endif()
 
 
