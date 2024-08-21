@@ -17,7 +17,10 @@ export MKL_ROOT=/opt/intel/oneapi/mkl/latest
 ```
 
 ### macOS
-TBD
+```
+brew install cmake hdf5 boost
+```
+Apple Accelerate (the MKL equivalent) is installed by default on macOS and should be detected by the build system automatically
 ## Build
 ```
 mkdir build
