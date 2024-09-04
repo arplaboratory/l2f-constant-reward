@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 cmake_policy(SET CMP0003 NEW)
 
+option(RL_TOOLS_ENABLE_BOOST_BEAST OFF "Enable Boost.Beast for the UI connection to the UI server")
 
 project(learning_to_fly_hpo)
 

@@ -29,13 +29,21 @@ cd build
 
 ```
 cmake ..
-cmake --build . --target training_headless evaluate_actor_headless
+cmake --build . --target training evaluation
 ```
 ```
 cd ..
 ```
 ## Run
 ```
-./build/src/training_headless --parameter-file parameters/output/crazyflie.json --num-runs 1
-./build/src/evaluate_actor_headless
+./build/src/training --parameter-file parameters/output/crazyflie.json --num-runs 1
+./build/src/evaluation
+```
+
+## UI
+```
+cmake .. -DRL_TOOLS_ENABLE_BOOST_BEAST=ON
+cmake --build . --target evaluation_ui
+docker run -it --rm -p 8000:8000 rltools/ui-server:v0.1-l2f
+./build/src/evaluation_ui
 ```

@@ -39,7 +39,7 @@ namespace TEST_DEFINITIONS{
     using penv = parameter_set::environment<T, TI, EVAL_SPEC>;
     using ENVIRONMENT = penv::ENVIRONMENT;
     constexpr TI MAX_EPISODE_LENGTH = 500;
-    constexpr TI NUM_EPISODES = 100;
+    constexpr TI NUM_EPISODES = 20;
 }
 
 int main(int argc, char** argv) {
@@ -48,14 +48,15 @@ int main(int argc, char** argv) {
     std::string arg_run = "", arg_checkpoint = "";
     DEVICE::index_t startup_timeout = 0;
     std::string arg_parameters_path = "parameters/output/crazyflie.json";
+    bool arg_simple_init = false;
     app.add_option("--run", arg_run, "path to the run's directory");
     app.add_option("--checkpoint", arg_checkpoint, "path to the checkpoint");
     app.add_option("--parameters", arg_parameters_path, "parameter file");
+    app.add_flag("--simple-init", arg_simple_init, "simple init");
 
     CLI11_PARSE(app, argc, argv);
     DEVICE dev;
     ENVIRONMENT env;
-    env.parameters = penv::parameters;
     typename CONFIG::ACTOR_TYPE actor;
     typename CONFIG::ACTOR_TYPE::template Buffer<1> actor_buffer;
     rlt::MatrixDynamic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::ACTION_DIM>> action;
@@ -112,7 +113,6 @@ int main(int argc, char** argv) {
         run = "";
     }
 
-    T reward_acc = 0;
     std::cout << "Loading parameters from: " << arg_parameters_path << std::endl;
     std::ifstream parameters_file(arg_parameters_path);
     if(!parameters_file.is_open()) {
@@ -123,13 +123,20 @@ int main(int argc, char** argv) {
     parameters_file >> parameters_json;
     env.parameters = penv::parameters;
     rlt::load_config(dev, env.parameters, parameters_json);
+    env.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+    env.parameters.mdp.termination.position_integral_threshold = 999999999999;
+    if(arg_simple_init){
+        env.parameters.mdp.init.max_angle = 5.0/180.0 * 3.14;
+    }
     nlohmann::json data_episodes;
     for(int episode_i = 0; episode_i < NUM_EPISODES; episode_i++){
+        T reward_acc = 0;
         nlohmann::json episode;
         nlohmann::json episode_states;
         nlohmann::json episode_actions;
         rlt::sample_initial_state(dev, env, state, rng);
-        for(int step_i = 0; step_i < MAX_EPISODE_LENGTH; step_i++){
+        int step_i = 0;
+        for(step_i = 0; step_i < MAX_EPISODE_LENGTH; step_i++){
             nlohmann::json json_state;
             json_state["position"] = std::vector<T>{state.position[0], state.position[1], state.position[2]};;
             json_state["orientation"] = std::vector<T>{state.orientation[0], state.orientation[1], state.orientation[2], state.orientation[3]};
@@ -148,6 +155,7 @@ int main(int argc, char** argv) {
                 break;
             }
         }
+        std::cout << "Episode " << episode_i << " finished after " << step_i << " steps with reward: " << reward_acc << std::endl;
         episode["states"] = episode_states;
         episode["actions"] = episode_actions;
         data_episodes.push_back(episode);

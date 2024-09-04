@@ -15,15 +15,17 @@ int run(int argc, char** argv){
     TI base_seed = 0;
     CLI::App app{"Hyperparameter optimization for Learning to Fly in Seconds"};
 
-    TI num_runs = 10;
+    TI num_runs = 100;
     app.add_option("-n,--num-runs", num_runs, "Number of runs with different seeds");
-    std::string parameters_path = "";
+    std::string parameters_path = "parameters/output/crazyflie.json";
     std::string results_path;
+    bool disable_error_integral = false;
     app.add_option("-f,--parameter-file", parameters_path, "Parameter file to load hyperparameters from");
 #ifdef LEARNING_TO_FLY_HYPERPARAMETER_OPTIMIZATION
     app.add_option("-r,--result-file", results_path, "Path store the results (JSON)")->required();
 #endif
     app.add_option("-s,--seed", base_seed, "Base seed (incremented for additional runs)");
+    app.add_flag("--disable-error-integral", disable_error_integral, "Use error integral in the termination condition");
 
 
     CLI11_PARSE(app, argc, argv);
@@ -35,6 +37,24 @@ int run(int argc, char** argv){
         ts.parameters_path = parameters_path;
         ts.results_path = results_path;
         learning_to_fly::init(ts, base_seed + run_i);
+
+        if(disable_error_integral){
+            ts.env_eval.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+            ts.env_eval.parameters.mdp.termination.position_integral_threshold = 999999999999;
+            for(typename CONFIG::ENVIRONMENT& env: ts.validation_envs){
+                env.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+                env.parameters.mdp.termination.position_integral_threshold = 999999999999;
+            }
+            for (auto& env : ts.envs) {
+                env.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+                env.parameters.mdp.termination.position_integral_threshold = 999999999999;
+            }
+
+            for (auto& env : ts.off_policy_runner.envs) {
+                env.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+                env.parameters.mdp.termination.position_integral_threshold = 999999999999;
+            }
+        }
 
         for(TI step_i=0; step_i < CONFIG::STEP_LIMIT; step_i++){
             learning_to_fly::step(ts);

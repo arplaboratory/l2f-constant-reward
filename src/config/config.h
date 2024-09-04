@@ -70,7 +70,7 @@ namespace learning_to_fly{
 
 
             static constexpr bool ACTOR_ENABLE_CHECKPOINTS = !BENCHMARK;
-            static constexpr TI ACTOR_CHECKPOINT_INTERVAL = 100000;
+            static constexpr TI ACTOR_CHECKPOINT_INTERVAL = 10000;
             static constexpr bool DETERMINISTIC_EVALUATION = !BENCHMARK;
             static constexpr TI EVALUATION_INTERVAL = 50000;
             static constexpr TI NUM_EVALUATION_EPISODES = 100;

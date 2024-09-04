@@ -169,6 +169,8 @@ int main(int argc, char** argv) {
         parameters_file >> parameters_json;
         env.parameters = penv::parameters;
         rlt::load_config(dev, env.parameters, parameters_json);
+        env.parameters.mdp.termination.orientation_integral_threshold = 999999999999;
+        env.parameters.mdp.termination.position_integral_threshold = 999999999999;
         if(!SAME_CONFIG_AS_IN_TRAINING && INIT_SIMPLE){
             env.parameters.mdp.init = rlt::rl::environments::multirotor::parameters::init::simple<typename decltype(env.parameters)::SPEC>;
         }
